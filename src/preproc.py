@@ -21,7 +21,14 @@ class Preproc:
             data[attribute] = item.str.lower()
         return data
 
+    
+    def map_binary_text(self, data):
+        map_dict = {'no':int(0),'yes':(1),'0':int(0),'1':int(1)}
+        categorical_data = data.select_dtypes(include=['object'])
+        for attribute, item in categorical_data.iteritems():
+            data[attribute] = item.replace(map_dict)
+        return data
+
+
 
     #TODO cast totalcharges to float
-    #TODO normalize text to lowercase
-    #TODO map text to 0,1,2
