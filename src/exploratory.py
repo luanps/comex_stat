@@ -31,8 +31,7 @@ class ExploratoryAnalysis:
     
     def check_unique_values(self,n):
         unique_values = dict()
-        categorical_data = self.data.select_dtypes(include=['object'])
-        for attribute, item in categorical_data.iteritems():
+        for attribute, item in self.data.iteritems():
             top_unique = item.unique()[:n]
             unique_values.update({attribute: top_unique})
         return unique_values
