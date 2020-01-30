@@ -25,6 +25,7 @@ if __name__ == '__main__':
 
     print("============= Preprocessing =============")
     preproc = Preproc()
-    preproc.clean_empty_data(data)
-    import pdb
-    pdb.set_trace()
+
+    data = preproc.clean_empty_data(data)
+
+    data = preproc.normalize_text(data)
