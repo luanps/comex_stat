@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
+import json
 
 from src.utils import load_dataset
 from src.exploratory import ExploratoryAnalysis
@@ -17,3 +18,8 @@ if __name__ == '__main__':
     empty_spaces = exploratory.check_empty_spaces()
     print(f"""Textual attributes with empty data (value=' '):\n{empty_spaces}""")
 
+    unique_values = exploratory.check_unique_values(10)
+    print(f"""Sample of each textual attributes:""")
+    [print(key, value) for key, value in unique_values.items()]
+    import pdb
+    pdb.set_trace()
