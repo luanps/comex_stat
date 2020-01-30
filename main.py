@@ -26,11 +26,7 @@ if __name__ == '__main__':
     print("============= Preprocessing =============")
     preproc = Preproc()
 
-    data = preproc.clean_empty_data(data)
-
-    data = preproc.normalize_text(data)
-    data = preproc.map_binary_text(data)
-
+    data = preproc.apply_preproc(data)
     unique_values = exploratory.check_unique_values(10)
     print(f"""Sample of each attribute:""")
     [print(key, value) for key, value in unique_values.items()]
