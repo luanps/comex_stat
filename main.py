@@ -30,5 +30,6 @@ if __name__ == '__main__':
     unique_values = exploratory.check_unique_values(10)
     print(f"""Sample of each attribute:""")
     [print(key, value) for key, value in unique_values.items()]
-    import pdb
-    pdb.set_trace()
+
+    exploratory.plot_correlation_matrix()
+    exploratory.plot_density()
