@@ -47,7 +47,7 @@ class ExploratoryAnalysis:
         axis = sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns,
                          linewidths=.2, cmap="YlGnBu")
 
-        plt.savefig("data/correlation_matrix.png")
+        plt.savefig("plots/correlation_matrix.png")
 
 
     def plot_density(self):
