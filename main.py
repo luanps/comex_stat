@@ -5,6 +5,7 @@ import json
 from src.utils import load_dataset
 from src.exploratory import ExploratoryAnalysis
 from src.preproc import Preproc
+from src.model import Model
 
 def data_exploration(data):
     exploratory = ExploratoryAnalysis(data)
@@ -24,7 +25,12 @@ def data_exploration(data):
     return empty_spaces
 
 
+def train_model(X_train, y_train):
+    model = Model()
+
+
 if __name__ == '__main__':
+    print("============= Reading data from file  =============")
     filepath = 'data/database.csv'
     data = load_dataset(filepath)
 
@@ -40,6 +46,11 @@ if __name__ == '__main__':
     data_exploration(treated_data)
 
     print("============= Plotting data  =============")
-    ExploratoryAnalysis.plot_data(treated_data)
+    #ExploratoryAnalysis.plot_data(treated_data)
 
-    '''preproc.categorical_encoding(data)'''
+    print("============= Encoding data  =============")
+    encoded_data = preproc.encode_data(treated_data)
+    X_train, X_test, y_train, y_test = preproc.split_data(encoded_data)
+
+    print("=============  Training classifier  =============")
+    model = train_model(X_train, y_train)
