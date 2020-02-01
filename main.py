@@ -25,11 +25,15 @@ if __name__ == '__main__':
 
     print("============= Preprocessing =============")
     preproc = Preproc()
-
     data = preproc.apply_preproc(data)
+
+    empty_spaces = exploratory.check_empty_spaces()
+    print(f"""Textual attributes with empty data (value=' '):\n{empty_spaces}""")
+
     unique_values = exploratory.check_unique_values(10)
-    print(f"""Sample of each attribute:""")
+    print(f"""Sample of each attribute after preprocessing step""")
     [print(key, value) for key, value in unique_values.items()]
 
     exploratory.plot_correlation_matrix()
     exploratory.plot_density()
+    exploratory.plot_bar()

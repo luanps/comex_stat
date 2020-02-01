@@ -2,6 +2,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+import numpy as np
 
 class ExploratoryAnalysis:
 
@@ -64,3 +65,17 @@ class ExploratoryAnalysis:
             axis1 = sns.kdeplot(self.data[self.data['Churn'] == 1][attribute], 
                               color= 'blue', label= 'Churn')
             plt.savefig(f"""plots/{attribute}.png""")
+
+    def plot_bar(self):
+        categorical_data = self.data.select_dtypes(exclude=['float'])
+        for attribute, item in categorical_data.iteritems():
+            len_unique_values = len(item.unique())
+            if attribute == 'Churn' or len_unique_values >5:
+                continue
+
+            plt.figure(figsize=(10, 5))
+            plt.ylabel('Density')
+            data = self.data.groupby(attribute)['Churn'].value_counts()/len(self.data)
+            data = data.to_frame().rename({'Churn': 'percentage'}, axis=1).reset_index()
+            ax = sns.barplot(x=attribute, y= 'percentage', hue= 'Churn', data= data)
+            plt.savefig(f"plots/{attribute}.png")
