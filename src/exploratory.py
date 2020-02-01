@@ -40,18 +40,20 @@ class ExploratoryAnalysis:
         return unique_values
 
 
-    def plot_correlation_matrix(self):
+    @staticmethod
+    def plot_correlation_matrix(data):
         plt.figure(figsize=(10, 8))
         plt.title(f"""Correlation matrix plot""")
-        corr = self.data.apply(lambda x: pd.factorize(x)[0]).corr()
+        corr = data.apply(lambda x: pd.factorize(x)[0]).corr()
         axis = sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns,
                          linewidths=.2, cmap="YlGnBu")
 
         plt.savefig("plots/correlation_matrix.png")
 
 
-    def plot_density(self):
-        continuous_data = self.data.select_dtypes(exclude=['object'])
+    @staticmethod
+    def plot_density(data):
+        continuous_data = data.select_dtypes(exclude=['object'])
         for attribute, item in continuous_data.iteritems():
             len_unique_values = len(item.unique())
             if attribute == 'Churn' or len_unique_values <5:
@@ -61,24 +63,34 @@ class ExploratoryAnalysis:
             plt.title(f"{attribute} density plot")
             plt.xlabel(f"{attribute}")
             plt.ylabel("Density")
-            axis0 = sns.kdeplot(self.data[self.data['Churn'] == 0][attribute], 
+            axis0 = sns.kdeplot(data[data['Churn'] == 0][attribute], 
                               color= 'red', label= 'No Churn')
-            axis1 = sns.kdeplot(self.data[self.data['Churn'] == 1][attribute], 
+            axis1 = sns.kdeplot(data[data['Churn'] == 1][attribute], 
                               color= 'blue', label= 'Churn')
             plt.savefig(f"""plots/densityplot_{attribute}.png""")
             plt.close()
 
-    def plot_bar(self):
-        categorical_data = self.data.select_dtypes(exclude=['float'])
+
+    @staticmethod
+    def plot_bar(data):
+        categorical_data = data.select_dtypes(exclude=['float'])
         for attribute, item in categorical_data.iteritems():
             len_unique_values = len(item.unique())
             if attribute == 'Churn' or len_unique_values >5:
                 continue
 
+
             plt.figure(figsize=(10, 5))
             plt.ylabel('Density')
-            data = self.data.groupby(attribute)['Churn'].value_counts()/len(self.data)
-            data = data.to_frame().rename({'Churn': 'percentage'}, axis=1).reset_index()
-            ax = sns.barplot(x=attribute, y= 'percentage', hue= 'Churn', data= data)
+            tmp_data = data.groupby(attribute)['Churn'].value_counts()/len(data)
+            tmp_data = tmp_data.to_frame().rename({'Churn': 'percentage'}, axis=1).reset_index()
+            ax = sns.barplot(x=attribute, y= 'percentage', hue= 'Churn', data= tmp_data)
             plt.savefig(f"plots/barplot_{attribute}.png")
             plt.close()
+
+
+    @staticmethod
+    def plot_data(data):
+        ExploratoryAnalysis.plot_correlation_matrix(data)
+        ExploratoryAnalysis.plot_density(data)
+        ExploratoryAnalysis.plot_bar(data)

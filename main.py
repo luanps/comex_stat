@@ -5,13 +5,11 @@ import json
 from src.utils import load_dataset
 from src.exploratory import ExploratoryAnalysis
 from src.preproc import Preproc
-if __name__ == '__main__':
-    filepath = 'data/database.csv'
-    data = load_dataset(filepath)
 
+def data_exploration(data):
     exploratory = ExploratoryAnalysis(data)
 
-    print(f"""The dataset {filepath} contains {exploratory.data_length()[0]}
+    print(f"""This dataset contains {exploratory.data_length()[0]}
         samples with {exploratory.data_length()[1]} attributes.\n""")
     print(f"""These attributes are:\n {exploratory.list_attributes()}""")
     print(f"""Attributes with null data:\n {exploratory.check_null()}""")
@@ -23,19 +21,25 @@ if __name__ == '__main__':
     print(f"""Sample of each attribute:""")
     [print(key, value) for key, value in unique_values.items()]
 
-    print("============= Preprocessing =============")
-    preproc = Preproc()
-    data = preproc.apply_preproc(data)
+    return empty_spaces
 
-    empty_spaces = exploratory.check_empty_spaces()
-    print(f"""Textual attributes with empty data (value=' '):\n{empty_spaces}""")
 
-    unique_values = exploratory.check_unique_values(10)
-    print(f"""Sample of each attribute after preprocessing step""")
-    [print(key, value) for key, value in unique_values.items()]
+if __name__ == '__main__':
+    filepath = 'data/database.csv'
+    data = load_dataset(filepath)
 
-    print(f"""Attributes after preprocessing:\n {exploratory.list_attributes()}""")
+    print("============= Data exploration  =============")
+    empty_spaces = data_exploration(data)
 
-    exploratory.plot_correlation_matrix()
-    exploratory.plot_density()
-    exploratory.plot_bar()
+    print("============= Applying Preprocessing step =============")
+    columns_to_drop = ['customerID','code','Hash']
+    preproc = Preproc(data, columns_to_drop, empty_spaces)
+    treated_data = preproc.apply_preproc()
+
+    print("============= Data exploration after preprocessing  =============")
+    data_exploration(treated_data)
+
+    print("============= Plotting data  =============")
+    ExploratoryAnalysis.plot_data(treated_data)
+
+    '''preproc.categorical_encoding(data)'''

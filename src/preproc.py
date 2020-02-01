@@ -4,15 +4,20 @@ import numpy as np
 
 class Preproc:
 
-    def __init__(self):
-        pass
+    def __init__(self, data, columns_to_drop, empty_spaces):
+        self.data = data
+        self.columns_to_drop = columns_to_drop
+        self.empty_spaces = empty_spaces
 
 
-    def clean_empty_data(self,data):
-        data.drop(columns=['customerID'], inplace=True)
-        data['TotalCharges'] = data['TotalCharges'].replace(' ',np.nan)
-        data.dropna(inplace=True)
-        return data
+    def drop_columns(self):
+        self.data.drop(self.columns_to_drop,axis=1, inplace=True)
+
+
+    def clean_empty_spaces(self):
+        for empty in self.empty_spaces.keys():
+            self.data[empty] = self.data[empty].replace(' ',np.nan)
+        self.data.dropna(inplace=True)
 
 
     def normalize_text(self, data_item):
@@ -34,13 +39,13 @@ class Preproc:
         return data_attribute
 
 
-    def apply_preproc(self,data):
-        data = self.clean_empty_data(data)
-        categorical_data = data.select_dtypes(include=['object'])
-
+    def apply_preproc(self):
+        self.drop_columns()
+        self.clean_empty_spaces()
+        categorical_data = self.data.select_dtypes(include=['object'])
         for attribute, item in categorical_data.iteritems():
             normalized_item = self.normalize_text(item)
-            data[attribute] = self.map_binary_text(normalized_item)
+            self.data[attribute] = self.map_binary_text(normalized_item)
 
-        data['TotalCharges'] = self.map_str_to_float(data['TotalCharges'])
-        return data
+        self.data['TotalCharges'] = self.map_str_to_float(self.data['TotalCharges'])
+        return self.data
