@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
 
 class Preproc:
 
@@ -56,10 +55,3 @@ class Preproc:
     def encode_data(data):
         encoded_data = pd.get_dummies(data)
         return encoded_data
-
-
-    @staticmethod
-    def split_data(data):
-        X = data.drop('Churn', axis=1)
-        y = data[['Churn']]
-        return train_test_split(X, y, test_size = 0.3, random_state = 42)

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 import json
+import pickle
+from sklearn.linear_model import LogisticRegression
 
 from src.utils import load_dataset
 from src.exploratory import ExploratoryAnalysis
@@ -25,10 +27,6 @@ def data_exploration(data):
     return empty_spaces
 
 
-def train_model(X_train, y_train):
-    model = Model()
-
-
 if __name__ == '__main__':
     print("============= Reading data from file  =============")
     filepath = 'data/database.csv'
@@ -50,7 +48,10 @@ if __name__ == '__main__':
 
     print("============= Encoding data  =============")
     encoded_data = preproc.encode_data(treated_data)
-    X_train, X_test, y_train, y_test = preproc.split_data(encoded_data)
 
-    print("=============  Training classifier  =============")
-    model = train_model(X_train, y_train)
+
+    print("=============  Running Logistic Regression  =============")
+    lr_model = LogisticRegression()
+    model_name = 'logistic_regression'
+    model = Model(lr_model,model_name)
+    model.run_model(encoded_data)
