@@ -10,10 +10,10 @@ if __name__ == '__main__':
     data = load_dataset(filepath)
 
     exploratory = ExploratoryAnalysis(data)
-    
+
     print(f"""The dataset {filepath} contains {exploratory.data_length()[0]}
-              samples with {exploratory.data_length()[1]} attributes. 
-              These attributes are: {exploratory.list_attributes()}\n""")
+        samples with {exploratory.data_length()[1]} attributes.\n""")
+    print(f"""These attributes are:\n {exploratory.list_attributes()}""")
     print(f"""Attributes with null data:\n {exploratory.check_null()}""")
 
     empty_spaces = exploratory.check_empty_spaces()
@@ -33,6 +33,8 @@ if __name__ == '__main__':
     unique_values = exploratory.check_unique_values(10)
     print(f"""Sample of each attribute after preprocessing step""")
     [print(key, value) for key, value in unique_values.items()]
+
+    print(f"""Attributes after preprocessing:\n {exploratory.list_attributes()}""")
 
     exploratory.plot_correlation_matrix()
     exploratory.plot_density()

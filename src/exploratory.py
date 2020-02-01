@@ -11,7 +11,7 @@ class ExploratoryAnalysis:
 
 
     def list_attributes(self):
-        return self.data.keys()
+        return self.data.dtypes
 
 
     def data_length(self):
@@ -51,9 +51,10 @@ class ExploratoryAnalysis:
 
 
     def plot_density(self):
-        continuous_data = self.data.select_dtypes(include=['float'])
+        continuous_data = self.data.select_dtypes(exclude=['object'])
         for attribute, item in continuous_data.iteritems():
-            if attribute == 'Churn':
+            len_unique_values = len(item.unique())
+            if attribute == 'Churn' or len_unique_values <5:
                 continue
             
             plt.figure(figsize=(6, 4))
@@ -64,7 +65,8 @@ class ExploratoryAnalysis:
                               color= 'red', label= 'No Churn')
             axis1 = sns.kdeplot(self.data[self.data['Churn'] == 1][attribute], 
                               color= 'blue', label= 'Churn')
-            plt.savefig(f"""plots/{attribute}.png""")
+            plt.savefig(f"""plots/densityplot_{attribute}.png""")
+            plt.close()
 
     def plot_bar(self):
         categorical_data = self.data.select_dtypes(exclude=['float'])
@@ -78,4 +80,5 @@ class ExploratoryAnalysis:
             data = self.data.groupby(attribute)['Churn'].value_counts()/len(self.data)
             data = data.to_frame().rename({'Churn': 'percentage'}, axis=1).reset_index()
             ax = sns.barplot(x=attribute, y= 'percentage', hue= 'Churn', data= data)
-            plt.savefig(f"plots/{attribute}.png")
+            plt.savefig(f"plots/barplot_{attribute}.png")
+            plt.close()
