@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
+
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import roc_curve
+import matplotlib.pyplot as plt
+import seaborn as sns
 import pickle
 
 class Model:
@@ -15,11 +23,31 @@ class Model:
 
 
     def predict(self, X_test):
-        self.model.predict(X_test)
+        pred = self.model.predict(X_test)
+        return pred
 
     
+    def plot_confusion_matrix(self, conf_matrix):
+        labels = ['Churn', 'Not Churn']
+        plt.figure(figsize=(8,6))
+        sns.heatmap(conf_matrix, annot=True, fmt='',  
+                    xticklabels=labels, yticklabels=labels)
+        plt.xlabel('Predicted labels')
+        plt.ylabel('True labels')
+        plt.title(f'Confusion Matrix for {self.model_name} model')
+        plt.savefig(f'plots/confusion_matrix_{self.model_name}.png')
+        plt.close()
+
     def eval(self, y_test, y_predicted):
-        pass
+        class_report = classification_report(y_test, y_predicted)
+        print('Classification Report')
+        print(class_report)
+
+        acc_score = accuracy_score(y_test, y_predicted)
+        print(f'Accuracy Score: {acc_score}')
+
+        conf_matrix = confusion_matrix(y_test, y_predicted)
+        self.plot_confusion_matrix(conf_matrix) 
 
 
     def split_data(self, data):
@@ -32,7 +60,7 @@ class Model:
         X_train, X_test, y_train, y_test = self.split_data(data)
         self.fit(X_train, y_train.values.ravel())
         y_predicted = self.predict(X_test)
-
+        self.eval(y_test, y_predicted)
         self.store_model()
 
 
