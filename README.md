@@ -18,10 +18,18 @@ pip3 main.py
 
 ## Saída
 
+São executadas inicialmente rotinas para exploração da base de dados e 
+etapas de pré-processamento para limpeza e formatação. Em ambos a saída é 
+textual no console. Em seguida são gerados gráficos para interpretação de 
+correlação entre os atributos existentes e o objeto alvo *Churn*.
+Ao final é empregado um modelo de regressão logística para estimar a
+probabilidade de *Churn*, e o mesmo é salvo no arquivo.
+
+As etapas são descritas em maiores detalhes a seguir.
 
 
-### O que é churn
-...
+
+
 #### Exploração da base de dados
 Neste estudo foi utilizado a base de dados |[Database.csv](data/Database.csv).
 Esta base consiste de 7043 amostras (clientes) e 23 atributos distintos,
@@ -254,5 +262,22 @@ A base de dados foi então dividida aleatoriamente nos subconjuntos de treino e
 validação (70% e 30%, respectivamente) e o modelo empregado não sofreu
 alterações de hiperparâmetros.
 
+O modelo resultou nas seguintes métricas para as classes 0 (*No Churn*) e 1
+(*Churn*):
 
+|              precision | recall | f1-score | support|
+| --- | --- | --- | --- |
+|           0     | 0.86    | 0.88    | 0.87      1557|
+|           1     | 0.63    | 0.57    | 0.60       543|
+| --- | --- | --- | --- |
+|    accuracy     |    |       |      | 0.80     | 2100|
+|   macro avg     | 0.74    | 0.73    | 0.74     | 2100|
+|weighted avg     | 0.80    | 0.80    | 0.80     | 2100|
+
+A acurácia média do modelo foi de 0.803.
+
+Na matriz de confusão é demonstrado que, para o total de 2100 amostras de
+testes deste experimento, 1376 são verdadeiros positivos e 312 são falsos
+  negativos.
+  O modelo obteve 181 falsos negativos e 231 verdadeiros negativos.
 ![Distribuição de Churn](plots/confusion_matrix_logisticregression.png)
