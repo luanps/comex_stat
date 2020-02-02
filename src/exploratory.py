@@ -43,7 +43,7 @@ class ExploratoryAnalysis:
     @staticmethod
     def plot_correlation_matrix(data):
         plt.figure(figsize=(10, 8))
-        plt.title(f"""Correlation matrix plot""")
+        plt.title(f"""Correlation matrix""")
         corr = data.apply(lambda x: pd.factorize(x)[0]).corr()
         axis = sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns,
                          linewidths=.2, cmap="YlGnBu")
@@ -79,8 +79,8 @@ class ExploratoryAnalysis:
             if attribute == 'Churn' or len_unique_values >5:
                 continue
 
-
             plt.figure(figsize=(10, 5))
+            plt.title(f"{attribute} plot")
             plt.ylabel('Density')
             tmp_data = data.groupby(attribute)['Churn'].value_counts()/len(data)
             tmp_data = tmp_data.to_frame().rename({'Churn': 'percentage'}, axis=1).reset_index()
@@ -90,7 +90,19 @@ class ExploratoryAnalysis:
 
 
     @staticmethod
+    def plot_pie(data):
+            labels = ['Chrun', 'No Churn']
+            sizes = data['Churn'].value_counts(sort = True)
+            plt.figure(figsize=(10, 5))
+            plt.title('Churn distribution')
+            plt.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=270)
+            plt.savefig("plots/piechart_churn.png")
+            plt.close()
+
+
+    @staticmethod
     def plot_data(data):
+        ExploratoryAnalysis.plot_pie(data)
         ExploratoryAnalysis.plot_correlation_matrix(data)
         ExploratoryAnalysis.plot_density(data)
         ExploratoryAnalysis.plot_bar(data)
