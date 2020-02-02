@@ -74,26 +74,28 @@ class ExploratoryAnalysis:
     @staticmethod
     def plot_bar(data):
         categorical_data = data.select_dtypes(exclude=['float'])
+        categorical_data['Churn'] = categorical_data['Churn'].replace({0: 'No Churn', 1: 'Churn'})
+
         for attribute, item in categorical_data.iteritems():
             len_unique_values = len(item.unique())
             if attribute == 'Churn' or len_unique_values >5:
                 continue
 
-            plt.figure(figsize=(10, 5))
+            categorical_data['Churn'].replace({0: 'No Churn', 1: 'Churn'}, inplace = True)
+            plt.figure(figsize=(6, 4))
             plt.title(f"{attribute} plot")
-            plt.ylabel('Density')
-            tmp_data = data.groupby(attribute)['Churn'].value_counts()/len(data)
+            tmp_data = categorical_data.groupby(attribute)['Churn'].value_counts()/len(categorical_data)
             tmp_data = tmp_data.to_frame().rename({'Churn': 'percentage'}, axis=1).reset_index()
-            ax = sns.barplot(x=attribute, y= 'percentage', hue= 'Churn', data= tmp_data)
+            ax = sns.barplot(x=attribute, y= 'percentage', hue = 'Churn', data= tmp_data)
             plt.savefig(f"plots/barplot_{attribute}.png")
             plt.close()
 
 
     @staticmethod
     def plot_pie(data):
-            labels = ['Chrun', 'No Churn']
+            labels = ['Churn', 'No Churn']
             sizes = data['Churn'].value_counts(sort = True)
-            plt.figure(figsize=(10, 5))
+            plt.figure(figsize=(6, 4))
             plt.title('Churn distribution')
             plt.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=270)
             plt.savefig("plots/piechart_churn.png")
