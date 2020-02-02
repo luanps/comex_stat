@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import pandas as pd
-import json
-import pickle
 from sklearn.linear_model import LogisticRegression
 
 from src.utils import load_dataset
@@ -23,7 +20,6 @@ def data_exploration(data):
     unique_values = exploratory.check_unique_values(10)
     print(f"""Sample of each attribute:""")
     [print(key, value) for key, value in unique_values.items()]
-
     return empty_spaces
 
 
@@ -44,11 +40,10 @@ if __name__ == '__main__':
     data_exploration(treated_data)
 
     print("============= Plotting data  =============")
-    #ExploratoryAnalysis.plot_data(treated_data)
+    ExploratoryAnalysis.plot_data(treated_data)
 
     print("============= Encoding data  =============")
     encoded_data = preproc.encode_data(treated_data)
-
 
     print("=============  Running Logistic Regression  =============")
     lr_model = LogisticRegression()
