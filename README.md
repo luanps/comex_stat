@@ -53,8 +53,7 @@ identificar o usuário, não são elementos que implicam no resultado de Churn.
 
 |Atributo | Amostra de dados |
 | --- | --- |
-|customerID |[nan '5575-GNVDE' '7795-CFOCW' '9237-HQITU' '6388-TABGU' '0280-XJGEX'|
-| '5129-JLPIS' '3655-SNQYZ' '8191-XWSZG' '9959-WOFKT']|
+|customerID |[nan '5575-GNVDE' '7795-CFOCW' '9237-HQITU' '6388-TABGU' '0280-XJGEX']|
 |gender |['Female' 'Male']|
 |SeniorCitizen |[0 1]|
 |Partner |['Yes' 'No' 'no' 'yes' '0' '1']|
@@ -64,26 +63,196 @@ identificar o usuário, não são elementos que implicam no resultado de Churn.
 |MultipleLines |['No phone service' 'No' 'Yes' 'no' 'yes' 'no phone service' '0' '1']|
 |code |[7590 5575 3668 7795 9237 9305 1452 6713 7892 6388]|
 |InternetService |['DSL' 'Fiber optic' 'No' 'no']|
-|OnlineSecurity |['No' 'Yes' 'No internet service' 'yes' 'no internet service' 'no' nan '0'|
-| '1']|
+|OnlineSecurity |['No' 'Yes' 'No internet service' 'yes' 'no internet service' 'no' nan '0' '1']|
 |OnlineBackup |['Yes' 'No' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
 |DeviceProtection |['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
 |TechSupport |['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
 |StreamingTV |['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
 |StreamingMovies |['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '1' '0']|
 |Contract |['Month-to-month' 'One year' 'Two year']|
-|Hash |['75VEG' 'GNVDE' 'QPYBK' 'CFOCW' 'HQITU' 'CDSKC' 'KIOVK' 'OKOMC' 'POOKP'|
-| 'TABGU']|
+|Hash |['75VEG' 'GNVDE' 'QPYBK' 'CFOCW' 'HQITU' 'CDSKC' 'KIOVK' 'OKOMC' 'POOKP' 'TABGU']|
 |PaperlessBilling |['Yes' 'No' 'yes' 'no' '1' '0']|
-|PaymentMethod |['Electronic check' 'Mailed check' 'Bank transfer (automatic)'|
-| 'Credit card (automatic)']|
+|PaymentMethod |['Electronic check' 'Mailed check' 'Bank transfer (automatic)' 'Credit card (automatic)']|
 |MonthlyCharges |[ 29.85  56.95  53.85  42.3   70.7   99.65  89.1   29.75 104.8   56.15]|
-|TotalCharges |['29.85' '1889.5' '108.15' '1840.75' '151.65' '820.5' '1949.4' '301.9'|
-| '3046.05' '3487.95']|
+|TotalCharges |['29.85' '1889.5' '108.15' '1840.75' '151.65' '820.5' '1949.4' '301.9']|
 |Churn |['No' 'Yes' 'yes' 'no' '0' '1']|
 
 
 #### Pré-processamento
 
+Esta etapa tem como intuito realizar a  limpeza e formatação dos dados.
 
-![img description](link)
+Uma vez identificado que as colunas *['customerId','code','Hash']* não
+influenciam no resultado de Churn, estas foram removidas do conjunto de dados.
+
+45 amostras que apresentavam dados faltantes foram removidas da base.
+
+Os atributos categóricos (elementos que podem ser separados em categorias, 
+ex.: *Partner*) tiveram seus campos semelhantes agrupados, evitando redundância
+(ex.: [no,No,0] foram substituídos por 0).
+
+Por fim, o campo *TotalCharges* foi convertido para o formato numérico *float*,
+pois este estava formatado com o tipo textual *str*
+
+Após o tratamento, segue uma amostra do conjunto de dados atualizado:
+
+|Atributo | Amostra de dados |
+| --- | --- |
+|gender [|'female' 'male']|
+|SeniorCitizen [|0 1]|
+|Partner [|1 0]|
+|Dependents [|0 1]|
+|tenure [| 1 34  2 45  8 22 10 28 62 13]|
+|PhoneService [|0 1]|
+|MultipleLines [|'no phone service' 0 1]|
+|InternetService [|'dsl' 'fiber optic' 0]|
+|OnlineSecurity [|0 1 'no internet service']|
+|OnlineBackup [|1 0 'no internet service']|
+|DeviceProtection [|0 1 'no internet service']|
+|TechSupport [|0 1 'no internet service']|
+|StreamingTV [|0 1 'no internet service']|
+|StreamingMovies [|0 1 'no internet service']|
+|Contract [|'month-to-month' 'one year' 'two year']|
+|PaperlessBilling [|1 0]|
+|PaymentMethod [|'electronic check' 'mailed check' 'bank transfer (automatic)' 'credit card (automatic)']|
+|MonthlyCharges [| 29.85  56.95  53.85  42.3   70.7   99.65  89.1   29.75 104.8   56.15]|
+|TotalCharges [|  29.85 1889.5   108.15 1840.75  151.65  820.5  1949.4   301.9  3046.05|
+| 3487.95]|
+|Churn [|0 1]|
+
+#### Análise de dados
+
+No gráfico abaixo é demonstrado a proporção de entradas separadas pelas
+categorias *Churn* e *No Churn*, sendo possível identificar que a base é 
+desbalanceada, aonde aproximadamente 2/3 dos dados são da classe *No Churn*.
+
+![Distribuição de Churn](plots/piechart_churn.png)
+
+Os gráficos a seguir relatam a distribuição de Churn em relação à cada
+atributo, sendo *No Churn* em azul e *Churn* em laranja.
+O eixo horizontal representa a ausência (0) e 
+presença (1) do atributo em questão, enquanto o eixo vertical indica a
+proporção dos dados (normalizados entre 0.0 e 1.0)
+
+Observando os dados do atributo *gender*, as variáveis *female* e *male*
+apresentam distribuições semelhantes, podendo então inferir que este atributo
+não interfere no *Churn*.
+
+![Distribuição de Churn](plots/barplot_gender.png)
+
+Já em relação ao atributo *Senior Citizen*, 84% de sua população não é 
+sênior (representado pelo valor 0 no eixo horizontal da figura), 
+e esta faixa etária é menos propensa ao *Churn*, visto que a razão entre
+*Churn/No Churn* é de 31%, enquanto a população sênior, embora que represente
+ape48nas 16% do total, tem uma razão de *Churn/No Churn* de aproximadamente 71%.
+
+![Distribuição de Churn](plots/barplot_SeniorCitizen.png)
+
+Na figura que relata o atributo *Partner* fica evidente que clientes que não 
+possuem parceiros (valor 0 no eixo horizontal da figura) são mais propensos
+ao *Churn*, apresentando a razão de 48%, o dobro da razão encontrada nos
+clientes que possuem parceiros.
+
+![Distribuição de Churn]( plots/barplot_Partner.png)
+
+Os valores contidos no atributo *Dependents* demonstram que clientes sem
+dependentes possuem maior taxa de *Churn* (45%). Já clientes com dependentes
+possuem taxa de *Churn* de 18%.
+
+![Distribuição de Churn - Dependents](plots/barplot_Dependents.png)
+
+No que tangem as três modalidades de contrato (*Contract*), a espécie
+*Month-to-month* lidera a proporção de taxa de *Churn* com 71%, o que é
+esperado, dado que este tipo de vínculo é mais curto e portanto depende de
+maior engajamento do cliente em realizar renovações mensais. 
+
+![Distribuição de Churn - Contract](plots/barplot_Contract.png)
+
+Consumidores que utilizam a opção de recebimento de conta *Paperless*
+são mais suscetíveis a *Churn*, conforme a figura abaixo:
+
+![Distribuição de Churn](plots/barplot_PaperlessBilling.png)
+
+Dentre os quatro tipos de pagamento (*PaymentMethod*) disponíveis, o modelo
+*eletronic check* apresenta uma taxa de Churn maior do que as outras três
+demais modalidades somadas.
+
+![Distribuição de Churn]( plots/barplot_PaymentMethod.png)
+
+A taxa de *Churn* dos serviços de internet (*InternetService*) possui uma
+variação significativa, sendo 71% para o serviço *fiber optic* e 23% do serviço
+*dsl*. Apenas 8% de *Churn* para consumidores que não possuem nenhum dos dois
+serviços.
+ 
+![Distribuição de Churn](plots/barplot_InternetService.png)
+
+Clientes que adquirem os serviços adicionais de *OnlineBackup*,
+ *OnlineSecurity*, *DeviceProtection* e *TechSupport* apresentam menor
+ taxa de *Churn*, conforme as quatro figuras a seguir: 
+
+![Distribuição de Churn](plots/barplot_OnlineBackup.png)
+![Distribuição de Churn](plots/barplot_OnlineSecurity.png)
+![Distribuição de Churn - DeviceProtection](plots/barplot_DeviceProtection.png)
+![Distribuição de Churn](plots/barplot_TechSupport.png)
+
+
+Os dados relacionados à assinatura de serviços de telefonia demonstram que a
+grande maioria dos clientes possui um serviço contratado, porém esta variável 
+não tem relação direta com *Churn*.
+
+![Distribuição de Churn](plots/barplot_PhoneService.png)
+
+O aumento da taxa de *Churn* quando se trata de comparar a contratação de
+múltiplas linhas telefônicas (*MultipleLines*) em relação à contratar apenas
+linha é de apenas 7%, não sendo então esta variável um fator muito discriminante. 
+
+![Distribuição de Churn](plots/barplot_MultipleLines.png)
+
+As contratações ou não dos serviços de  *StreamingTV* e *StreamingMovies* 
+apresentam razão entre *Churn* e *No Churn* semelhantes, não sendo estes então
+atributos descritivos para inferir o *Churn*, conforme as duas figuras abaixo:
+
+![Distribuição de Churn](plots/barplot_StreamingTV.png)
+![Distribuição de Churn](plots/barplot_StreamingMovies.png)
+
+
+Uma vez reportadas todas as variáveis qualitativas, nas figuras a seguir são
+expostas a relação de *Churn* dos dados quantitativos, individualmente.
+
+Observando a distribuição de densidade do atributo *tenure* na figura abaixo, é
+nítida sua relevante contribuição para o *Churn*, destacando um pico 
+enquanto valores de *tenure* são iniciais.
+
+![Distribuição de Churn](plots/densityplot_tenure.png)
+
+O atributo *MonthlyCharges* apresenta um pico na variável *No Churn* acerca do
+valor 20 (eixo horizontal), enquanto o *Churn* é uma crescente que atinge altos
+valores principalmente entre as faixas de 60 à 110. Conforme a figura abaixo,
+pode-se inferir que este atributo é um forte indicador de *Churn*.
+
+![Distribuição de Churn](plots/densityplot_MonthlyCharges.png)
+
+Conforme a figura abaixo, é possível identificar uma maior influência no
+*Churn* em valores mais baixos de *TotalCharges*, sendo então este atributo
+relevante para análise de *Churn*.
+
+![Distribuição de Churn](plots/densityplot_TotalCharges.png)
+
+A figura a seguir demonstra o grau de correlação entre os atributos da base de
+dados, sendo possível identificar uma maior interseção entre os elementos
+demarcados em azul escuro na região central da figura.
+
+![Distribuição de Churn](plots/correlation_matrix.png)
+
+#### Modelo de predição de Churn
+
+Por fim, foi empregado o modelo de regressão logística para estimar a
+probabilidade de *Churn*, visando compreender se, dado um novo cliente, em qual
+grau de precisão é possível inferir sua probabilidade de *Churn*
+
+A base de dados foi então dividida aleatoriamente nos subconjuntos de treino e
+validação (70% e 30%, respectivamente) e o modelo empregado não sofreu
+alterações de hiperparâmetros.
+
+
+![Distribuição de Churn](plots/confusion_matrix_logisticregression.png)
