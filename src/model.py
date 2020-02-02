@@ -28,7 +28,7 @@ class Model:
 
     
     def plot_confusion_matrix(self, conf_matrix):
-        labels = ['Churn', 'Not Churn']
+        labels = ['Churn', 'No Churn']
         plt.figure(figsize=(8,6))
         sns.heatmap(conf_matrix, annot=True, fmt='',  
                     xticklabels=labels, yticklabels=labels)
