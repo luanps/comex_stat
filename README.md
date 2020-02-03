@@ -42,7 +42,7 @@ DeviceProtection, TechSupport, StreamingTV, StreamingMovies, Contract, Hash,
 PaperlessBilling, PaymentMethod, MonthlyCharges, TotalCharges, Churn
 ```
 
-Foram identificados alguns atributos com dados faltantes, (campo vazio ou epaço
+Foram identificados alguns atributos com dados faltantes, (campo vazio ou espaço
 em branco ' '), que podem vir a ser removidos do estudo.
 
 |atributo        |quantidade de dados faltantes|
@@ -57,7 +57,7 @@ mesmo significado, podendo ser agrupados (ex.: [no,No,0] = 0).
 
 Além disso, observando as colunas *Hash* e *code* pode se inferir que são uma
 decomposição da coluna *customerID*, e tas três existem unicamente  para
-identificar o usuário, não são elementos que implicam no resultado de Churn.
+identificar o usuário, não são elementos que implicam no resultado de *Churn*.
 
 |Atributo | Amostra de dados |
 | --- | --- |
@@ -91,7 +91,7 @@ identificar o usuário, não são elementos que implicam no resultado de Churn.
 Esta etapa tem como intuito realizar a  limpeza e formatação dos dados.
 
 Uma vez identificado que as colunas *['customerId','code','Hash']* não
-influenciam no resultado de Churn, estas foram removidas do conjunto de dados.
+influenciam no resultado de *Churn*, estas foram removidas do conjunto de dados.
 
 45 amostras que apresentavam dados faltantes foram removidas da base.
 
@@ -136,7 +136,7 @@ desbalanceada, aonde aproximadamente 2/3 dos dados são da classe *No Churn*.
 
 ![Distribuição de Churn](plots/piechart_churn.png)
 
-Os gráficos a seguir relatam a distribuição de Churn em relação à cada
+Os gráficos a seguir relatam a distribuição de *Churn* em relação à cada
 atributo, sendo *No Churn* em azul e *Churn* em laranja.
 O eixo horizontal representa a ausência (0) e 
 presença (1) do atributo em questão, enquanto o eixo vertical indica a
@@ -152,7 +152,7 @@ Já em relação ao atributo *Senior Citizen*, 84% de sua população não é
 sênior (representado pelo valor 0 no eixo horizontal da figura), 
 e esta faixa etária é menos propensa ao *Churn*, visto que a razão entre
 *Churn/No Churn* é de 31%, enquanto a população sênior, embora que represente
-ape48nas 16% do total, tem uma razão de *Churn/No Churn* de aproximadamente 71%.
+apenas 16% do total, tem uma razão de *Churn/No Churn* de aproximadamente 71%.
 
 ![Distribuição de Churn](plots/barplot_SeniorCitizen.png)
 
@@ -182,7 +182,7 @@ são mais suscetíveis a *Churn*, conforme a figura abaixo:
 ![Distribuição de Churn](plots/barplot_PaperlessBilling.png)
 
 Dentre os quatro tipos de pagamento (*PaymentMethod*) disponíveis, o modelo
-*electronic check* apresenta uma taxa de Churn maior do que as outras três
+*electronic check* apresenta uma taxa de *Churn* maior do que as outras três
 demais modalidades somadas.
 
 ![Distribuição de Churn]( plots/barplot_PaymentMethod.png)
@@ -260,7 +260,7 @@ Foi empregado o modelo de regressão logística para estimar a probabilidade de
 
 A base de dados foi então dividida aleatoriamente nos subconjuntos de treino e
 validação (70% e 30%, respectivamente) e o modelo empregado não sofreu
-alterações de hiperparâmetros.
+alterações de hiper parâmetros.
 
 O modelo resultou nas seguintes métricas para as classes 0 (*No Churn*) e 1
 (*Churn*):
@@ -290,5 +290,5 @@ de clientes, em especial as variáveis contínuas *tenure*, *MontlyCharges* e
 além de algumas variáveis categóricas, como *Contract (Month-to-month),
 InternetService (fiber optic), PaymentMethod (electronic check) e
 SeniorCitizen*
-Foi gerado ainda um modelo de predição de Churn como baseline,
+Foi gerado ainda um modelo de predição de *Churn* como baseline,
 o qual obteve acurácia de 80%.
