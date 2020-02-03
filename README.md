@@ -106,27 +106,27 @@ Após o tratamento, segue uma amostra do conjunto de dados atualizado:
 
 |Atributo | Amostra de dados |
 | --- | --- |
-|gender [|'female' 'male']|
-|SeniorCitizen [|0 1]|
-|Partner [|1 0]|
-|Dependents [|0 1]|
-|tenure [| 1 34  2 45  8 22 10 28 62 13]|
-|PhoneService [|0 1]|
-|MultipleLines [|'no phone service' 0 1]|
-|InternetService [|'dsl' 'fiber optic' 0]|
-|OnlineSecurity [|0 1 'no internet service']|
-|OnlineBackup [|1 0 'no internet service']|
-|DeviceProtection [|0 1 'no internet service']|
-|TechSupport [|0 1 'no internet service']|
-|StreamingTV [|0 1 'no internet service']|
-|StreamingMovies [|0 1 'no internet service']|
-|Contract [|'month-to-month' 'one year' 'two year']|
-|PaperlessBilling [|1 0]|
-|PaymentMethod [|'electronic check' 'mailed check' 'bank transfer (automatic)' 'credit card (automatic)']|
-|MonthlyCharges [| 29.85  56.95  53.85  42.3   70.7   99.65  89.1   29.75 104.8   56.15]|
-|TotalCharges [|  29.85 1889.5   108.15 1840.75  151.65  820.5  1949.4   301.9  3046.05|
+|gender |['female' 'male']|
+|SeniorCitizen |[0 1]|
+|Partner |[1 0]|
+|Dependents |[0 1]|
+|tenure |[ 1 34  2 45  8 22 10 28 62 13]|
+|PhoneService |[0 1]|
+|MultipleLines |['no phone service' 0 1]|
+|InternetService |['dsl' 'fiber optic' 0]|
+|OnlineSecurity |[0 1 'no internet service']|
+|OnlineBackup |[1 0 'no internet service']|
+|DeviceProtection |[0 1 'no internet service']|
+|TechSupport |[0 1 'no internet service']|
+|StreamingTV |[0 1 'no internet service']|
+|StreamingMovies |[0 1 'no internet service']|
+|Contract |['month-to-month' 'one year' 'two year']|
+|PaperlessBilling |[1 0]|
+|PaymentMethod |['electronic check' 'mailed check' 'bank transfer (automatic)' 'credit card (automatic)']|
+|MonthlyCharges |[ 29.85  56.95  53.85  42.3   70.7   99.65  89.1   29.75 104.8   56.15]|
+|TotalCharges |[  29.85 1889.5   108.15 1840.75  151.65  820.5  1949.4   301.9  3046.05|
 | 3487.95]|
-|Churn [|0 1]|
+|Churn |[0 1]|
 
 #### Análise de dados
 
