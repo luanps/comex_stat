@@ -28,10 +28,10 @@ probabilidade de *Churn*, e o mesmo é salvo no arquivo.
 As etapas são descritas em maiores detalhes a seguir.
 
 
-
+---
 
 #### Exploração da base de dados
-Neste estudo foi utilizado a base de dados |[Database.csv](data/Database.csv).
+Neste estudo foi utilizado a base de dados |[database.csv](data/database.csv).
 Esta base consiste de 7043 amostras (clientes) e 23 atributos distintos,
 sendo estes:
 
@@ -45,7 +45,7 @@ PaperlessBilling, PaymentMethod, MonthlyCharges, TotalCharges, Churn
 Foram identificados alguns atributos com dados faltantes, (campo vazio ou epaço
 em branco ' '), que podem vir a ser removidos do estudo.
 
-|atributo        |qtde de dados faltantes:|
+|atributo        |quantidade de dados faltantes|
 | ---            | ---|
 |customerID      |3459|
 |OnlineSecurity  |34|
@@ -61,28 +61,28 @@ identificar o usuário, não são elementos que implicam no resultado de Churn.
 
 |Atributo | Amostra de dados |
 | --- | --- |
-|customerID |[nan '5575-GNVDE' '7795-CFOCW' '9237-HQITU' '6388-TABGU' '0280-XJGEX']|
-|gender |['Female' 'Male']|
-|SeniorCitizen |[0 1]|
-|Partner |['Yes' 'No' 'no' 'yes' '0' '1']|
-|Dependents |['No' 'Yes' 'no' 'yes' '0' '1']|
-|tenure |[ 1 34  2 45  8 22 10 28 62 13]|
-|PhoneService |['No' 'Yes' 'yes' 'no' '1' '0']|
-|MultipleLines |['No phone service' 'No' 'Yes' 'no' 'yes' 'no phone service' '0' '1']|
-|code |[7590 5575 3668 7795 9237 9305 1452 6713 7892 6388]|
-|InternetService |['DSL' 'Fiber optic' 'No' 'no']|
-|OnlineSecurity |['No' 'Yes' 'No internet service' 'yes' 'no internet service' 'no' nan '0' '1']|
-|OnlineBackup |['Yes' 'No' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
-|DeviceProtection |['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
-|TechSupport |['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
-|StreamingTV |['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
-|StreamingMovies |['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '1' '0']|
-|Contract |['Month-to-month' 'One year' 'Two year']|
-|Hash |['75VEG' 'GNVDE' 'QPYBK' 'CFOCW' 'HQITU' 'CDSKC' 'KIOVK' 'OKOMC' 'POOKP' 'TABGU']|
-|PaperlessBilling |['Yes' 'No' 'yes' 'no' '1' '0']|
-|PaymentMethod |['Electronic check' 'Mailed check' 'Bank transfer (automatic)' 'Credit card (automatic)']|
-|MonthlyCharges |[ 29.85  56.95  53.85  42.3   70.7   99.65  89.1   29.75 104.8   56.15]|
-|TotalCharges |['29.85' '1889.5' '108.15' '1840.75' '151.65' '820.5' '1949.4' '301.9']|
+|customerID | [nan '5575-GNVDE' '7795-CFOCW' '9237-HQITU' '6388-TABGU' '0280-XJGEX']|
+|gender | ['Female' 'Male']|
+|SeniorCitizen | [0 1]|
+|Partner | ['Yes' 'No' 'no' 'yes' '0' '1']|
+|Dependents | ['No' 'Yes' 'no' 'yes' '0' '1']|
+|tenure | [ 1 34  2 45  8 22 10 28 62 13]|
+|PhoneService | ['No' 'Yes' 'yes' 'no' '1' '0']|
+|MultipleLines | ['No phone service' 'No' 'Yes' 'no' 'yes' 'no phone service' '0' '1']|
+|code | [7590 5575 3668 7795 9237 9305 1452 6713 7892 6388]|
+|InternetService | ['DSL' 'Fiber optic' 'No' 'no']|
+|OnlineSecurity | ['No' 'Yes' 'No internet service' 'yes' 'no internet service' 'no' nan '0' '1']|
+|OnlineBackup | ['Yes' 'No' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
+|DeviceProtection | ['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
+|TechSupport | ['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
+|StreamingTV | ['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '0' '1']|
+|StreamingMovies | ['No' 'Yes' 'No internet service' 'no' 'no internet service' 'yes' '1' '0']|
+|Contract | ['Month-to-month' 'One year' 'Two year']|
+|Hash | ['75VEG' 'GNVDE' 'QPYBK' 'CFOCW' 'HQITU' 'CDSKC' 'KIOVK' 'OKOMC' 'POOKP' 'TABGU']|
+|PaperlessBilling | ['Yes' 'No' 'yes' 'no' '1' '0']|
+|PaymentMethod | ['Electronic check' 'Mailed check' 'Bank transfer (automatic)' 'Credit card (automatic)']|
+|MonthlyCharges | [ 29.85  56.95  53.85  42.3   70.7   99.65  89.1   29.75 104.8   56.15]|
+|TotalCharges | ['29.85' '1889.5' '108.15' '1840.75' '151.65' '820.5' '1949.4' '301.9']|
 |Churn |['No' 'Yes' 'yes' 'no' '0' '1']|
 
 
@@ -267,10 +267,9 @@ O modelo resultou nas seguintes métricas para as classes 0 (*No Churn*) e 1
 
 |              precision | recall | f1-score | support|
 | --- | --- | --- | --- |
-|           0     | 0.86    | 0.88    | 0.87      1557|
-|           1     | 0.63    | 0.57    | 0.60       543|
-| --- | --- | --- | --- |
-|    accuracy     |    |       |      | 0.80     | 2100|
+|           0     | 0.86    | 0.88    | 0.87     | 1557|
+|           1     | 0.63    | 0.57    | 0.60     |  543|
+|    accuracy     |         |         | 0.80     | 2100|
 |   macro avg     | 0.74    | 0.73    | 0.74     | 2100|
 |weighted avg     | 0.80    | 0.80    | 0.80     | 2100|
 
@@ -280,4 +279,5 @@ Na matriz de confusão é demonstrado que, para o total de 2100 amostras de
 testes deste experimento, 1376 são verdadeiros positivos e 312 são falsos
   negativos.
   O modelo obteve 181 falsos negativos e 231 verdadeiros negativos.
-![Distribuição de Churn](plots/confusion_matrix_logisticregression.png)
+
+![Distribuição de Churn](plots/confusion_matrix_logistic_regression.png)
