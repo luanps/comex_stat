@@ -31,7 +31,7 @@ As etapas são descritas em maiores detalhes a seguir.
 ---
 
 #### Exploração da base de dados
-Neste estudo foi utilizado a base de dados |[database.csv](data/database.csv).
+Neste estudo foi utilizado a base de dados [database.csv](data/database.csv).
 Esta base consiste de 7043 amostras (clientes) e 23 atributos distintos,
 sendo estes:
 
@@ -51,7 +51,7 @@ em branco ' '), que podem vir a ser removidos do estudo.
 |OnlineSecurity  |34|
 |TotalCharges    |11|
 
-Por fim, uma amostra de quais informações são contidas em cada atributo,
+Em seguida, é reportado uma amostra de quais informações são contidas em cada atributo,
 sendo possível identificar que alguns campos possuem grafia diferente, porém
 mesmo significado, podendo ser agrupados (ex.: [no,No,0] = 0).
 
@@ -99,7 +99,7 @@ Os atributos categóricos (elementos que podem ser separados em categorias,
 ex.: *Partner*) tiveram seus campos semelhantes agrupados, evitando redundância
 (ex.: [no,No,0] foram substituídos por 0).
 
-Por fim, o campo *TotalCharges* foi convertido para o formato numérico *float*,
+O campo *TotalCharges* foi convertido para o formato numérico *float*,
 pois este estava formatado com o tipo textual *str*
 
 Após o tratamento, segue uma amostra do conjunto de dados atualizado:
@@ -182,7 +182,7 @@ são mais suscetíveis a *Churn*, conforme a figura abaixo:
 ![Distribuição de Churn](plots/barplot_PaperlessBilling.png)
 
 Dentre os quatro tipos de pagamento (*PaymentMethod*) disponíveis, o modelo
-*eletronic check* apresenta uma taxa de Churn maior do que as outras três
+*electronic check* apresenta uma taxa de Churn maior do que as outras três
 demais modalidades somadas.
 
 ![Distribuição de Churn]( plots/barplot_PaymentMethod.png)
@@ -254,9 +254,9 @@ demarcados em azul escuro na região central da figura.
 
 #### Modelo de predição de Churn
 
-Por fim, foi empregado o modelo de regressão logística para estimar a
-probabilidade de *Churn*, visando compreender se, dado um novo cliente, em qual
-grau de precisão é possível inferir sua probabilidade de *Churn*
+Foi empregado o modelo de regressão logística para estimar a probabilidade de
+*Churn*, visando inferir a probabilidade de *Churn* para  dado uma nova entrada
+(novo cliente).
 
 A base de dados foi então dividida aleatoriamente nos subconjuntos de treino e
 validação (70% e 30%, respectivamente) e o modelo empregado não sofreu
@@ -281,3 +281,14 @@ testes deste experimento, 1376 são verdadeiros positivos e 312 são falsos
   O modelo obteve 181 falsos negativos e 231 verdadeiros negativos.
 
 ![Distribuição de Churn](plots/confusion_matrix_logistic_regression.png)
+
+### Considerações Finais
+
+A base de dados utilizada apresenta atributos que podem influenciar no *Churn*
+de clientes, em especial as variáveis contínuas *tenure*, *MontlyCharges* e
+*TotalCharges*, conforme demonstrados anteriormente nos gráficos de densidade,
+além de algumas variáveis categóricas, como *Contract (Month-to-month),
+InternetService (fiber optic), PaymentMethod (electronic check) e
+SeniorCitizen*
+Foi gerado ainda um modelo de predição de Churn como baseline,
+o qual obteve acurácia de 80%.
