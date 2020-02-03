@@ -81,12 +81,16 @@ class ExploratoryAnalysis:
             if attribute == 'Churn' or len_unique_values >5:
                 continue
 
-            categorical_data['Churn'].replace({0: 'No Churn', 1: 'Churn'}, inplace = True)
-            plt.figure(figsize=(6, 4))
+            plt.figure(figsize=(10, 8))
             plt.title(f"{attribute} plot")
             tmp_data = categorical_data.groupby(attribute)['Churn'].value_counts()/len(categorical_data)
             tmp_data = tmp_data.to_frame().rename({'Churn': 'percentage'}, axis=1).reset_index()
             ax = sns.barplot(x=attribute, y= 'percentage', hue = 'Churn', data= tmp_data)
+
+            for p in ax.patches:
+                ax.annotate(format(p.get_height(), '.3f'), (p.get_x() + p.get_width() / 2., p.get_height()),
+                ha = 'center', va = 'center', xytext = (0, 5), textcoords = 'offset points')
+
             plt.savefig(f"plots/barplot_{attribute}.png")
             plt.close()
 
