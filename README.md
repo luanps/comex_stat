@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Análise de churn
 
 Este repositório tem como finalidade realizar uma análise em
@@ -292,3 +293,6 @@ InternetService (fiber optic), PaymentMethod (electronic check) e
 SeniorCitizen*
 Foi gerado ainda um modelo de predição de *Churn* como baseline,
 o qual obteve acurácia de 80%.
+=======
+# airbnb
+>>>>>>> Initial commit

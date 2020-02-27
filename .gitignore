@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 *.docx
 tags
 
+=======
+>>>>>>> Initial commit
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -112,8 +115,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+<<<<<<< HEAD
 .envrc
 .direnv/
+=======
+>>>>>>> Initial commit
 
 # Spyder project settings
 .spyderproject
