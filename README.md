@@ -1,8 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Análise de churn
 
 Este repositório tem como finalidade realizar uma análise em
 atributos relacionados ao *Churn* de clientes.  
+=======
+# Análise de preço de estadia no AirBnB-Rio de Janeiro
+
+Este repositório tem como finalidade estimar o valor de estadia 
+no Rio de Janeiro analisando dados do [AirBnB](http://insideairbnb.com/get-the-data.html)
+
+>>>>>>> update readme
 
 ## Instalação
 
@@ -14,6 +22,7 @@ pip3 install -r requirements.txt
 ## Como executar
 
 ```
+<<<<<<< HEAD
 pip3 main.py
 ```
 
@@ -296,3 +305,7 @@ o qual obteve acurácia de 80%.
 =======
 # airbnb
 >>>>>>> Initial commit
+=======
+python3 main.py
+```
+>>>>>>> update readme
