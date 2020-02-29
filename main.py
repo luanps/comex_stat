@@ -8,7 +8,6 @@ from src.preproc import Preproc
 from src.model import Model
 pd.set_option('display.max_rows', 1000)
 
-# TODO: remove empty prices
 # TODO: remove prices outliers
 # TODO: encode strings
 

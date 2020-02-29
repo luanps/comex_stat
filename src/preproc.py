@@ -45,6 +45,10 @@ class Preproc:
         self.data = self.data[self.data['country'] == self.country]
 
 
+    def drop_zero_prices(self):
+        self.data = self.data[self.data['price'] != 0]
+       
+
     def apply_preproc(self):
         self.drop_another_countries()
         self.drop_columns()
@@ -57,6 +61,7 @@ class Preproc:
 
         for attribute in self.obj_to_str:
             self.data[attribute] = self.map_str_to_float(self.data[attribute])
+        self.drop_zero_prices()
         return self.data
 
 
