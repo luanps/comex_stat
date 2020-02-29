@@ -20,7 +20,8 @@ class ExploratoryAnalysis:
 
 
     def check_null(self):
-        return self.data.isnull().sum()
+        return self.data.isnull().sum() 
+
 
     def majority_nulls(self,proportion_cutoff):
         length = self.data_length()[0]
@@ -68,6 +69,14 @@ class ExploratoryAnalysis:
             top_unique = item.unique()[:n]
             unique_values.update({attribute: top_unique})
         return unique_values
+
+    def check_singlelabel(self):
+        singlelabel = dict()
+        unique_values = self.check_unique_values(2)
+        for key, value in unique_values.items():
+            if len(value) <=1:
+                singlelabel.update({key: value})
+        return singlelabel
 
 
     @staticmethod

@@ -30,7 +30,6 @@ def data_exploration(data):
     null_data = exploratory.check_null()
     print(f"""Attributes with null data:\n {null_data}""")
 
-    
     majority_null = exploratory.majority_nulls(0.66)
     print(f"""Attributes which more than 66% of data is null""")
     [print(f"""{value}\n""") for key, value in majority_null.items()]
@@ -40,10 +39,14 @@ def data_exploration(data):
     
     zeros = exploratory.check_zeros()
     print(f"""Numerical attributes with zeros:\n{zeros}""")
-    unique_values = exploratory.check_unique_values(10)
 
+    unique_values = exploratory.check_unique_values(10)
     print(f"""Sample of each attribute:""")
     [print(key, value) for key, value in unique_values.items()]
+
+    singlelabel = exploratory.check_singlelabel()
+    print(f"""Attribute with only one label:""")
+    [print(key, value) for key, value in singlelabel.items()]
 
     return empty_spaces, zeros
 
