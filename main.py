@@ -8,27 +8,41 @@ from src.preproc import Preproc
 from src.model import Model
 pd.set_option('display.max_rows', 1000)
 
+# TODO: export per attribute description
+# TODO: remove unnecessary attributes
+# TODO: remove empty prices
+# TODO: remove prices outliers
+# TODO: encode strings
+
 def data_exploration(data):
     exploratory = ExploratoryAnalysis(data)
+    
+    data_length = exploratory.data_length()
+    print(f"""This dataset contains {data_length[0]}
+        samples with {data_length[1]} attributes.\n""")
 
-    print(f"""This dataset contains {exploratory.data_length()[0]}
-        samples with {exploratory.data_length()[1]} attributes.\n""")
-    print(f"""These attributes are:\n {exploratory.list_attributes()}""")
-    print(f"""Attributes with null data:\n {exploratory.check_null()}""")
+    attributes = exploratory.list_attributes()
+    print(f"""These attributes are:\n {attributes}""")
+    
+    null_data = exploratory.check_null()
+    print(f"""Attributes with null data:\n {null_data}""")
+
     empty_spaces = exploratory.check_empty_spaces()
     print(f"""Textual attributes with empty data (value=' '):\n{empty_spaces}""")
+
     zeros = exploratory.check_zeros()
     print(f"""Numerical attributes with zeros:\n{zeros}""")
-
     unique_values = exploratory.check_unique_values(10)
+
     print(f"""Sample of each attribute:""")
     [print(key, value) for key, value in unique_values.items()]
+
     return empty_spaces, zeros
 
 
 if __name__ == '__main__':
     print("============= Reading data from file  =============")
-    filepath = 'data/listings_rio.csv'
+    filepath = 'data/listings_full.csv'
     data = load_dataset(filepath)
 
     print("============= Data exploration  =============")
@@ -36,10 +50,12 @@ if __name__ == '__main__':
 
     print("============= Applying Preprocessing step =============")
 
-    columns_to_drop = ['id', 'name', 'host_id', 'host_name', 'longitude',
+    '''columns_to_drop = ['id', 'name', 'host_id', 'host_name', 'longitude',
                        'neighbourhood_group', 'last_review', 'latitude', 
-                       'reviews_per_month', 'calculated_host_listings_count']
-    
+                       'reviews_per_month',
+                       'calculated_host_listings_count']'''
+
+    columns_to_drop = [] 
     preproc = Preproc(data, columns_to_drop, empty_spaces)
     treated_data = preproc.apply_preproc()
 
