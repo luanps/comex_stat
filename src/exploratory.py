@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import numpy as np
+import pdb
 
 class ExploratoryAnalysis:
 
@@ -22,6 +23,14 @@ class ExploratoryAnalysis:
         return self.data.isnull().sum()
 
 
+    def data_description(self):
+        data_description = dict()
+        for attribute, item in self.data.iteritems():
+            item_description = item.describe()
+            data_description.update({attribute: item_description})
+        return data_description
+
+
     def check_empty_spaces(self):
         empty_spaces = dict()
         categorical_data = self.data.select_dtypes(include=['object'])
@@ -33,13 +42,13 @@ class ExploratoryAnalysis:
 
 
     def check_zeros(self):
-        empty_spaces = dict()
+        zeros = dict()
         numerical_data = self.data.select_dtypes(exclude=['object'])
         for attribute, item in numerical_data.iteritems():
-            empty = item[item == 0].count()
-            if empty:
-                empty_spaces.update({attribute: empty})
-        return empty_spaces
+            item_zero = item[item == 0].count()
+            if item_zero:
+                zeros.update({attribute: item_zero})
+        return zeros
 
     
     def check_unique_values(self,n):

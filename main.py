@@ -8,7 +8,6 @@ from src.preproc import Preproc
 from src.model import Model
 pd.set_option('display.max_rows', 1000)
 
-# TODO: export per attribute description
 # TODO: remove unnecessary attributes
 # TODO: remove empty prices
 # TODO: remove prices outliers
@@ -24,6 +23,10 @@ def data_exploration(data):
     attributes = exploratory.list_attributes()
     print(f"""These attributes are:\n {attributes}""")
     
+    description = exploratory.data_description()
+    print(f"""Per attribute description :""")
+    [print(f"""{key}\n{value}""") for key, value in description.items()]
+
     null_data = exploratory.check_null()
     print(f"""Attributes with null data:\n {null_data}""")
 
