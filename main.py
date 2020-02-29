@@ -8,7 +8,6 @@ from src.preproc import Preproc
 from src.model import Model
 pd.set_option('display.max_rows', 1000)
 
-# TODO: remove unnecessary attributes
 # TODO: remove empty prices
 # TODO: remove prices outliers
 # TODO: encode strings
@@ -17,31 +16,39 @@ def data_exploration(data):
     exploratory = ExploratoryAnalysis(data)
     
     data_length = exploratory.data_length()
+    print("="*79)
     print(f"""This dataset contains {data_length[0]}
         samples with {data_length[1]} attributes.\n""")
 
     attributes = exploratory.list_attributes()
+    print("="*79)
     print(f"""These attributes are:\n {attributes}""")
     
     description = exploratory.data_description()
+    print("="*79)
     print(f"""Per attribute description :""")
     [print(f"""{value}\n""") for key, value in description.items()]
 
     null_data = exploratory.check_null()
+    print("="*79)
     print(f"""Attributes with null data:\n {null_data}""")
 
     majority_null = exploratory.majority_nulls(0.66)
+    print("="*79)
     print(f"""Attributes which more than 66% of data is null""")
     [print(key, value) for key, value in majority_null.items()]
 
     empty_spaces = exploratory.check_empty_spaces()
+    print("="*79)
     print(f"""Textual attributes with empty data (value=' '):\n{empty_spaces}""")
     
     zeros = exploratory.check_zeros()
+    print("="*79)
     print(f"""Numerical attributes with zeros:""")
     [print(key, value) for key, value in zeros.items()]
 
     unique_values = exploratory.check_unique_values(10)
+    print("="*79)
     print(f"""Sample of each attribute:""")
     [print(key, value) for key, value in unique_values.items()]
 
@@ -71,12 +78,15 @@ if __name__ == '__main__':
     columns_to_drop = unnecessary_columns + empty_columns
     print(columns_to_drop)
 
-    '''preproc = Preproc(data, columns_to_drop)
+    country = 'Brazil'
+    obj_to_str = ['price', 'security_deposit', 'cleaning_fee',
+    'extra_people', 'host_response_rate']
+
+    preproc = Preproc(data, columns_to_drop, country , obj_to_str)
     treated_data = preproc.apply_preproc()
 
-    pdb.set_trace()
     print("============= Data exploration after preprocessing  =============")
-    data_exploration(treated_data)'''
+    data_exploration(treated_data)
 
     '''print("============= Plotting data  =============")
     ExploratoryAnalysis.plot_data(treated_data)

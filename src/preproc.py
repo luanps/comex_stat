@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 import numpy as np
+import pdb
 
 class Preproc:
 
-    def __init__(self, data, columns_to_drop, empty_spaces):
+    def __init__(self, data, columns_to_drop, country, obj_to_str):
         self.data = data
         self.columns_to_drop = columns_to_drop
-        self.empty_spaces = empty_spaces
+        self.country = country
+        self.obj_to_str = obj_to_str
 
 
     def drop_columns(self):
         self.data.drop(self.columns_to_drop,axis=1, inplace=True)
 
 
-    def clean_empty_spaces(self):
-        for empty in self.empty_spaces.keys():
-            self.data[empty] = self.data[empty].replace(' ',np.nan)
-            self.data[empty] = self.data[empty].replace(0,np.nan)
-        self.data.dropna(inplace=True)
+    def clean_signs(self, data_item):
+        cleaned_dolar = data_item.str.replace('$','')
+        cleaned_percent = cleaned_dolar.str.replace('%','')
+        return cleaned_percent
 
 
     def normalize_text(self, data_item):
@@ -36,19 +37,26 @@ class Preproc:
 
 
     def map_str_to_float(self, data_attribute):
-        data_attribute = data_attribute.astype(float)
-        return data_attribute
+        formatted_data = data_attribute.str.replace(',','')
+        return formatted_data.astype(float)
+
+
+    def drop_another_countries(self):
+        self.data = self.data[self.data['country'] == self.country]
 
 
     def apply_preproc(self):
+        self.drop_another_countries()
         self.drop_columns()
-        self.clean_empty_spaces()
+
         categorical_data = self.data.select_dtypes(include=['object'])
         for attribute, item in categorical_data.iteritems():
             normalized_item = self.normalize_text(item)
-            self.data[attribute] = self.map_binary_text(normalized_item)
+            self.data[attribute] = self.clean_signs(normalized_item)
+            #self.data[attribute] = self.map_binary_text(normalized_item)
 
-        #self.data['TotalCharges'] = self.map_str_to_float(self.data['TotalCharges'])
+        for attribute in self.obj_to_str:
+            self.data[attribute] = self.map_str_to_float(self.data[attribute])
         return self.data
 
 
