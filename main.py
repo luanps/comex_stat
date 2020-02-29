@@ -32,13 +32,14 @@ def data_exploration(data):
 
     majority_null = exploratory.majority_nulls(0.66)
     print(f"""Attributes which more than 66% of data is null""")
-    [print(f"""{value}\n""") for key, value in majority_null.items()]
+    [print(key, value) for key, value in majority_null.items()]
 
     empty_spaces = exploratory.check_empty_spaces()
     print(f"""Textual attributes with empty data (value=' '):\n{empty_spaces}""")
     
     zeros = exploratory.check_zeros()
-    print(f"""Numerical attributes with zeros:\n{zeros}""")
+    print(f"""Numerical attributes with zeros:""")
+    [print(key, value) for key, value in zeros.items()]
 
     unique_values = exploratory.check_unique_values(10)
     print(f"""Sample of each attribute:""")
@@ -47,8 +48,8 @@ def data_exploration(data):
     singlelabel = exploratory.check_singlelabel()
     print(f"""Attribute with only one label:""")
     [print(key, value) for key, value in singlelabel.items()]
-
-    return empty_spaces, zeros
+   
+    return majority_null, singlelabel
 
 
 if __name__ == '__main__':
@@ -56,20 +57,24 @@ if __name__ == '__main__':
     filepath = 'data/listings_full.csv'
     data = load_dataset(filepath)
 
+    unnecessary_columns = 'unnecessary_attributes.csv'
+    unnecessary_columns = load_dataset(unnecessary_columns)
+    unnecessary_columns = unnecessary_columns['attributes'].values.tolist()
+
     print("============= Data exploration  =============")
-    empty_spaces, zeros = data_exploration(data)
+    majority_null, singlelabel = data_exploration(data)
 
     print("============= Applying Preprocessing step =============")
+    empty_columns = [key for key, value in {**majority_null,
+                                              **singlelabel}.items()]
 
-    '''columns_to_drop = ['id', 'name', 'host_id', 'host_name', 'longitude',
-                       'neighbourhood_group', 'last_review', 'latitude', 
-                       'reviews_per_month',
-                       'calculated_host_listings_count']'''
+    columns_to_drop = unnecessary_columns + empty_columns
+    print(columns_to_drop)
 
-    '''columns_to_drop = [] 
-    preproc = Preproc(data, columns_to_drop, empty_spaces)
+    '''preproc = Preproc(data, columns_to_drop)
     treated_data = preproc.apply_preproc()
 
+    pdb.set_trace()
     print("============= Data exploration after preprocessing  =============")
     data_exploration(treated_data)'''
 
