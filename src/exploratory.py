@@ -22,6 +22,17 @@ class ExploratoryAnalysis:
     def check_null(self):
         return self.data.isnull().sum()
 
+    def majority_nulls(self,proportion_cutoff):
+        length = self.data_length()[0]
+        thresh = proportion_cutoff * length
+        null = self.check_null()
+
+        majority_nulls = dict()
+        for attribute, item in null.iteritems():
+            if item >= thresh:
+                majority_nulls.update({attribute: item})
+        return majority_nulls
+
 
     def data_description(self):
         data_description = dict()

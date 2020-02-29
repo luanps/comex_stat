@@ -25,14 +25,19 @@ def data_exploration(data):
     
     description = exploratory.data_description()
     print(f"""Per attribute description :""")
-    [print(f"""{key}\n{value}""") for key, value in description.items()]
+    [print(f"""{value}\n""") for key, value in description.items()]
 
     null_data = exploratory.check_null()
     print(f"""Attributes with null data:\n {null_data}""")
 
+    
+    majority_null = exploratory.majority_nulls(0.66)
+    print(f"""Attributes which more than 66% of data is null""")
+    [print(f"""{value}\n""") for key, value in majority_null.items()]
+
     empty_spaces = exploratory.check_empty_spaces()
     print(f"""Textual attributes with empty data (value=' '):\n{empty_spaces}""")
-
+    
     zeros = exploratory.check_zeros()
     print(f"""Numerical attributes with zeros:\n{zeros}""")
     unique_values = exploratory.check_unique_values(10)
@@ -58,12 +63,12 @@ if __name__ == '__main__':
                        'reviews_per_month',
                        'calculated_host_listings_count']'''
 
-    columns_to_drop = [] 
+    '''columns_to_drop = [] 
     preproc = Preproc(data, columns_to_drop, empty_spaces)
     treated_data = preproc.apply_preproc()
 
     print("============= Data exploration after preprocessing  =============")
-    data_exploration(treated_data)
+    data_exploration(treated_data)'''
 
     '''print("============= Plotting data  =============")
     ExploratoryAnalysis.plot_data(treated_data)
