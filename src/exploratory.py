@@ -31,6 +31,16 @@ class ExploratoryAnalysis:
                 empty_spaces.update({attribute: empty})
         return empty_spaces
 
+
+    def check_zeros(self):
+        empty_spaces = dict()
+        numerical_data = self.data.select_dtypes(exclude=['object'])
+        for attribute, item in numerical_data.iteritems():
+            empty = item[item == 0].count()
+            if empty:
+                empty_spaces.update({attribute: empty})
+        return empty_spaces
+
     
     def check_unique_values(self,n):
         unique_values = dict()
@@ -73,12 +83,12 @@ class ExploratoryAnalysis:
 
     @staticmethod
     def plot_bar(data):
-        categorical_data = data.select_dtypes(exclude=['float'])
+        categorical_data = data.select_dtypes(exclude=['int64'])
         categorical_data['Churn'] = categorical_data['Churn'].replace({0: 'No Churn', 1: 'Churn'})
 
         for attribute, item in categorical_data.iteritems():
             len_unique_values = len(item.unique())
-            if attribute == 'Churn' or len_unique_values >5:
+            if attribute == 'price':# or len_unique_values >5:
                 continue
 
             plt.figure(figsize=(10, 8))
@@ -108,7 +118,7 @@ class ExploratoryAnalysis:
 
     @staticmethod
     def plot_data(data):
-        ExploratoryAnalysis.plot_pie(data)
+        #ExploratoryAnalysis.plot_pie(data)
         ExploratoryAnalysis.plot_correlation_matrix(data)
         ExploratoryAnalysis.plot_density(data)
         ExploratoryAnalysis.plot_bar(data)
