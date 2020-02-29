@@ -17,6 +17,7 @@ class Preproc:
     def clean_empty_spaces(self):
         for empty in self.empty_spaces.keys():
             self.data[empty] = self.data[empty].replace(' ',np.nan)
+            self.data[empty] = self.data[empty].replace(0,np.nan)
         self.data.dropna(inplace=True)
 
 
@@ -47,7 +48,7 @@ class Preproc:
             normalized_item = self.normalize_text(item)
             self.data[attribute] = self.map_binary_text(normalized_item)
 
-        self.data['TotalCharges'] = self.map_str_to_float(self.data['TotalCharges'])
+        #self.data['TotalCharges'] = self.map_str_to_float(self.data['TotalCharges'])
         return self.data
 
 
