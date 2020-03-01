@@ -119,6 +119,7 @@ class Preproc:
 
         categorical_data = self.data.select_dtypes(include=['object'])
         for attribute, item in categorical_data.iteritems():
+            self.data[attribute].fillna('No data', inplace=True)
             self.data[attribute] = self.clean_signs(item)
 
         for attribute in self.obj_to_float:
