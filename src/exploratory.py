@@ -80,34 +80,28 @@ class ExploratoryAnalysis:
 
 
     @staticmethod
-    def plot_correlation_matrix(data):
-        plt.figure(figsize=(10, 8))
+    def plot_correlation_matrix(data, prefix):
+        plt.figure(figsize=(14, 14))
         plt.title(f"""Correlation matrix""")
         corr = data.apply(lambda x: pd.factorize(x)[0]).corr()
         axis = sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns,
                          linewidths=.2, cmap="YlGnBu")
 
-        plt.savefig("plots/correlation_matrix.png")
+        plt.savefig(f"plots/{prefix}/correlation_matrix.png")
 
 
     @staticmethod
-    def plot_density(data):
+    def plot_hist_boxplot(data, prefix):
         continuous_data = data.select_dtypes(exclude=['object'])
         for attribute, item in continuous_data.iteritems():
-            len_unique_values = len(item.unique())
-            if attribute == 'Churn' or len_unique_values <5:
-                continue
             
-            plt.figure(figsize=(6, 4))
-            plt.title(f"{attribute} density plot")
-            plt.xlabel(f"{attribute}")
-            plt.ylabel("Density")
-            axis0 = sns.kdeplot(data[data['Churn'] == 0][attribute], 
-                              color= 'red', label= 'No Churn')
-            axis1 = sns.kdeplot(data[data['Churn'] == 1][attribute], 
-                              color= 'blue', label= 'Churn')
-            plt.savefig(f"""plots/densityplot_{attribute}.png""")
+            fig, ax =plt.subplots(1,2, figsize=(12,4))
+            sns.distplot(data[attribute], color= 'blue', ax=ax[0])
+            sns.boxplot(data[attribute], color= 'blue', ax=ax[1])
+
+            plt.savefig(f"plots/{prefix}/hist_boxplot_{attribute}.png")
             plt.close()
+
 
 
     @staticmethod
@@ -146,8 +140,8 @@ class ExploratoryAnalysis:
 
 
     @staticmethod
-    def plot_data(data):
+    def plot_data(data, prefix):
         #ExploratoryAnalysis.plot_pie(data)
-        ExploratoryAnalysis.plot_correlation_matrix(data)
-        ExploratoryAnalysis.plot_density(data)
-        ExploratoryAnalysis.plot_bar(data)
+        ExploratoryAnalysis.plot_correlation_matrix(data, prefix)
+        ExploratoryAnalysis.plot_hist_boxplot(data, prefix)
+        #ExploratoryAnalysis.plot_bar(data)
