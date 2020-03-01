@@ -5,11 +5,11 @@ import pdb
 
 class Preproc:
 
-    def __init__(self, data, columns_to_drop, country, obj_to_str):
+    def __init__(self, data, columns_to_drop, country, obj_to_float):
         self.data = data
         self.columns_to_drop = columns_to_drop
         self.country = country
-        self.obj_to_str = obj_to_str
+        self.obj_to_float = obj_to_float
 
 
     def drop_columns(self):
@@ -36,8 +36,8 @@ class Preproc:
         return  data_item.replace(map_dict)
 
 
-    def map_str_to_float(self, data_attribute):
-        formatted_data = data_attribute.str.replace(',','')
+    def map_str_to_float(self, data_item):
+        formatted_data = data_item.str.replace(',','')
         return formatted_data.astype(float)
 
 
@@ -49,6 +49,21 @@ class Preproc:
         self.data = self.data[self.data['price'] != 0]
        
 
+    def compute_zscore(self, data_item):
+        z_score = (data_item - data_item.mean())/data_item.std(ddof=0)
+        return z_score
+
+
+    def drop_outliers(self, outliers_to_analize, thresh):
+        self.drop_zero_prices()
+        data = self.data[outliers_to_analize]
+        for attribute, item in data.iteritems():
+            z_score = self.compute_zscore(item)
+            self.data = self.data[(z_score < thresh) & (z_score > -thresh)]
+        return self.data
+
+
+
     def apply_preproc(self):
         self.drop_another_countries()
         self.drop_columns()
@@ -59,9 +74,8 @@ class Preproc:
             self.data[attribute] = self.clean_signs(normalized_item)
             #self.data[attribute] = self.map_binary_text(normalized_item)
 
-        for attribute in self.obj_to_str:
+        for attribute in self.obj_to_float:
             self.data[attribute] = self.map_str_to_float(self.data[attribute])
-        self.drop_zero_prices()
         return self.data
 
 
