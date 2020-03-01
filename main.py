@@ -8,7 +8,6 @@ from src.preproc import Preproc
 from src.model import Model
 pd.set_option('display.max_rows', 1000)
 
-# TODO: remove prices outliers
 # TODO: group some numerical attributes into range of categories
 # TODO: encode strings
 
@@ -76,33 +75,39 @@ if __name__ == '__main__':
                                               **singlelabel}.items()]
 
     columns_to_drop = unnecessary_columns + empty_columns
-    print(columns_to_drop)
 
     country = 'Brazil'
     obj_to_float = ['price', 'security_deposit', 'cleaning_fee',
     'extra_people', 'host_response_rate']
+    num_to_categories = ['review_scores_rating', 'review_scores_accuracy',
+    'review_scores_cleanliness', 'review_scores_checkin',
+    'review_scores_communication', 'review_scores_location',
+    'review_scores_value', 'reviews_per_month']
 
-    preproc = Preproc(data, columns_to_drop, country , obj_to_float)
+    preproc = Preproc(data, columns_to_drop, country , obj_to_float,
+        num_to_categories)
+
     treated_data = preproc.apply_preproc()
-
+    preproc.encode_numerical_to_categories()
 
     print("============= Plotting data  =============")
     prefix = 'before_outlier_removal'
     ExploratoryAnalysis.plot_data(treated_data, prefix)
 
     print("============= Removing outliers  =============")
-    outlier_threshold = 2
-    outliers_to_analize = ['price', 'accomodates', 'bathrooms', 'bedrooms',
+    outlier_threshold = 3
+    outliers_to_analize = ['price', 'accommodates', 'bathrooms', 'bedrooms',
     'beds', 'calculated_host_listings_count', 'cleaning_fee', 'extra_people',
     'guests_included', 'minimum_nights', 'security_deposit'] 
     cleaned_data = preproc.drop_outliers(outliers_to_analize, outlier_threshold)
 
     print("============= Plotting data  =============")
     prefix = 'after_outlier_removal'
-    ExploratoryAnalysis.plot_data(cleaned_data, prefix)
+    #ExploratoryAnalysis.plot_data(cleaned_data, prefix)
 
     print("============= Data exploration after preprocessing  =============")
-    data_exploration(cleaned_data)
+    #data_exploration(cleaned_data)
+
 
     '''print("============= Encoding data  =============")
     encoded_data = preproc.encode_data(treated_data)

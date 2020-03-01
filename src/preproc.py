@@ -5,12 +5,13 @@ import pdb
 
 class Preproc:
 
-    def __init__(self, data, columns_to_drop, country, obj_to_float):
+    def __init__(self, data, columns_to_drop, country, obj_to_float,
+        num_to_categories):
         self.data = data
         self.columns_to_drop = columns_to_drop
         self.country = country
         self.obj_to_float = obj_to_float
-
+        self.num_to_categories = num_to_categories
 
     def drop_columns(self):
         self.data.drop(self.columns_to_drop,axis=1, inplace=True)
@@ -62,6 +63,33 @@ class Preproc:
             self.data = self.data[(z_score < thresh) & (z_score > -thresh)]
         return self.data
 
+
+    def map_quantile(self, data_item):
+        quantile = data_item.describe()
+        data_item.fillna('No data', inplace=True)
+
+        for idx, data in data_item.iteritems():
+            pdb.set_trace()
+            if data <= quantile['25%']:
+                data_item.loc[idx] = 'Low'
+
+            elif data > quantile['25%'] and data <= quantile['50%']:
+                data_item.loc[idx] = 'Medium'
+
+            elif data > quantile['50%'] and data <= quantile['75%']:
+                data_item.loc[idx] = 'High'
+
+            elif data > quantile['75%']:
+                data_item.loc[idx] = 'Excellent'
+
+        return data_item
+
+
+    def encode_numerical_to_categories(self):
+        data = self.data[self.num_to_categories]
+        for attribute, item in data.iteritems():
+            mapped_categories = self.map_quantile(item)
+            self.data[attribute] = mapped_categories
 
 
     def apply_preproc(self):
