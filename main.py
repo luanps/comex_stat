@@ -8,8 +8,6 @@ from src.preproc import Preproc
 from src.model import Model
 pd.set_option('display.max_rows', 1000)
 
-# TODO: group some numerical attributes into range of categories
-# TODO: encode strings
 
 def data_exploration(data):
     exploratory = ExploratoryAnalysis(data)
@@ -79,20 +77,28 @@ if __name__ == '__main__':
     country = 'Brazil'
     obj_to_float = ['price', 'security_deposit', 'cleaning_fee',
     'extra_people', 'host_response_rate']
-    num_to_categories = ['review_scores_rating', 'review_scores_accuracy',
-    'review_scores_cleanliness', 'review_scores_checkin',
-    'review_scores_communication', 'review_scores_location',
-    'review_scores_value', 'reviews_per_month']
+    print(f"""Data that will be transformed into float:\n{obj_to_float}""")
+
+    num_to_categories = ['host_response_rate', 'review_scores_rating', 
+        'review_scores_accuracy', 'review_scores_cleanliness',
+        'review_scores_checkin', 'review_scores_communication',
+        'review_scores_location', 'review_scores_value', 'reviews_per_month']
+    print(f"""Numerical data that will be transformed into categories 
+        [No Data, Low, Medium, High, Excellent]
+        based on their own quantiles: \n{num_to_categories}""")
+
+    text_to_counter = ['amenities', 'name', 'summary', 'space', 'description', 'access', 
+    'neighborhood_overview', 'interaction', 'house_rules']
+    print(f"""Textual data that will be transformed into an integer
+          by counting its words:\n{text_to_counter}""")
 
     preproc = Preproc(data, columns_to_drop, country , obj_to_float,
-        num_to_categories)
-
-    treated_data = preproc.apply_preproc()
-    preproc.encode_numerical_to_categories()
+        num_to_categories, text_to_counter)
+    preproc.apply_general_preproc()
 
     print("============= Plotting data  =============")
     prefix = 'before_outlier_removal'
-    ExploratoryAnalysis.plot_data(treated_data, prefix)
+    ExploratoryAnalysis.plot_data(preproc.data, prefix)
 
     print("============= Removing outliers  =============")
     outlier_threshold = 3
@@ -101,12 +107,16 @@ if __name__ == '__main__':
     'guests_included', 'minimum_nights', 'security_deposit'] 
     cleaned_data = preproc.drop_outliers(outliers_to_analize, outlier_threshold)
 
+
+    print("========= Transforming target variable 'price' into log ========")
+    preproc.log_price()
+
     print("============= Plotting data  =============")
     prefix = 'after_outlier_removal'
-    #ExploratoryAnalysis.plot_data(cleaned_data, prefix)
+    ExploratoryAnalysis.plot_data(cleaned_data, prefix)
 
     print("============= Data exploration after preprocessing  =============")
-    #data_exploration(cleaned_data)
+    data_exploration(cleaned_data)
 
 
     '''print("============= Encoding data  =============")
