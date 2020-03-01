@@ -9,6 +9,7 @@ from src.model import Model
 pd.set_option('display.max_rows', 1000)
 
 # TODO: remove prices outliers
+# TODO: group some numerical attributes into range of categories
 # TODO: encode strings
 
 def data_exploration(data):
@@ -78,19 +79,32 @@ if __name__ == '__main__':
     print(columns_to_drop)
 
     country = 'Brazil'
-    obj_to_str = ['price', 'security_deposit', 'cleaning_fee',
+    obj_to_float = ['price', 'security_deposit', 'cleaning_fee',
     'extra_people', 'host_response_rate']
 
-    preproc = Preproc(data, columns_to_drop, country , obj_to_str)
+    preproc = Preproc(data, columns_to_drop, country , obj_to_float)
     treated_data = preproc.apply_preproc()
 
+
+    print("============= Plotting data  =============")
+    prefix = 'before_outlier_removal'
+    ExploratoryAnalysis.plot_data(treated_data, prefix)
+
+    print("============= Removing outliers  =============")
+    outlier_threshold = 2
+    outliers_to_analize = ['price', 'accomodates', 'bathrooms', 'bedrooms',
+    'beds', 'calculated_host_listings_count', 'cleaning_fee', 'extra_people',
+    'guests_included', 'minimum_nights', 'security_deposit'] 
+    cleaned_data = preproc.drop_outliers(outliers_to_analize, outlier_threshold)
+
+    print("============= Plotting data  =============")
+    prefix = 'after_outlier_removal'
+    ExploratoryAnalysis.plot_data(cleaned_data, prefix)
+
     print("============= Data exploration after preprocessing  =============")
-    data_exploration(treated_data)
+    data_exploration(cleaned_data)
 
-    '''print("============= Plotting data  =============")
-    ExploratoryAnalysis.plot_data(treated_data)
-
-    print("============= Encoding data  =============")
+    '''print("============= Encoding data  =============")
     encoded_data = preproc.encode_data(treated_data)
 
     print("=============  Running Logistic Regression  =============")
