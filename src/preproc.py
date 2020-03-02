@@ -38,6 +38,7 @@ class Preproc:
 
     def map_str_to_float(self, data_item):
         formatted_data = data_item.str.replace(',','')
+        formatted_data = formatted_data.replace('No data', np.nan)
         return formatted_data.astype(float)
 
 
@@ -57,10 +58,14 @@ class Preproc:
     def drop_outliers(self, outliers_to_analize, thresh):
         self.drop_zero_prices()
         data = self.data[outliers_to_analize]
+        outlier_idx = list()
         for attribute, item in data.iteritems():
             z_score = self.compute_zscore(item)
-            self.data = self.data[(z_score < thresh) & (z_score > -thresh)]
-        return self.data
+            outliers =  z_score[(z_score > thresh) | (z_score < -thresh)]
+            outlier_idx.append(outliers.index)
+        outlier_idx = [element for sublist in outlier_idx for element in sublist] 
+        outlier_idx_unique = set(outlier_idx)
+        self.data = self.data.drop(outlier_idx_unique, axis=0)
 
 
     def map_numerical_to_categories(self, data_item):
@@ -119,8 +124,9 @@ class Preproc:
 
         categorical_data = self.data.select_dtypes(include=['object'])
         for attribute, item in categorical_data.iteritems():
-            self.data[attribute].fillna('No data', inplace=True)
-            self.data[attribute] = self.clean_signs(item)
+            cleaned_data = self.clean_signs(item)
+            treated_data = cleaned_data.fillna('No data')
+            self.data[attribute] = treated_data
 
         for attribute in self.obj_to_float:
             data = self.data[attribute].copy()
@@ -136,6 +142,11 @@ class Preproc:
                 self.data[attribute] = self.word_count_amenities(data)
             else:
                 self.data[attribute] = self.word_count(data)
+
+        numerical_data = self.data.select_dtypes(exclude=['object'])
+        for attribute, item in numerical_data.iteritems():
+            treated_data = item.fillna(0)
+            self.data[attribute] = treated_data
 
 
     @staticmethod
