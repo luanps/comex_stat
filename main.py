@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import Lasso
 import pandas as pd
 import pdb
 from src.utils import load_dataset
@@ -148,13 +149,25 @@ if __name__ == '__main__':
         data = preproc_routines()
         save_serialized(preproc_filepath, data)
 
-    '''print("============= Loading preprocessed data  =============")
-    print("============= Encoding data  =============")
-    encoded_data = preproc.encode_data(treated_data)'''
+    print("=============  Running Ridge Regression  =============")
+    cross_validation = 5
+    alphas = [0.01, 0.03, 0.05, 0.1, 0.3, 1, 3, 5, 10]
+    ridge = Ridge()
 
-    print("=============  Running Logistic Regression  =============")
-    cross_validation = 2
-    lr_model = LogisticRegression()
-    model_name = 'logistic_regression'
-    model = Model(lr_model,model_name, cross_validation)
-    model.run_model(data)
+    model_name = 'ridge'
+    pdb.set_trace()
+    ridge = Model(ridge,model_name, cross_validation)
+    rmse_train, rmse_pred = ridge.run_model(data)
+
+    print(f'Best alpha: {ridge.model.alpha_}')
+    print(f'RMSE on training data: {rmse_train}')
+    print(f'RMSE on validation data: {rmse_pred}')
+
+    print("=============  Running Lasso Regression  =============")
+    lasso = Lasso(alphas, cv = cross_validation)
+    model_name = 'lasso'
+    lasso = Model(lasso,model_name, cross_validation)
+    rmse_train, rmse_pred = lasso.run_model(data)
+    print(f'Best alpha: {lasso.model.alpha_}')
+    print(f'RMSE on training data: {rmse_train}')
+    print(f'RMSE on validation data: {rmse_pred}')
