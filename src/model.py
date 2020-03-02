@@ -26,8 +26,8 @@ class Model:
         self.model.fit(X_train, y_train)
 
 
-    def predict(self, X_train, y_train):
-        self.model.predict(X_train, y_train)
+    def predict(self, X_test, y_test):
+        self.model.predict(X_test, y_test)
 
         
     def fit_cross_val(self, X_train, y_train):
@@ -57,6 +57,23 @@ class Model:
             l1_ratio = 0
 
         return alpha, l1_ratio
+
+    def plot_feature_importances(self, X_test):
+        feat = pd.Series(self.model.feature_importances_, index = X_test.columns)
+        '''keep_coefs = sum(coefs != 0)
+        discarted_coefs = sum(coefs == 0)
+        print(f"""The model {self.model_name} picked {keep_coefs} features 
+                  and eliminated {discarted_coefs} features""")'''
+
+        plt.figure(figsize=(8,6))
+        importances = feat.sort_values(ascending = False).head(20)
+        pdb.set_trace()
+        importances.plot(kind = 'barh')
+
+        plt.title(f'{self.model_name} feature importances')
+        plt.savefig(f'plots/coefficients/{self.model_name}.png', 
+                    bbox_inches = "tight")
+        plt.close()
 
 
     def plot_coefficients(self, X_test):
