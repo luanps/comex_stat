@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import make_scorer
@@ -206,16 +205,27 @@ def run_ensemble_model(generic_model, model_name,  model_configs,
     save_serialized(filepath, model)
 
 
-def run_nonlinear_model(generic_model, model_name,  model_configs):
+def run_nonlinear_model(generic_model, model_name,  model_configs,
+                        nonlinear_param_grid):
 
     X_train, X_test, y_train, y_test = model_configs['splitted_data']
     y_train = y_train.to_numpy().ravel()
     y_test = y_test.to_numpy().ravel()
-    model = generic_model()
+    #model = generic_model()
 
+    scorer = make_scorer(mean_squared_error, greater_is_better = False)
+    model = RandomizedSearchCV(generic_model(),
+                               nonlinear_param_grid, random_state=1, n_iter=100,
+                               cv=model_configs['cross_val'], verbose=0,
+                               scoring = scorer)
     model = Model(model, model_name, cross_val = model_configs['cross_val'])
-    #model.fit(X_train, y_train)
 
+    model.fit(X_train, y_train)
+    best_model = model.model.best_estimator_
+    best_params = model.model.best_params_ 
+    print(f'Best {model_name} params:\n{best_params}')
+
+    model = Model(best_model, model_name, cross_val = model_configs['cross_val'])
     rmse_train = model.fit_cross_val(X_train, y_train)
     rmse_test = model.predict_cross_val(X_test, y_test)
     print(f'RMSE on training data: {rmse_train}')
@@ -293,6 +303,15 @@ if __name__ == '__main__':
         'min_samples_split' : [2, 5, 10]
     }
 
+    nonlinear_param_grid = {
+        'C' : [0.001, 0.01, 0.1, 1, 10],
+        'gamma' : [0.001, 0.01, 0.1, 1]
+    }
+
+    nonlinear_param_grid = {
+        'C' : [0.01, 1],
+        'gamma' : [ 0.1, 1]
+    }
     '''print("=============  Running Ridge Regression  =============")
     model = RidgeCV
     model_name = 'Ridge'
@@ -310,16 +329,18 @@ if __name__ == '__main__':
     model = ElasticNetCV
     model_name = 'ElasticNet'
     run_linear_model(model, model_name, general_configs)
-    print("="*79)
+    print("="*79)'''
 
     print("=============  Running SVR   =============")
     model = SVR
     model_name = 'SVR'
-    run_nonlinear_model(model, model_name, general_configs)
-    print("="*79)'''
+    run_nonlinear_model(model, model_name, general_configs,
+                        nonlinear_param_grid)
+    print("="*79)
 
+    '''
     print("=============  Running Gradient Boosting   =============")
     model = GradientBoostingRegressor
     model_name = 'GradientBoosting'
     run_ensemble_model(model, model_name, general_configs, ensemble_param_grid)
-    print("="*79)
+    print("="*79)'''
