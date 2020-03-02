@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import ElasticNetCV
 from sklearn.linear_model import LassoCV
+from sklearn.linear_model import RidgeCV
+from sklearn.svm import SVR
 import numpy as np
 import pandas as pd
 import pdb
@@ -142,6 +144,49 @@ def preproc_routines():
     return preproc.data
 
 
+def update_alphas(generic_model, model_name, model_configs, alpha, l1_ratio): 
+    refined_alphas = model_configs['update_alphas'] * alpha
+    refined_l1_ratios = model_configs['update_alphas'] * l1_ratio
+
+    if model_name == 'Ridge':
+        model = generic_model(alphas = refined_alphas,
+                              cv = model_configs['cross_val'])
+
+    elif model_name == 'Lasso':
+        model = generic_model(alphas = refined_alphas,
+                              cv = model_configs['cross_val'],
+                              max_iter = model_configs['max_iter'])
+
+    elif model_name == 'ElasticNet':
+
+        model = generic_model(l1_ratio = refined_l1_ratios,
+                              alphas = refined_alphas,
+                              cv = model_configs['cross_val'],
+                              max_iter = model_configs['max_iter'])
+
+    model = Model(model, model_name, cross_val = model_configs['cross_val'])
+    return model
+
+
+def run_nonlinear_model(generic_model, model_name,  model_configs):
+
+    X_train, X_test, y_train, y_test = model_configs['splitted_data']
+    y_train = y_train.to_numpy().ravel()
+    y_test = y_test.to_numpy().ravel()
+    model = generic_model()
+
+    model = Model(model, model_name, cross_val = model_configs['cross_val'])
+    model.fit(X_train, y_train)
+
+    rmse_train = model.fit_cross_val(X_train, y_train)
+    rmse_test = model.predict_cross_val(X_test, y_test)
+    print(f'RMSE on training data: {rmse_train}')
+    print(f'RMSE on validation data: {rmse_test}')
+
+    filepath = f'models/{model_name}' 
+    save_serialized(filepath, model)
+
+    
 def run_linear_model(generic_model, model_name,  model_configs):
 
     X_train, X_test, y_train, y_test = model_configs['splitted_data']
@@ -157,24 +202,25 @@ def run_linear_model(generic_model, model_name,  model_configs):
                               cv = model_configs['cross_val'],
                               max_iter = model_configs['max_iter'])
 
-    model = Model(model, model_name, cross_val = model_configs['cross_val'])
-    model.fit(X_train, y_train)
-    alpha = model.model.alpha_
-    print(f'Best initial alpha: {alpha}')
+    elif model_name == 'ElasticNet':
+        model = generic_model(l1_ratio = model_configs['initial_alphas'],
+                              alphas = model_configs['initial_alphas'] * 0.001,
+                              cv = model_configs['cross_val'],
+                              max_iter = model_configs['max_iter'])
 
-    refined_alphas = model_configs['update_alphas'] * alpha
-    model = generic_model(alphas = refined_alphas)
     model = Model(model, model_name, cross_val = model_configs['cross_val'])
-    model.fit(X_train, y_train)
-    alpha = model.model.alpha_
-    print(f'Best refined alpha: {alpha}')
+    alpha, l1_ratio = model.fit_linear_model(X_train, y_train)
 
-    rmse_train = model.fit_cross_val(X_train, y_train)
-    rmse_test = model.predict_cross_val(X_test, y_test)
+    updated_model = update_alphas(generic_model, model_name, model_configs, 
+                                  alpha, l1_ratio)
+    alpha, l1_ratio = updated_model.fit_linear_model(X_train, y_train)
+
+    rmse_train = updated_model.fit_cross_val(X_train, y_train)
+    rmse_test = updated_model.predict_cross_val(X_test, y_test)
     print(f'RMSE on training data: {rmse_train}')
     print(f'RMSE on validation data: {rmse_test}')
 
-    model.plot_coefficients(X_test)
+    updated_model.plot_coefficients(X_test)
 
     filepath = f'models/{model_name}' 
     save_serialized(filepath, model)
@@ -205,9 +251,23 @@ if __name__ == '__main__':
     model = RidgeCV
     model_name = 'Ridge'
     run_linear_model(model, model_name, general_configs)
+    print("="*79)
 
 
     print("=============  Running Lasso Regression  =============")
     model = LassoCV
     model_name = 'Lasso'
     run_linear_model(model, model_name, general_configs)
+    print("="*79)
+
+    print("=============  Running ElasticNet Regression  =============")
+    model = ElasticNetCV
+    model_name = 'ElasticNet'
+    run_linear_model(model, model_name, general_configs)
+    print("="*79)
+
+    print("=============  Running SVR   =============")
+    model = SVR
+    model_name = 'SVR'
+    run_nonlinear_model(model, model_name, general_configs)
+    print("="*79)
