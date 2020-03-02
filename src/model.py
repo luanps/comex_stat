@@ -3,6 +3,7 @@
 from src.utils import save_serialized
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
 '''from sklearn.metrics import accuracy_score
@@ -13,8 +14,11 @@ from sklearn.metrics import roc_curve'''
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import make_scorer
 import matplotlib.pyplot as plt
-import seaborn as sns
+import pandas as pd
+import numpy as np
 import pickle
+import seaborn as sns
+import pdb
 
 class Model:
 
@@ -62,30 +66,41 @@ class Model:
         self.plot_confusion_matrix(conf_matrix)'''
 
 
+    def encode_data(self, X):
+        numerical_data = X.select_dtypes(exclude=['object'])
+        numerical_labels = numerical_data.keys().tolist()
 
+        categorical_data = X.select_dtypes(include=['object'])
+        categorical_labels = categorical_data.keys().tolist()
+
+        standard_X = StandardScaler()
+        standard_X.fit(numerical_data)
+        standard_encoded = standard_X.transform(numerical_data)
+
+        onehot_X = OneHotEncoder()
+        onehot_X.fit(categorical_data)
+        onehot_encoded = onehot_X.transform(categorical_data).toarray()
+        onehot_labels = onehot_X.get_feature_names(categorical_labels)
+
+        standard_df = pd.DataFrame(standard_encoded, columns = numerical_labels)
+        onehot_df = pd.DataFrame(onehot_encoded, columns = onehot_labels)
+        X = pd.concat([standard_df, onehot_df],axis=1)
+
+        return X
 
 
     def split_data(self, data):
         X = data.drop(['logPrice', 'price'], axis=1)
+        X = self.encode_data(X)
         y = data[['logPrice']]
-        import pdb
-        pdb.set_trace()
-
-        numerical_data = X.select_dtypes(exclude=['object'])
-        standard_X = StandardScaler()
-        standard_X.fit(numerical_data)
-        
-        categorical_data = X.select_dtypes(include=['object'])
-        one_hot = OneHotEncoder()
-
-        one_hot.fit(categorical_data)
 
         return train_test_split(X, y, test_size = 0.3, random_state = 42)
 
     
     def run_model(self, data):
         X_train, X_test, y_train, y_test = self.split_data(data)
-
+        import pdb
+        pdb.set_trace()
         rmse_train = self.fit(X_train, y_train.values.ravel())
         rmse_pred = self.predict(X_test, y_test.values.ravel())
         #self.eval(y_test, y_predicted)
