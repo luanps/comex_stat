@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from sklearn.linear_model import Ridge
-from sklearn.linear_model import Lasso
+from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import LassoCV
+import numpy as np
 import pandas as pd
 import pdb
 from src.utils import load_dataset
@@ -9,6 +10,7 @@ from src.utils import save_serialized
 from src.exploratory import ExploratoryAnalysis
 from src.preproc import Preproc
 from src.model import Model
+
 pd.set_option('display.max_rows', 1000)
 
 
@@ -140,6 +142,44 @@ def preproc_routines():
     return preproc.data
 
 
+def run_linear_model(generic_model, model_name,  model_configs):
+
+    X_train, X_test, y_train, y_test = model_configs['splitted_data']
+    y_train = y_train.to_numpy().ravel()
+    y_test = y_test.to_numpy().ravel()
+
+    if model_name == 'Ridge':
+        model = generic_model(alphas = model_configs['initial_alphas'],
+                              cv = model_configs['cross_val'])
+
+    elif model_name == 'Lasso':
+        model = generic_model(alphas = model_configs['initial_alphas'] * 0.001,
+                              cv = model_configs['cross_val'],
+                              max_iter = model_configs['max_iter'])
+
+    model = Model(model, model_name, cross_val = model_configs['cross_val'])
+    model.fit(X_train, y_train)
+    alpha = model.model.alpha_
+    print(f'Best initial alpha: {alpha}')
+
+    refined_alphas = model_configs['update_alphas'] * alpha
+    model = generic_model(alphas = refined_alphas)
+    model = Model(model, model_name, cross_val = model_configs['cross_val'])
+    model.fit(X_train, y_train)
+    alpha = model.model.alpha_
+    print(f'Best refined alpha: {alpha}')
+
+    rmse_train = model.fit_cross_val(X_train, y_train)
+    rmse_test = model.predict_cross_val(X_test, y_test)
+    print(f'RMSE on training data: {rmse_train}')
+    print(f'RMSE on validation data: {rmse_test}')
+
+    model.plot_coefficients(X_test)
+
+    filepath = f'models/{model_name}' 
+    save_serialized(filepath, model)
+
+
 if __name__ == '__main__':
 
     preproc_filepath = 'data/preprocessed_data'
@@ -149,25 +189,25 @@ if __name__ == '__main__':
         data = preproc_routines()
         save_serialized(preproc_filepath, data)
 
+
+    #X_train, X_test, y_train, y_test = 
+    general_configs = {
+        'splitted_data' : Model.encode_split_data(data),
+        'cross_val' : 2,
+        'max_iter' : 50000,
+        'initial_alphas' : np.array([0.01, 0.03, 0.06, 0.1, 0.3, 0.6, 1, 3, 6,
+                                     10, 30, 60]),
+        'update_alphas' : np.array([.6, .65, .7, .75, .8, .85, .9, .95, 1.05, 
+                                    1.1, 1.15, 1.25, 1.3, 1.35, 1.4])
+    }
+
     print("=============  Running Ridge Regression  =============")
-    cross_validation = 5
-    alphas = [0.01, 0.03, 0.05, 0.1, 0.3, 1, 3, 5, 10]
-    ridge = Ridge()
+    model = RidgeCV
+    model_name = 'Ridge'
+    run_linear_model(model, model_name, general_configs)
 
-    model_name = 'ridge'
-    pdb.set_trace()
-    ridge = Model(ridge,model_name, cross_validation)
-    rmse_train, rmse_pred = ridge.run_model(data)
-
-    print(f'Best alpha: {ridge.model.alpha_}')
-    print(f'RMSE on training data: {rmse_train}')
-    print(f'RMSE on validation data: {rmse_pred}')
 
     print("=============  Running Lasso Regression  =============")
-    lasso = Lasso(alphas, cv = cross_validation)
-    model_name = 'lasso'
-    lasso = Model(lasso,model_name, cross_validation)
-    rmse_train, rmse_pred = lasso.run_model(data)
-    print(f'Best alpha: {lasso.model.alpha_}')
-    print(f'RMSE on training data: {rmse_train}')
-    print(f'RMSE on validation data: {rmse_pred}')
+    model = LassoCV
+    model_name = 'Lasso'
+    run_linear_model(model, model_name, general_configs)

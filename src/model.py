@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from src.utils import save_serialized
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import StandardScaler
@@ -24,18 +23,26 @@ class Model:
     def __init__(self, model, model_name, cross_val):
         self.model = model
         self.model_name = model_name
-        self.scorer = make_scorer(mean_squared_error, greater_is_better = False) 
         self.cross_val = cross_val
+        self.scorer = make_scorer(mean_squared_error, greater_is_better = False) 
 
 
     def fit(self, X_train, y_train):
+        self.model.fit(X_train, y_train)
+
+
+    def predict(self, X_train, y_train):
+        self.model.predict(X_train, y_train)
+
+        
+    def fit_cross_val(self, X_train, y_train):
         cv_score = cross_val_score(self.model, X_train, y_train,
                                    scoring = self.scorer, cv = self.cross_val)
         rmse_train = np.sqrt(-cv_score).mean()
         return rmse_train
 
 
-    def predict(self, X_test, y_test):
+    def predict_cross_val(self, X_test, y_test):
         cv_score = cross_val_score(self.model, X_test, y_test, 
                                    scoring = self.scorer, cv = self.cross_val)
         rmse_pred = np.sqrt(-cv_score).mean()
@@ -50,9 +57,29 @@ class Model:
         plt.xlabel('Predicted labels')
         plt.ylabel('True labels')
         plt.title(f'Confusion Matrix for {self.model_name} model')
-        plt.savefig(f'plots/confusion_matrix_{self.model_name}.png')
+        plt.savefig(f'plots/confusion_matrix_{self.model_name}.png',
+                    bbox_inches = "tight")
         plt.close()
 
+
+    def plot_coefficients(self, X_test):
+        coefs = pd.Series(self.model.coef_, index = X_test.columns)
+        keep_coefs = sum(coefs != 0)
+        discarted_coefs = sum(coefs == 0)
+        print(f"""The model {self.model_name} picked {keep_coefs} features 
+                  and eliminated {discarted_coefs} features""")
+
+        plt.figure(figsize=(8,6))
+        imp_coefs = pd.concat([coefs.sort_values().head(10),
+                               coefs.sort_values().tail(10)])
+
+        imp_coefs.plot(kind = 'barh')
+        plt.title(f'{self.model_name} coefficients')
+        plt.savefig(f'plots/coefficients/{self.model_name}.png', 
+                    bbox_inches = "tight")
+        plt.close()
+
+#
     def eval(self, y_test, y_predicted):
         '''class_report = classification_report(y_test, y_predicted)
         print('Classification Report')
@@ -65,7 +92,8 @@ class Model:
         self.plot_confusion_matrix(conf_matrix)'''
 
 
-    def encode_data(self, X):
+    @staticmethod
+    def encode_data(X):
         numerical_data = X.select_dtypes(exclude=['object'])
         numerical_labels = numerical_data.keys().tolist()
 
@@ -88,20 +116,10 @@ class Model:
         return X
 
 
-    def split_data(self, data):
+    @staticmethod
+    def encode_split_data(data):
         X = data.drop(['logPrice', 'price'], axis=1)
-        X = self.encode_data(X)
+        X = Model.encode_data(X)
         y = data[['logPrice']]
 
         return train_test_split(X, y, test_size = 0.3, random_state = 42)
-
-
-    def run_model(self, data):
-        X_train, X_test, y_train, y_test = self.split_data(data)
-
-        rmse_train = self.fit(X_train, y_train.values.ravel())
-        rmse_pred = self.predict(X_test, y_test.values.ravel())
-
-        filepath = f'models/{self.model_name}'
-        save_serialized(filepath, self.model)
-        return rmse_train, rmse_pred
