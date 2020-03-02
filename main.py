@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+
+
 from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import make_scorer
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.linear_model import ElasticNetCV
 from sklearn.linear_model import LassoCV
@@ -178,10 +182,11 @@ def run_ensemble_model(generic_model, model_name,  model_configs,
     y_train = y_train.to_numpy().ravel()
     y_test = y_test.to_numpy().ravel()
 
+    scorer = make_scorer(mean_squared_error, greater_is_better = False)
     model = RandomizedSearchCV(generic_model(loss='huber'),
                                ensemble_param_grid, random_state=1, n_iter=100,
-                               cv=model_configs['cross_val'], verbose=0)
-
+                               cv=model_configs['cross_val'], verbose=0,
+                               scoring = scorer)
     model = Model(model, model_name, cross_val = model_configs['cross_val'])
 
     model.fit(X_train, y_train)
@@ -282,10 +287,10 @@ if __name__ == '__main__':
 
     ensemble_param_grid = {
         'n_estimators' : [100, 500, 1000],
-        'learning_rate' : [0.01, 0.02, 0.05, 0.1],
+        'learning_rate' : [0.01, 0.02, 0.05],
         'max_depth': [1, 2, 5],
         'min_samples_leaf' : [1, 5, 10],
-        'min_samples_split' : [1, 5, 10]
+        'min_samples_split' : [2, 5, 10]
     }
 
     '''print("=============  Running Ridge Regression  =============")
