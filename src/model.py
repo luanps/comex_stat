@@ -67,7 +67,6 @@ class Model:
 
         plt.figure(figsize=(8,6))
         importances = feat.sort_values(ascending = False).head(20)
-        pdb.set_trace()
         importances.plot(kind = 'barh')
 
         plt.title(f'{self.model_name} feature importances')
