@@ -120,7 +120,7 @@ def preproc_routines():
     'guests_included', 'minimum_nights', 'security_deposit'] 
     print(f"""Numerical data which their outliers will be removed 
         (computed by z-score): \n{outliers_to_analize}""")
-    cleaned_data = preproc.drop_outliers(outliers_to_analize, outlier_threshold)
+    preproc.drop_outliers(outliers_to_analize, outlier_threshold)
     print("="*79)
 
     print("========= Transforming target variable 'price' into log ========")
@@ -129,11 +129,11 @@ def preproc_routines():
 
     print("============= Plotting data  =============")
     prefix = 'after_outlier_removal'
-    ExploratoryAnalysis.plot_data(cleaned_data, prefix)
+    ExploratoryAnalysis.plot_data(preproc.data, prefix)
     print("="*79)
 
     print("============= Data exploration after preprocessing  =============")
-    data_exploration(cleaned_data)
+    data_exploration(preproc.data)
     print("="*79)
 
     return preproc.data
