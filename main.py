@@ -293,7 +293,7 @@ if __name__ == '__main__':
 
     general_configs = {
         'splitted_data' : Model.encode_split_data(data),
-        'cross_val' : 2,
+        'cross_val' : 5,
         'max_iter' : 50000,
         'initial_alphas' : np.array([0.01, 0.03, 0.06, 0.1, 0.3, 0.6, 1, 3, 6,
                                      10, 30, 60]),
@@ -314,7 +314,7 @@ if __name__ == '__main__':
         'gamma' : [0.001, 0.01, 0.1, 1]
     }
 
-    ensemble_param_grid = {
+    '''ensemble_param_grid = {
         'n_estimators' : [100],
         'learning_rate' : [0.01],
         'max_depth': [1],
@@ -325,7 +325,7 @@ if __name__ == '__main__':
     nonlinear_param_grid = {
         'C' : [1],
         'gamma' : [1]
-    }
+    }'''
 
     logging.info("Running Ridge Regression")
     model = RidgeCV
