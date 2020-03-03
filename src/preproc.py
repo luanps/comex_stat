@@ -15,6 +15,7 @@ class Preproc:
         self.num_to_categories = num_to_categories
         self.text_to_counter = text_to_counter
 
+
     def drop_columns(self):
         self.data.drop(self.columns_to_drop,axis=1, inplace=True)
 
@@ -24,16 +25,6 @@ class Preproc:
         cleaned_dolar = lower_text.str.replace('$','')
         cleaned_percent = cleaned_dolar.str.replace('%','')
         return cleaned_percent
-
-    
-    def map_binary_text(self, data_item):
-        map_dict = {
-                    'no': int(0),
-                    'yes': (1),
-                    '0': int(0),
-                    '1': int(1)
-                    }
-        return  data_item.replace(map_dict)
 
 
     def map_str_to_float(self, data_item):
@@ -103,6 +94,7 @@ class Preproc:
 
         return data_item
 
+
     def word_count_amenities(self, data_item):
         data_item.fillna('', inplace=True)
         for idx, data in data_item.iteritems():
@@ -147,9 +139,3 @@ class Preproc:
         for attribute, item in numerical_data.iteritems():
             treated_data = item.fillna(0)
             self.data[attribute] = treated_data
-
-
-    @staticmethod
-    def encode_data(data):
-        encoded_data = pd.get_dummies(data)
-        return encoded_data

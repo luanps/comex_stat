@@ -48,22 +48,17 @@ class Model:
         self.fit(X_train, y_train)
 
         alpha = self.model.alpha_
-        print(f'Best alpha: {alpha}')
 
         if self.model_name == 'ElasticNet':
             l1_ratio = self.model.l1_ratio_
-            print(f'Best l1_ratio: {l1_ratio}')
         else:
             l1_ratio = 0
 
         return alpha, l1_ratio
 
+
     def plot_feature_importances(self, X_test):
         feat = pd.Series(self.model.feature_importances_, index = X_test.columns)
-        '''keep_coefs = sum(coefs != 0)
-        discarted_coefs = sum(coefs == 0)
-        print(f"""The model {self.model_name} picked {keep_coefs} features 
-                  and eliminated {discarted_coefs} features""")'''
 
         plt.figure(figsize=(8,6))
         importances = feat.sort_values(ascending = False).head(20)
@@ -79,8 +74,6 @@ class Model:
         coefs = pd.Series(self.model.coef_, index = X_test.columns)
         keep_coefs = sum(coefs != 0)
         discarted_coefs = sum(coefs == 0)
-        print(f"""The model {self.model_name} picked {keep_coefs} features 
-                  and eliminated {discarted_coefs} features""")
 
         plt.figure(figsize=(8,6))
         imp_coefs = pd.concat([coefs.sort_values().head(10),
@@ -91,6 +84,8 @@ class Model:
         plt.savefig(f'plots/coefficients/{self.model_name}.png', 
                     bbox_inches = "tight")
         plt.close()
+
+        return keep_coefs, discarted_coefs
 
 
     @staticmethod
