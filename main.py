@@ -273,7 +273,7 @@ def run_linear_model(generic_model, model_name,  model_configs):
     logging.info(f'RMSE on validation data: {rmse_test}')
 
     keep_coefs, discarted_coefs = updated_model.plot_coefficients(X_test)
-    logging.info(f"""The model {model_name} picked {keep_coefs} features
+    logging.info(f"""The {model_name} model picked {keep_coefs} features
                      and eliminated {discarted_coefs} features""")
 
     filepath = f'models/{model_name}' 
