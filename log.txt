@@ -1,0 +1,1525 @@
+INFO:root:Running data preprocessment routines
+INFO:root:=====================================================================
+INFO:root:Reading data from file
+INFO:root:=====================================================================
+INFO:root:Data exploration
+INFO:root:=====================================================================
+INFO:root:This dataset contains 33715
+        samples with 106 attributes.
+
+INFO:root:=====================================================================
+INFO:root:These attributes are:
+ id                                                int64
+listing_url                                      object
+scrape_id                                         int64
+last_scraped                                     object
+name                                             object
+summary                                          object
+space                                            object
+description                                      object
+experiences_offered                              object
+neighborhood_overview                            object
+notes                                            object
+transit                                          object
+access                                           object
+interaction                                      object
+house_rules                                      object
+thumbnail_url                                   float64
+medium_url                                      float64
+picture_url                                      object
+xl_picture_url                                  float64
+host_id                                           int64
+host_url                                         object
+host_name                                        object
+host_since                                       object
+host_location                                    object
+host_about                                       object
+host_response_time                               object
+host_response_rate                               object
+host_acceptance_rate                            float64
+host_is_superhost                                object
+host_thumbnail_url                               object
+host_picture_url                                 object
+host_neighbourhood                               object
+host_listings_count                             float64
+host_total_listings_count                       float64
+host_verifications                               object
+host_has_profile_pic                             object
+host_identity_verified                           object
+street                                           object
+neighbourhood                                    object
+neighbourhood_cleansed                           object
+neighbourhood_group_cleansed                    float64
+city                                             object
+state                                            object
+zipcode                                          object
+market                                           object
+smart_location                                   object
+country_code                                     object
+country                                          object
+latitude                                        float64
+longitude                                       float64
+is_location_exact                                object
+property_type                                    object
+room_type                                        object
+accommodates                                      int64
+bathrooms                                       float64
+bedrooms                                        float64
+beds                                            float64
+bed_type                                         object
+amenities                                        object
+square_feet                                     float64
+price                                            object
+weekly_price                                     object
+monthly_price                                    object
+security_deposit                                 object
+cleaning_fee                                     object
+guests_included                                   int64
+extra_people                                     object
+minimum_nights                                    int64
+maximum_nights                                    int64
+minimum_minimum_nights                            int64
+maximum_minimum_nights                            int64
+minimum_maximum_nights                            int64
+maximum_maximum_nights                            int64
+minimum_nights_avg_ntm                          float64
+maximum_nights_avg_ntm                          float64
+calendar_updated                                 object
+has_availability                                 object
+availability_30                                   int64
+availability_60                                   int64
+availability_90                                   int64
+availability_365                                  int64
+calendar_last_scraped                            object
+number_of_reviews                                 int64
+number_of_reviews_ltm                             int64
+first_review                                     object
+last_review                                      object
+review_scores_rating                            float64
+review_scores_accuracy                          float64
+review_scores_cleanliness                       float64
+review_scores_checkin                           float64
+review_scores_communication                     float64
+review_scores_location                          float64
+review_scores_value                             float64
+requires_license                                 object
+license                                          object
+jurisdiction_names                              float64
+instant_bookable                                 object
+is_business_travel_ready                         object
+cancellation_policy                              object
+require_guest_profile_picture                    object
+require_guest_phone_verification                 object
+calculated_host_listings_count                    int64
+calculated_host_listings_count_entire_homes       int64
+calculated_host_listings_count_private_rooms      int64
+calculated_host_listings_count_shared_rooms       int64
+reviews_per_month                               float64
+dtype: object
+INFO:root:=====================================================================
+INFO:root:Per attribute description:
+{'id': count    3.371500e+04
+mean     1.837737e+07
+std      1.182836e+07
+min      1.787800e+04
+25%      1.026686e+07
+50%      1.425308e+07
+75%      2.991364e+07
+max      4.029091e+07
+Name: id, dtype: float64, 'listing_url': count                                     33715
+unique                                    33715
+top       https://www.airbnb.com/rooms/35569331
+freq                                          1
+Name: listing_url, dtype: object, 'scrape_id': count    3.371500e+04
+mean     2.019112e+13
+std      0.000000e+00
+min      2.019112e+13
+25%      2.019112e+13
+50%      2.019112e+13
+75%      2.019112e+13
+max      2.019112e+13
+Name: scrape_id, dtype: float64, 'last_scraped': count          33715
+unique             2
+top       2019-11-22
+freq           32920
+Name: last_scraped, dtype: object, 'name': count                         33654
+unique                        32590
+top       Apartamento em Copacabana
+freq                             45
+Name: name, dtype: object, 'summary': count     31661
+unique    30486
+top           .
+freq         82
+Name: summary, dtype: object, 'space': count                                                 20756
+unique                                                19815
+top       The apartment is amazing, spacious, quiet and ...
+freq                                                     50
+Name: space, dtype: object, 'description': count     32785
+unique    32052
+top           .
+freq         24
+Name: description, dtype: object, 'experiences_offered': count     33715
+unique        1
+top        none
+freq      33715
+Name: experiences_offered, dtype: object, 'neighborhood_overview': count                                                 18838
+unique                                                17225
+top       Copacabana, a name synonym of paradise. The wa...
+freq                                                     27
+Name: neighborhood_overview, dtype: object, 'notes': count                                                 11247
+unique                                                10045
+top       Intern Settlement : 1. The maximum number of t...
+freq                                                    170
+Name: notes, dtype: object, 'transit': count                                                 18739
+unique                                                17167
+top       The location is very convenient to visit the n...
+freq                                                     50
+Name: transit, dtype: object, 'access': count                                                 16032
+unique                                                14177
+top       This is a entire property which will just for ...
+freq                                                     93
+Name: access, dtype: object, 'interaction': count                                                 16802
+unique                                                14777
+top       My name is Daniel, I am French and I live Rio ...
+freq                                                    161
+Name: interaction, dtype: object, 'house_rules': count                                                 17424
+unique                                                15597
+top       Somos a maior empresa de aluguel por temporada...
+freq                                                    104
+Name: house_rules, dtype: object, 'thumbnail_url': count    0.0
+mean     NaN
+std      NaN
+min      NaN
+25%      NaN
+50%      NaN
+75%      NaN
+max      NaN
+Name: thumbnail_url, dtype: float64, 'medium_url': count    0.0
+mean     NaN
+std      NaN
+min      NaN
+25%      NaN
+50%      NaN
+75%      NaN
+max      NaN
+Name: medium_url, dtype: float64, 'picture_url': count                                                 33715
+unique                                                33257
+top       https://a0.muscache.com/im/pictures/3f0a5ed5-5...
+freq                                                      8
+Name: picture_url, dtype: object, 'xl_picture_url': count    0.0
+mean     NaN
+std      NaN
+min      NaN
+25%      NaN
+50%      NaN
+75%      NaN
+max      NaN
+Name: xl_picture_url, dtype: float64, 'host_id': count    3.371500e+04
+mean     7.333110e+07
+std      7.577773e+07
+min      1.173900e+04
+25%      1.431560e+07
+50%      5.277714e+07
+75%      9.143910e+07
+max      3.111796e+08
+Name: host_id, dtype: float64, 'host_url': count                                          33715
+unique                                         24064
+top       https://www.airbnb.com/users/show/91654021
+freq                                             205
+Name: host_url, dtype: object, 'host_name': count      33695
+unique      6277
+top       Daniel
+freq         360
+Name: host_name, dtype: object, 'host_since': count          33695
+unique          3135
+top       2016-08-24
+freq             218
+Name: host_since, dtype: object, 'host_location': count                                               33522
+unique                                               1120
+top       Rio de Janeiro, State of Rio de Janeiro, Brazil
+freq                                                16510
+Name: host_location, dtype: object, 'host_about': count                                                 16172
+unique                                                 9571
+top       Meu nome é Daniel, eu sou francês e moro no Br...
+freq                                                    205
+Name: host_about, dtype: object, 'host_response_time': count              21481
+unique                 4
+top       within an hour
+freq                8737
+Name: host_response_time, dtype: object, 'host_response_rate': count     21481
+unique       84
+top        100%
+freq      11924
+Name: host_response_rate, dtype: object, 'host_acceptance_rate': count    0.0
+mean     NaN
+std      NaN
+min      NaN
+25%      NaN
+50%      NaN
+75%      NaN
+max      NaN
+Name: host_acceptance_rate, dtype: float64, 'host_is_superhost': count     33695
+unique        2
+top           f
+freq      29525
+Name: host_is_superhost, dtype: object, 'host_thumbnail_url': count                                                 33695
+unique                                                23920
+top       https://a0.muscache.com/im/pictures/user/57b50...
+freq                                                    205
+Name: host_thumbnail_url, dtype: object, 'host_picture_url': count                                                 33695
+unique                                                23920
+top       https://a0.muscache.com/im/pictures/user/57b50...
+freq                                                    205
+Name: host_picture_url, dtype: object, 'host_neighbourhood': count          21399
+unique           164
+top       Copacabana
+freq            6592
+Name: host_neighbourhood, dtype: object, 'host_listings_count': count    33695.000000
+mean         7.347559
+std         32.194777
+min          0.000000
+25%          1.000000
+50%          1.000000
+75%          3.000000
+max       1259.000000
+Name: host_listings_count, dtype: float64, 'host_total_listings_count': count    33695.000000
+mean         7.347559
+std         32.194777
+min          0.000000
+25%          1.000000
+50%          1.000000
+75%          3.000000
+max       1259.000000
+Name: host_total_listings_count, dtype: float64, 'host_verifications': count                  33715
+unique                   334
+top       ['email', 'phone']
+freq                    6725
+Name: host_verifications, dtype: object, 'host_has_profile_pic': count     33695
+unique        2
+top           t
+freq      33558
+Name: host_has_profile_pic, dtype: object, 'host_identity_verified': count     33695
+unique        2
+top           f
+freq      24129
+Name: host_identity_verified, dtype: object, 'street': count                                      33715
+unique                                       466
+top       Rio de Janeiro, Rio de Janeiro, Brazil
+freq                                       15563
+Name: street, dtype: object, 'neighbourhood': count          31757
+unique            99
+top       Copacabana
+freq            8373
+Name: neighbourhood, dtype: object, 'neighbourhood_cleansed': count          33715
+unique           153
+top       Copacabana
+freq            8443
+Name: neighbourhood_cleansed, dtype: object, 'neighbourhood_group_cleansed': count    0.0
+mean     NaN
+std      NaN
+min      NaN
+25%      NaN
+50%      NaN
+75%      NaN
+max      NaN
+Name: neighbourhood_group_cleansed, dtype: float64, 'city': count              33633
+unique               313
+top       Rio de Janeiro
+freq               18348
+Name: city, dtype: object, 'state': count              33668
+unique                54
+top       Rio de Janeiro
+freq               29527
+Name: state, dtype: object, 'zipcode': count     32010
+unique     4146
+top       22790
+freq        312
+Name: zipcode, dtype: object, 'market': count              33670
+unique                11
+top       Rio De Janeiro
+freq               30696
+Name: market, dtype: object, 'smart_location': count                      33715
+unique                       316
+top       Rio de Janeiro, Brazil
+freq                       18357
+Name: smart_location, dtype: object, 'country_code': count     33715
+unique        2
+top          BR
+freq      33714
+Name: country_code, dtype: object, 'country': count      33715
+unique         2
+top       Brazil
+freq       33714
+Name: country, dtype: object, 'latitude': count    33715.000000
+mean       -22.965208
+std          0.035244
+min        -23.073400
+25%        -22.984710
+50%        -22.970850
+75%        -22.946725
+max        -22.750380
+Name: latitude, dtype: float64, 'longitude': count    33715.000000
+mean       -43.254228
+std          0.097488
+min        -43.737090
+25%        -43.323360
+50%        -43.200220
+75%        -43.187085
+max        -43.104060
+Name: longitude, dtype: float64, 'is_location_exact': count     33715
+unique        2
+top           t
+freq      20310
+Name: is_location_exact, dtype: object, 'property_type': count         33715
+unique           37
+top       Apartment
+freq          25774
+Name: property_type, dtype: object, 'room_type': count               33715
+unique                  4
+top       Entire home/apt
+freq                23947
+Name: room_type, dtype: object, 'accommodates': count    33715.000000
+mean         4.199941
+std          2.625252
+min          1.000000
+25%          2.000000
+50%          4.000000
+75%          6.000000
+max        160.000000
+Name: accommodates, dtype: float64, 'bathrooms': count    33661.000000
+mean         1.694765
+std          1.508228
+min          0.000000
+25%          1.000000
+50%          1.000000
+75%          2.000000
+max        200.000000
+Name: bathrooms, dtype: float64, 'bedrooms': count    33673.000000
+mean         1.646126
+std          1.075649
+min          0.000000
+25%          1.000000
+50%          1.000000
+75%          2.000000
+max         20.000000
+Name: bedrooms, dtype: float64, 'beds': count    33667.000000
+mean         2.574242
+std          2.121490
+min          0.000000
+25%          1.000000
+50%          2.000000
+75%          3.000000
+max         69.000000
+Name: beds, dtype: float64, 'bed_type': count        33715
+unique           5
+top       Real Bed
+freq         33244
+Name: bed_type, dtype: object, 'amenities': count     33715
+unique    31637
+top          {}
+freq        345
+Name: amenities, dtype: object, 'square_feet': count      495.000000
+mean       498.751515
+std        931.444840
+min          0.000000
+25%          0.000000
+50%        161.000000
+75%        700.000000
+max      10764.000000
+Name: square_feet, dtype: float64, 'price': count       33715
+unique        856
+top       $202.00
+freq         1323
+Name: price, dtype: object, 'weekly_price': count          2546
+unique          729
+top       $2,000.00
+freq             84
+Name: weekly_price, dtype: object, 'monthly_price': count          2825
+unique          820
+top       $4,000.00
+freq             78
+Name: monthly_price, dtype: object, 'security_deposit': count     18935
+unique      622
+top       $0.00
+freq       7184
+Name: security_deposit, dtype: object, 'cleaning_fee': count       22731
+unique        404
+top       $150.00
+freq         4159
+Name: cleaning_fee, dtype: object, 'guests_included': count    33715.000000
+mean         1.718434
+std          1.585645
+min          1.000000
+25%          1.000000
+50%          1.000000
+75%          2.000000
+max         25.000000
+Name: guests_included, dtype: float64, 'extra_people': count     33715
+unique      305
+top       $0.00
+freq      20413
+Name: extra_people, dtype: object, 'minimum_nights': count    33715.000000
+mean         4.789826
+std         22.640328
+min          1.000000
+25%          1.000000
+50%          2.000000
+75%          4.000000
+max       1123.000000
+Name: minimum_nights, dtype: float64, 'maximum_nights': count    3.371500e+04
+mean     9.571741e+02
+std      5.473614e+04
+min      1.000000e+00
+25%      3.000000e+01
+50%      1.125000e+03
+75%      1.125000e+03
+max      1.000000e+07
+Name: maximum_nights, dtype: float64, 'minimum_minimum_nights': count    33715.000000
+mean         4.677325
+std         21.651351
+min          1.000000
+25%          1.000000
+50%          2.000000
+75%          4.000000
+max       1095.000000
+Name: minimum_minimum_nights, dtype: float64, 'maximum_minimum_nights': count    33715.000000
+mean         5.279164
+std         22.298511
+min          1.000000
+25%          2.000000
+50%          3.000000
+75%          5.000000
+max       1095.000000
+Name: maximum_minimum_nights, dtype: float64, 'minimum_maximum_nights': count    3.371500e+04
+mean     9.536130e+02
+std      5.473616e+04
+min      1.000000e+00
+25%      3.000000e+01
+50%      1.125000e+03
+75%      1.125000e+03
+max      1.000000e+07
+Name: minimum_maximum_nights, dtype: float64, 'maximum_maximum_nights': count    3.371500e+04
+mean     9.565083e+02
+std      5.473614e+04
+min      1.000000e+00
+25%      3.000000e+01
+50%      1.125000e+03
+75%      1.125000e+03
+max      1.000000e+07
+Name: maximum_maximum_nights, dtype: float64, 'minimum_nights_avg_ntm': count    33715.000000
+mean         4.814341
+std         21.762781
+min          1.000000
+25%          1.100000
+50%          2.300000
+75%          4.000000
+max       1095.000000
+Name: minimum_nights_avg_ntm, dtype: float64, 'maximum_nights_avg_ntm': count    3.371500e+04
+mean     9.557378e+02
+std      5.473614e+04
+min      1.000000e+00
+25%      3.000000e+01
+50%      1.125000e+03
+75%      1.125000e+03
+max      1.000000e+07
+Name: maximum_nights_avg_ntm, dtype: float64, 'calendar_updated': count            33715
+unique              95
+top       2 months ago
+freq              2377
+Name: calendar_updated, dtype: object, 'has_availability': count     33715
+unique        1
+top           t
+freq      33715
+Name: has_availability, dtype: object, 'availability_30': count    33715.000000
+mean        15.476553
+std         13.024685
+min          0.000000
+25%          0.000000
+50%         19.000000
+75%         29.000000
+max         30.000000
+Name: availability_30, dtype: float64, 'availability_60': count    33715.000000
+mean        30.368234
+std         24.678858
+min          0.000000
+25%          0.000000
+50%         34.000000
+75%         57.000000
+max         60.000000
+Name: availability_60, dtype: float64, 'availability_90': count    33715.000000
+mean        47.661516
+std         37.328647
+min          0.000000
+25%          0.000000
+50%         56.000000
+75%         87.000000
+max         90.000000
+Name: availability_90, dtype: float64, 'availability_365': count    33715.000000
+mean       177.956251
+std        149.766863
+min          0.000000
+25%          0.000000
+50%        165.000000
+75%        350.000000
+max        365.000000
+Name: availability_365, dtype: float64, 'calendar_last_scraped': count          33715
+unique             2
+top       2019-11-22
+freq           32922
+Name: calendar_last_scraped, dtype: object, 'number_of_reviews': count    33715.000000
+mean         9.374344
+std         24.815311
+min          0.000000
+25%          0.000000
+50%          1.000000
+75%          6.000000
+max        372.000000
+Name: number_of_reviews, dtype: float64, 'number_of_reviews_ltm': count    33715.000000
+mean         3.524396
+std          8.185492
+min          0.000000
+25%          0.000000
+50%          0.000000
+75%          3.000000
+max        127.000000
+Name: number_of_reviews_ltm, dtype: float64, 'first_review': count          19149
+unique          2357
+top       2019-10-06
+freq             304
+Name: first_review, dtype: object, 'last_review': count          19149
+unique          1408
+top       2019-10-07
+freq            1291
+Name: last_review, dtype: object, 'review_scores_rating': count    18293.000000
+mean        94.777565
+std          9.141386
+min         20.000000
+25%         93.000000
+50%         98.000000
+75%        100.000000
+max        100.000000
+Name: review_scores_rating, dtype: float64, 'review_scores_accuracy': count    18275.00000
+mean         9.65658
+std          0.88463
+min          2.00000
+25%         10.00000
+50%         10.00000
+75%         10.00000
+max         10.00000
+Name: review_scores_accuracy, dtype: float64, 'review_scores_cleanliness': count    18280.000000
+mean         9.431565
+std          1.079031
+min          2.000000
+25%          9.000000
+50%         10.000000
+75%         10.000000
+max         10.000000
+Name: review_scores_cleanliness, dtype: float64, 'review_scores_checkin': count    18274.000000
+mean         9.802561
+std          0.713238
+min          2.000000
+25%         10.000000
+50%         10.000000
+75%         10.000000
+max         10.000000
+Name: review_scores_checkin, dtype: float64, 'review_scores_communication': count    18280.000000
+mean         9.775656
+std          0.744620
+min          2.000000
+25%         10.000000
+50%         10.000000
+75%         10.000000
+max         10.000000
+Name: review_scores_communication, dtype: float64, 'review_scores_location': count    18277.000000
+mean         9.748044
+std          0.734016
+min          2.000000
+25%         10.000000
+50%         10.000000
+75%         10.000000
+max         10.000000
+Name: review_scores_location, dtype: float64, 'review_scores_value': count    18278.000000
+mean         9.332093
+std          1.016906
+min          2.000000
+25%          9.000000
+50%         10.000000
+75%         10.000000
+max         10.000000
+Name: review_scores_value, dtype: float64, 'requires_license': count     33715
+unique        1
+top           f
+freq      33715
+Name: requires_license, dtype: object, 'license': count                      2
+unique                     2
+top       05.557.336/0001-70
+freq                       1
+Name: license, dtype: object, 'jurisdiction_names': count    0.0
+mean     NaN
+std      NaN
+min      NaN
+25%      NaN
+50%      NaN
+75%      NaN
+max      NaN
+Name: jurisdiction_names, dtype: float64, 'instant_bookable': count     33715
+unique        2
+top           f
+freq      20287
+Name: instant_bookable, dtype: object, 'is_business_travel_ready': count     33715
+unique        1
+top           f
+freq      33715
+Name: is_business_travel_ready, dtype: object, 'cancellation_policy': count        33715
+unique           6
+top       flexible
+freq         14194
+Name: cancellation_policy, dtype: object, 'require_guest_profile_picture': count     33715
+unique        2
+top           f
+freq      33156
+Name: require_guest_profile_picture, dtype: object, 'require_guest_phone_verification': count     33715
+unique        2
+top           f
+freq      33141
+Name: require_guest_phone_verification, dtype: object, 'calculated_host_listings_count': count    33715.000000
+mean         5.996292
+std         20.303420
+min          1.000000
+25%          1.000000
+50%          1.000000
+75%          3.000000
+max        205.000000
+Name: calculated_host_listings_count, dtype: float64, 'calculated_host_listings_count_entire_homes': count    33715.000000
+mean         5.112383
+std         19.782263
+min          0.000000
+25%          1.000000
+50%          1.000000
+75%          2.000000
+max        200.000000
+Name: calculated_host_listings_count_entire_homes, dtype: float64, 'calculated_host_listings_count_private_rooms': count    33715.000000
+mean         0.702862
+std          1.475525
+min          0.000000
+25%          0.000000
+50%          0.000000
+75%          1.000000
+max         18.000000
+Name: calculated_host_listings_count_private_rooms, dtype: float64, 'calculated_host_listings_count_shared_rooms': count    33715.000000
+mean         0.079638
+std          0.618935
+min          0.000000
+25%          0.000000
+50%          0.000000
+75%          0.000000
+max         14.000000
+Name: calculated_host_listings_count_shared_rooms, dtype: float64, 'reviews_per_month': count    19149.000000
+mean         0.707232
+std          0.927453
+min          0.010000
+25%          0.110000
+50%          0.340000
+75%          0.980000
+max         10.080000
+Name: reviews_per_month, dtype: float64}
+INFO:root:=====================================================================
+INFO:root:Attributes with null data:
+ id                                                  0
+listing_url                                         0
+scrape_id                                           0
+last_scraped                                        0
+name                                               61
+summary                                          2054
+space                                           12959
+description                                       930
+experiences_offered                                 0
+neighborhood_overview                           14877
+notes                                           22468
+transit                                         14976
+access                                          17683
+interaction                                     16913
+house_rules                                     16291
+thumbnail_url                                   33715
+medium_url                                      33715
+picture_url                                         0
+xl_picture_url                                  33715
+host_id                                             0
+host_url                                            0
+host_name                                          20
+host_since                                         20
+host_location                                     193
+host_about                                      17543
+host_response_time                              12234
+host_response_rate                              12234
+host_acceptance_rate                            33715
+host_is_superhost                                  20
+host_thumbnail_url                                 20
+host_picture_url                                   20
+host_neighbourhood                              12316
+host_listings_count                                20
+host_total_listings_count                          20
+host_verifications                                  0
+host_has_profile_pic                               20
+host_identity_verified                             20
+street                                              0
+neighbourhood                                    1958
+neighbourhood_cleansed                              0
+neighbourhood_group_cleansed                    33715
+city                                               82
+state                                              47
+zipcode                                          1705
+market                                             45
+smart_location                                      0
+country_code                                        0
+country                                             0
+latitude                                            0
+longitude                                           0
+is_location_exact                                   0
+property_type                                       0
+room_type                                           0
+accommodates                                        0
+bathrooms                                          54
+bedrooms                                           42
+beds                                               48
+bed_type                                            0
+amenities                                           0
+square_feet                                     33220
+price                                               0
+weekly_price                                    31169
+monthly_price                                   30890
+security_deposit                                14780
+cleaning_fee                                    10984
+guests_included                                     0
+extra_people                                        0
+minimum_nights                                      0
+maximum_nights                                      0
+minimum_minimum_nights                              0
+maximum_minimum_nights                              0
+minimum_maximum_nights                              0
+maximum_maximum_nights                              0
+minimum_nights_avg_ntm                              0
+maximum_nights_avg_ntm                              0
+calendar_updated                                    0
+has_availability                                    0
+availability_30                                     0
+availability_60                                     0
+availability_90                                     0
+availability_365                                    0
+calendar_last_scraped                               0
+number_of_reviews                                   0
+number_of_reviews_ltm                               0
+first_review                                    14566
+last_review                                     14566
+review_scores_rating                            15422
+review_scores_accuracy                          15440
+review_scores_cleanliness                       15435
+review_scores_checkin                           15441
+review_scores_communication                     15435
+review_scores_location                          15438
+review_scores_value                             15437
+requires_license                                    0
+license                                         33713
+jurisdiction_names                              33715
+instant_bookable                                    0
+is_business_travel_ready                            0
+cancellation_policy                                 0
+require_guest_profile_picture                       0
+require_guest_phone_verification                    0
+calculated_host_listings_count                      0
+calculated_host_listings_count_entire_homes         0
+calculated_host_listings_count_private_rooms        0
+calculated_host_listings_count_shared_rooms         0
+reviews_per_month                               14566
+dtype: int64
+INFO:root:=====================================================================
+INFO:root:Attributes which more than 66% of data is null:
+
+                    {'notes': 22468, 'thumbnail_url': 33715, 'medium_url': 33715, 'xl_picture_url': 33715, 'host_acceptance_rate': 33715, 'neighbourhood_group_cleansed': 33715, 'square_feet': 33220, 'weekly_price': 31169, 'monthly_price': 30890, 'license': 33713, 'jurisdiction_names': 33715}
+INFO:root:=====================================================================
+INFO:root:Textual attributes with empty data (value=' '):
+{'host_about': 28, 'zipcode': 1}
+INFO:root:=====================================================================
+INFO:root:Numerical attributes with zeros:
+{'host_listings_count': 1223, 'host_total_listings_count': 1223, 'bathrooms': 90, 'bedrooms': 1914, 'beds': 400, 'square_feet': 218, 'availability_30': 11337, 'availability_60': 9931, 'availability_90': 9568, 'availability_365': 8511, 'number_of_reviews': 14566, 'number_of_reviews_ltm': 19158, 'calculated_host_listings_count_entire_homes': 7864, 'calculated_host_listings_count_private_rooms': 22289, 'calculated_host_listings_count_shared_rooms': 32625}
+INFO:root:=====================================================================
+INFO:root:Sample of each attribute:
+{'id': array([17878, 25026, 31560, 35636, 35764, 35893, 48305, 48726, 48901,
+       49179]), 'listing_url': array(['https://www.airbnb.com/rooms/17878',
+       'https://www.airbnb.com/rooms/25026',
+       'https://www.airbnb.com/rooms/31560',
+       'https://www.airbnb.com/rooms/35636',
+       'https://www.airbnb.com/rooms/35764',
+       'https://www.airbnb.com/rooms/35893',
+       'https://www.airbnb.com/rooms/48305',
+       'https://www.airbnb.com/rooms/48726',
+       'https://www.airbnb.com/rooms/48901',
+       'https://www.airbnb.com/rooms/49179'], dtype=object), 'scrape_id': array([20191122092441]), 'last_scraped': array(['2019-11-22', '2019-11-23'], dtype=object), 'name': array(['Very Nice 2Br - Copacabana - WiFi',
+       'Beautiful Modern Decorated Studio in Copa',
+       'NICE & COZY 1BDR - IPANEMA BEACH',
+       'Cosy flat close to Ipanema beach',
+       'COPACABANA SEA BREEZE  -  RIO - 20 X Superhost', 'Copa Tabajaras',
+       'Beach Block 6bed Penthouse, Ipanema Best Location!',
+       'Rio de Janeiro Copacabana Ipanema',
+       'Confortable 4BD 3.5BT Atlantic avenue',
+       'Djalma Ocean View - #100A'], dtype=object), 'summary': array(['Pls note that special rates apply for Carnival.  Pls contact me to discuss. - Beautiful, sunny 2 bedroom (90 square meters) in 24h doorman building - 1 min. to walk to Copacabana beach - Spacious living room, 2  bedrooms with 2 full-size beds (each sleeps 2) - High speed WiFi (10MB); phone (local landline calls free)',
+       'Our apartment is a little gem, everyone loves staying there! Best location, 2 blocks to the subway, 3 blocks to the beach, close to bars, restaurants, supermarket, banks, public transportation and all you need! Wi-fi, cable TV, air con and fan!',
+       'This nice and clean 1 bedroom apartment is located in the best area in Rio: Just 2 blocks from Ipanema beach, posto 10, right next to Leblon and Lagoa. Perfect for those who want to feel like a local, a real "carioca".  ',
+       'This cosy apartment  is just a few steps away from the famous Copacabana and in a walking distance of the stunning Ipanema beach, from both main attractions of the city. Located at Arpoador, in an lovely building with 24 hours doorman security.',
+       'Our newly renovated studio is located in the best part of Copacabana - Between  Posto 5 and Posto 6 - 10 minutes from the Arpoador and Ipanema beach.   Security 24 hours a day.    Enjoy your stay in a family bulding  living as a local people.',
+       'Very quiet flat, with view on tropical jungle and roofs of Copacabana. Very good localization in the heart of Copacabana, very close to Metro Siqueira Campos',
+       'Sunny terrace with side ocean view, 6 ensuite and plenty of living area! ••LOCATION LOCATION! •• In the heart of Ipanema, steps away from the beach ••Perfect for groups of friends & families•• Cleaning service and DELICIOUS BREAKFAST (optional). Recently remodelled clean and modern double bedrooms all with private ensuite bathrooms, AC, Cable TV.  No elevator at the building. High quality beds and sheets, fresh towels and all amenities needed!',
+       'Apartamento tem três dormitórios, dois banheiros, sala cozinha lavanderia, bem claro, arejado.Excelente localizaçao coração de Ipanema arpoador e Copacabana,proximo  bares , restaurantes, da praia,metro.Uso de geladeira cafeteira.Roupa cama banho.',
+       'A nice, very well located 4 bedroom apartmaent, ideal for families, located right on Posto 2 of Copacbana beach. ( Our stairs take directly to the beach walk ). All bedrooms A/C  Wi-fi free of charge  Parking space available when informed Cable tv Easy shopping nearby, lots of shops and restaurants, beach access easy tansportation anywhere in Rio Electricity allowed 10 kilowats per day',
+       'Amazing 12th Floor Ocean View Condo. Queen Sized Bed, Extra inflatable Queen mattress, A/C, 40" Flat Panel Smart TV with Cable, Netflix and YouTube. Table with 2 Chairs Looking out the Window. Kitchen area with Microwave and Fridge & Hot Plate, Digital Safe & Full Bathroom with Walk in Shower with Glass Door. 24 Hour Doorman Security. Towels and Linens Included.  Steps to the beach. Close to everything!'],
+      dtype=object), 'space': array(['- large balcony which looks out on pedestrian street - no traffic - priceless in Rio (apts with sea view are noisy because of traffic) - "Split" air condition in each room (almost silent like in a hotel) - 32\'\' flat screen tv, premium cable including channels in Engl. - close to everything, a stone throw away from famous Copacabana Palace Hotel -  4 burner gas stove with oven, fridge, microwave, coffee maker, iron, hairdryer, vacuum cleaner, water filter - apt is fully equipped, you only need to bring your toothbrush - 2 min. to walk to subway station "Cardeal Arco Verde - Copacabana"',
+       'This newly renovated studio (last renovations Oct 2014)   is in the best location of Copacabana, situated on a quieter street but just off the main streets, right in the middle of everything, 2 blocks from the beach, 1 block from the subway (Cantagalo station which places you just a stop away from Ipanema! --> you can just walk there too, no need to hop on the subway really), very close to all local bars and restaurants, and very close to Ipanema and Lagoa (walking distance) where true cariocas exercise in the mornings. The place is colorfully decorated, modern, with lots of natural light, on the 3rd floor of a leafy greet shady street, in the summer it is great, as any shade helps!  And the building is safe with 24 hour doorman at the entrance. It has cable TV, cable/wi-fi internet, air con, ceiling fan, all kitchen gear (fridge, stove, oven, toaster, pots &  pans, utensils), a mini stereo, DVD player and some DVD movies. It has a double comfortable bed and a sofa bed that sleeps 1. S',
+       'This nice and clean 1 bedroom apartment is located in the best area in Rio: Just 2 blocks from Ipanema beach, posto 10, right next to Leblon and Lagoa. Perfect for those who want to feel like a local, a real "carioca". Walking distance to the best restaurants and shops in town, as well as lots of fun places to visit. The best mall in Rio, "Shopping Leblon" is just 2 blocks away. It fits up to 3 people comfortably. There\'s a small kitchen area with a small oven, a coffee machine, a small fridge and some other simple tools.  It`s not a suitable kitchen for those who want to cook in the apt. The area has lots of option for public transportation. The main buses in Rio pass through Visconde de Pirajá, and although the metro is at the other end of Ipanema, you can take the bus that connects to the metro (without any extra costs) one block away from the apt. You can also rent a bike 2 blocks away, in Anibal de Mendonça street, more information on the site (Website hidden by Airbnb)  There\'s a',
+       'The location is extremely convenient, safe and in a walking distance from all the most trendy and popular bars and restaurants of the area, which is for sure one of the best districts of the city.   Moving around the city is also very easy since there is a Metro stop just 5 blocks away and plenty of taxis, buses just around the corner.  This stylish Rio apartment has been recently renovated and it features a charming and cozy style. Several paintings enrich the property and give to it a personal touch. The apartment features a  queen size bed, 3 pillows included, linen  and towels included, and it is perfect to host up 3 people. It is extremely well equipped and it features many facilities you could need during your stay in Rio de Janeiro, such as the washing machine, Internet Wi-Fi access, cable TV, a fully equipped kitchen, air conditioning, which is very important during the Brazilian summer.',
+       'FEEL LIKE YOUR HOME LIVING AS "CARIOCA" LOCAL PEOPLE IN A NEW RENOVATED AND  REFURBISHED APARTMENT CAREFULLY PREPARED FOR YOU.  THE APARTMENT IS  VERY CLEAN  IN A  SAFE AND FAMILIAR BUILDING.  ONLY 4 STUDIOS PER FLOOR. MAKE SURE YOU   WILL STAY IN THE BEST PLACE OF COPACABANA -  POSTO 6 - (lifeguard station 6) 10 MINUTES WALKING TO ARPOADOR AND IPANEMA.  Attention: 1)  All the pictures are surrounding the apartment and not far away. 2)  We are pround  super host with also full golden 5 stars in all aspects. We care about your well being.! Packages for Carnival 2020 is available.  Send a message to us. Check in and out are flexible as long as we don\'t have other guests leaving or arriving on the same day as you. If this happens, the check-out time will be at 10:00 and the check-in at 14:00. In this case, we can store your luggage. Breathtaking ocean views span the width of this studio apartment located in best place of Copacabana Beach (Posto 6). Walk just 10 steps from the door and you',
+       'Purpose of CopaTabajaras is to provide a nice, safe, clean, inexpensive place to stay while visiting Rio de Janeiro. We provide minimal furnishings / amenities such as a bed Futon, sheets, towels, kitchen with eating / cooking utensils,   The flat is most advantageous for families and friends who simply need a place to sleep by night after enjoying Rio de Janeiro. Copatabajaras is NOT ideal for guest who prefer additional amenities. We welcome travelers of the worlds global village who embrace Rio´s conglomerate culture and the privilege to live among it’s diverse people in a private home  The location is fantastic! We are 2 block from the beach and 3 block from subway metro We are one block from Organic food shop (O Herborista) and Winery and tons of shop. You´ll enjoy a fantastic view to Copacabana skyline, with tropical jungle in front of you. You´ll miss it when you´´ ll leave! ***CALL / TEXT  when you have arrived to Rio, to confirm your appointment to check in and to inform hosts',
+       '••• WHY AND HOW WE DIFFER ••• Our guest loves to stay with us, we hosted more than 500 of them, including a few famous ones and there is a reason why they all come back to us, send recommendations and leave great reviews!  •••LOCATION LOCATION LOCATION!!••• Right by the famous "Posto 9", the building is located only twenty seconds away from the beach sand. This is a clean, comfortable and beautiful beach block apartment located at the best possible location in Ipanema neighbourhood. In the heart of the trendiest and safest part of Rio, this side of Ipanema is packed with incredible restaurants, cafes, boutique clothing and nightlife. Tree lined, street and very safe environment, AWAY from the delinquency and mass tourism you would find in Copacabana. Ipanema is the best option to live the true Carioca life. •••SERVICE & SECURITY••• A warm welcome... We want our guests to enjoy their holidays to the fullest, to have the most comfortable home away from home. This is why we offer our serv',
+       'Excelente acomodação perto da praia mais famosa do Rio de Janeiro. Apartamento confortável, limpo e organizado. Quarto arejado, com cama de solteiro e banheiro partilhado com mais uma pessoa. Cozinha equipada para refeições rapidas, maquina de lavar; oferecemos roupa de cama e banho. Prédio pequeno e familiar, perto de paradas de ônibus e metrô. Cinco minutos do Arpoador. Região segura, longe das comunidades. Tudo perto,  bares, restaurantes, etc.',
+       'Plenty of space on 150 sq. meters.  Large rooms 4 bathrooms',
+       "Apartment in Copacabana with stunning sea views. Studio apartment with a queen bed and bathroom. Kitchen with microwave, refrigerator, electric hot plate. Secure building with 24 hour doorman. Towels and linens are included in the stay. Apartment is on the 12th floor. Wireless internet free for use. Air conditioning and ceiling fan in apartment Small table to support the computer. A very cozy place one block from Copacabana beach. At station 5. A very central place with various services such as restaurants, bars, clubs and others to guest's disposal. Also nearby Arpoador and Ipanema. With transport facilities such as buses and subways. That will give you great mobility to meet all the wonderful city. Contact us to confirm availability and prices for packages for the New Year and Carnival, where is one of the best parties in the world. Enjoy and come see a very beautiful city, and charming, friendly Brazilian people."],
+      dtype=object), 'description': array(['Pls note that special rates apply for Carnival.  Pls contact me to discuss. - Beautiful, sunny 2 bedroom (90 square meters) in 24h doorman building - 1 min. to walk to Copacabana beach - Spacious living room, 2  bedrooms with 2 full-size beds (each sleeps 2) - High speed WiFi (10MB); phone (local landline calls free) - large balcony which looks out on pedestrian street - no traffic - priceless in Rio (apts with sea view are noisy because of traffic) - "Split" air condition in each room (almost silent like in a hotel) - 32\'\' flat screen tv, premium cable including channels in Engl. - close to everything, a stone throw away from famous Copacabana Palace Hotel -  4 burner gas stove with oven, fridge, microwave, coffee maker, iron, hairdryer, vacuum cleaner, water filter - apt is fully equipped, you only need to bring your toothbrush - 2 min. to walk to subway station "Cardeal Arco Verde - Copacabana" The entire apartment is yours. It\'s like your "home away from home", everything you need ',
+       'Our apartment is a little gem, everyone loves staying there! Best location, 2 blocks to the subway, 3 blocks to the beach, close to bars, restaurants, supermarket, banks, public transportation and all you need! Wi-fi, cable TV, air con and fan! This newly renovated studio (last renovations Oct 2014)   is in the best location of Copacabana, situated on a quieter street but just off the main streets, right in the middle of everything, 2 blocks from the beach, 1 block from the subway (Cantagalo station which places you just a stop away from Ipanema! --> you can just walk there too, no need to hop on the subway really), very close to all local bars and restaurants, and very close to Ipanema and Lagoa (walking distance) where true cariocas exercise in the mornings. The place is colorfully decorated, modern, with lots of natural light, on the 3rd floor of a leafy greet shady street, in the summer it is great, as any shade helps!  And the building is safe with 24 hour doorman at the entrance.',
+       'This nice and clean 1 bedroom apartment is located in the best area in Rio: Just 2 blocks from Ipanema beach, posto 10, right next to Leblon and Lagoa. Perfect for those who want to feel like a local, a real "carioca".  This nice and clean 1 bedroom apartment is located in the best area in Rio: Just 2 blocks from Ipanema beach, posto 10, right next to Leblon and Lagoa. Perfect for those who want to feel like a local, a real "carioca". Walking distance to the best restaurants and shops in town, as well as lots of fun places to visit. The best mall in Rio, "Shopping Leblon" is just 2 blocks away. It fits up to 3 people comfortably. There\'s a small kitchen area with a small oven, a coffee machine, a small fridge and some other simple tools.  It`s not a suitable kitchen for those who want to cook in the apt. The area has lots of option for public transportation. The main buses in Rio pass through Visconde de Pirajá, and although the metro is at the other end of Ipanema, you can take the bu',
+       'This cosy apartment  is just a few steps away from the famous Copacabana and in a walking distance of the stunning Ipanema beach, from both main attractions of the city. Located at Arpoador, in an lovely building with 24 hours doorman security. The location is extremely convenient, safe and in a walking distance from all the most trendy and popular bars and restaurants of the area, which is for sure one of the best districts of the city.   Moving around the city is also very easy since there is a Metro stop just 5 blocks away and plenty of taxis, buses just around the corner.  This stylish Rio apartment has been recently renovated and it features a charming and cozy style. Several paintings enrich the property and give to it a personal touch. The apartment features a  queen size bed, 3 pillows included, linen  and towels included, and it is perfect to host up 3 people. It is extremely well equipped and it features many facilities you could need during your stay in Rio de Janeiro, such ',
+       'Our newly renovated studio is located in the best part of Copacabana - Between  Posto 5 and Posto 6 - 10 minutes from the Arpoador and Ipanema beach.   Security 24 hours a day.    Enjoy your stay in a family bulding  living as a local people. FEEL LIKE YOUR HOME LIVING AS "CARIOCA" LOCAL PEOPLE IN A NEW RENOVATED AND  REFURBISHED APARTMENT CAREFULLY PREPARED FOR YOU.  THE APARTMENT IS  VERY CLEAN  IN A  SAFE AND FAMILIAR BUILDING.  ONLY 4 STUDIOS PER FLOOR. MAKE SURE YOU   WILL STAY IN THE BEST PLACE OF COPACABANA -  POSTO 6 - (lifeguard station 6) 10 MINUTES WALKING TO ARPOADOR AND IPANEMA.  Attention: 1)  All the pictures are surrounding the apartment and not far away. 2)  We are pround  super host with also full golden 5 stars in all aspects. We care about your well being.! Packages for Carnival 2020 is available.  Send a message to us. Check in and out are flexible as long as we don\'t have other guests leaving or arriving on the same day as you. If this happens, the check-out time ',
+       'Very quiet flat, with view on tropical jungle and roofs of Copacabana. Very good localization in the heart of Copacabana, very close to Metro Siqueira Campos Purpose of CopaTabajaras is to provide a nice, safe, clean, inexpensive place to stay while visiting Rio de Janeiro. We provide minimal furnishings / amenities such as a bed Futon, sheets, towels, kitchen with eating / cooking utensils,   The flat is most advantageous for families and friends who simply need a place to sleep by night after enjoying Rio de Janeiro. Copatabajaras is NOT ideal for guest who prefer additional amenities. We welcome travelers of the worlds global village who embrace Rio´s conglomerate culture and the privilege to live among it’s diverse people in a private home  The location is fantastic! We are 2 block from the beach and 3 block from subway metro We are one block from Organic food shop (O Herborista) and Winery and tons of shop. You´ll enjoy a fantastic view to Copacabana skyline, with tropical jungle ',
+       'Sunny terrace with side ocean view, 6 ensuite and plenty of living area! ••LOCATION LOCATION! •• In the heart of Ipanema, steps away from the beach ••Perfect for groups of friends & families•• Cleaning service and DELICIOUS BREAKFAST (optional). Recently remodelled clean and modern double bedrooms all with private ensuite bathrooms, AC, Cable TV.  No elevator at the building. High quality beds and sheets, fresh towels and all amenities needed! ••• WHY AND HOW WE DIFFER ••• Our guest loves to stay with us, we hosted more than 500 of them, including a few famous ones and there is a reason why they all come back to us, send recommendations and leave great reviews!  •••LOCATION LOCATION LOCATION!!••• Right by the famous "Posto 9", the building is located only twenty seconds away from the beach sand. This is a clean, comfortable and beautiful beach block apartment located at the best possible location in Ipanema neighbourhood. In the heart of the trendiest and safest part of Rio, this side ',
+       'Apartamento tem três dormitórios, dois banheiros, sala cozinha lavanderia, bem claro, arejado.Excelente localizaçao coração de Ipanema arpoador e Copacabana,proximo  bares , restaurantes, da praia,metro.Uso de geladeira cafeteira.Roupa cama banho. Excelente acomodação perto da praia mais famosa do Rio de Janeiro. Apartamento confortável, limpo e organizado. Quarto arejado, com cama de solteiro e banheiro partilhado com mais uma pessoa. Cozinha equipada para refeições rapidas, maquina de lavar; oferecemos roupa de cama e banho. Prédio pequeno e familiar, perto de paradas de ônibus e metrô. Cinco minutos do Arpoador. Região segura, longe das comunidades. Tudo perto,  bares, restaurantes, etc. Os hospedes tem acesso a lavanderia, cozinha para pequenos lanches.rede wi fi.televisão a cabo. Poderão compartilhar a sala de visitas.Nosso banheiro e muito limpo todo branco. Sou muito extrovertida gosto de uma boa conversa, mas respeito a intimidade e liberdade de cada um.Provavelmente sempre est',
+       'A nice, very well located 4 bedroom apartmaent, ideal for families, located right on Posto 2 of Copacbana beach. ( Our stairs take directly to the beach walk ). All bedrooms A/C  Wi-fi free of charge  Parking space available when informed Cable tv Easy shopping nearby, lots of shops and restaurants, beach access easy tansportation anywhere in Rio Electricity allowed 10 kilowats per day Plenty of space on 150 sq. meters.  Large rooms 4 bathrooms Great traditional distric. Lively and cool. Friendly atmosfere. Beach life Easy to find a taxi or a bus, walking is ALWAYS an option to most places in Rio. A few blocks away from RioMetro. Grupos compostos apenas com homens - reserva sob consulta Single male groups please consult before paying',
+       'Amazing 12th Floor Ocean View Condo. Queen Sized Bed, Extra inflatable Queen mattress, A/C, 40" Flat Panel Smart TV with Cable, Netflix and YouTube. Table with 2 Chairs Looking out the Window. Kitchen area with Microwave and Fridge & Hot Plate, Digital Safe & Full Bathroom with Walk in Shower with Glass Door. 24 Hour Doorman Security. Towels and Linens Included.  Steps to the beach. Close to everything! Apartment in Copacabana with stunning sea views. Studio apartment with a queen bed and bathroom. Kitchen with microwave, refrigerator, electric hot plate. Secure building with 24 hour doorman. Towels and linens are included in the stay. Apartment is on the 12th floor. Wireless internet free for use. Air conditioning and ceiling fan in apartment Small table to support the computer. A very cozy place one block from Copacabana beach. At station 5. A very central place with various services such as restaurants, bars, clubs and others to guest\'s disposal. Also nearby Arpoador and Ipanema. Wi'],
+      dtype=object), 'experiences_offered': array(['none'], dtype=object), 'neighborhood_overview': array(["This is the best spot in Rio. Everything happens here. All big events are just 1 min. to walk away. Any kind of parade or concert (like the Stones) will either be on the beach in front of Copacabana Palace Hotel or on Avenida Atlantica. It's definitely the most lively area in all of Rio. - The apt is very spacious. Everyone adores the huge balcony (on second floor) which allows you to see the action below. There are no cars passing. It's a pedestrian street, and you will see Brazilians socializing, having a churrasco, playing a guitar, dancing etc. - The subway station Cardeal Arco Verde and all major bus lines are a short walk away, so it's extremely easy to move around. Most people stay put, though, since you're at the best spot anyway!",
+       "Copacabana is a lively neighborhood and the apartment is located very close to an area in Copa full of bars, cafes and restaurants at Rua Bolivar and Domingos Ferreira. Copacabana never sleeps, there is always movement and it's a great mix of all kinds of people.",
+       'Die Nachbarschaft von Ipanema ist super lebendig und praktisch für die Touristen. Die Wohnung befindet sich in der Nähe von guten Restaurants und Bars, Geschäften und verschiedenen Dienstleistern (Banken, Waschsalon, öffentliche Verkehrsmittel, Supermärkte usw.). Nicht zu vergessen Strand und See Lagoa Rodrigo Freitas, Orte, die man in Rio unbedingt gesehen haben muss!',
+       'The  apartment street is very quiet and safe . The trees are full of orchids and give a beautiful frame to the neighborhood. Close to the apartment (literally across the street) you have excellent supermarket Zona Sul , pharmacies, banks , bike rental, in fact almost everything you need .',
+       'Our guests will experience living with a local peole "Carioca"  in a very friendly building with 24 hours a day security with all kind of stores, banks, transports, restaurants.',
+       'Copacabana is the heart of Rio de Janeiro, with 24 hours activites, mixity of population, locals mixed with tourists.',
+       'In the heart of perhaps the trendiest part of Rio, this side of Ipanema is packed with restaurants, cafes, boutique clothing stores, and nightspots. The tree-lined street provides a safe, welcoming environment, away from the areas of mass tourism.',
+       'Amo a paisagem, arvores a proximidade da praia, bares, restaurantes, teatros e a facilidade de deslocamento.',
+       'Great traditional distric. Lively and cool. Friendly atmosfere. Beach life',
+       nan], dtype=object), 'notes': array([nan,
+       'For any stay superior to 15 days, an additional tax for electricity will be asked and charged accordingly to your consumption. WE ARE NOT PROCEEDING CHECK IN NOR CHECK OUT DURING NIGHT TIME.  Thank you to contact us about your schedule before making any booking. New Year Package: minimum 7 nights stay: BRL3150 + cleaning fees + airbnb fees up to two people Carnival: minimum 5 nights stay: BRL2250 + cleaning fees + airbnb fees up to two people.',
+       'Please include the following information with your inquiry:  1. Your desired check in/out times.  2. Check in time is negociable and late check out possible if no other guest is checking in on the same day.  3. Any guest with less than 18 years old is only allowed if accompanied by at least one of his/her parents or by his/her legal guardian.',
+       'Our guests no  need to worry about breakfast and food. We have a delicious breakfast in front of the apartment( Apetite cafe), a restaurant with a variety of salads on the door side and several restaurants around.',
+       'The apartment is on the 5th floor. The elevator goes to the 4th floor and there is one floor of stair until the Penthouse.',
+       'O amnbiente é muito agradável, excelente localização, o apartamento esta no coração de Ipanema arpoador e Copacabana.',
+       'Grupos compostos apenas com homens - reserva sob consulta Single male groups please consult before paying',
+       '+ Actual Electric My representative with read the meter when you check in and out. If you turn off the air conditioner when you go out the bill will be very low. You need to pay the electric bill in cash at checkout.',
+       'The apartment is located on the 4th floor.',
+       'We have our principal staff Manger + Concierge leaving in the house and our house keeping is coming often, this way the house will be always clean and our guest will have fast feedback in all their requirements.'],
+      dtype=object), 'transit': array(['Excellent location. Close to all major public transportation.',
+       'At night we recommend you to take taxis only. The subway runs until 11pm only, it is not 24 hours in Rio, except on New Years Eve.',
+       'Bus, U-Bahn, Taxi und Leihfahrräder in der Nähe.',
+       'Metro stop just 5 blocks from our place. Buses to almost every part of the city just around the corner.',
+       'There are convenient public transportantion like  subway 10 minutes walking  taxi and bus just steeps from the apartament.',
+       'Very close to Siqueira Campos Metro Station',
+       'The beach is a few steps away. Bus stop and taxi point right of the street corner, two blocks away from metro station.',
+       'Sim vários, metros e ônibus na porta. Do Aeroporto dispõe de ônibus exclusivo executivo.',
+       'Easy to find a taxi or a bus, walking is ALWAYS an option to most places in Rio. A few blocks away from RioMetro.',
+       'Metro Station Cantagalo is 3 blocks away. Buses run up and down Avenida Atlantica & Nossa Senhora de Copacabana.'],
+      dtype=object), 'access': array(['The entire apartment is yours. It\'s like your "home away from home", everything you need is there.',
+       'internet wi-fi, cable tv, air cond, ceiling fan, kitchen with fridge, stove, oven, pots and pans and the basics.',
+       'Die Urlauber dürfen das Badezimmer benutzen, das in sehr gutem Zustand ist. Sie haben auch Zugang zur Küche, wo sie einen Kühlschrank, einen elektrischen Backofen und alles das finden, was man zum Zubereiten von Kaffee oder Tee braucht.',
+       nan,
+       'Our guests have quick access to the beach and can enjoy various sports available few  steeps from the apartment as voleyball class, stant up paddle class.',
+       "You 'll have an access to 1 or 2 bedrooms 1 private bathroom, living room and kitechn",
+       'Entire private unit, 6 bedrooms and terrace. No sharing space, it is your privatized unit for your group only. - A warm welcome! Either our maid, our hospitality manager, a representative or our doorman will welcome you upon arrival.  When you arrive, the apartment will be ready, all beds made and fresh clean towels, shampoos soap and conditioner (from Natura Brasil®), lights on, AC already fishing up the apartment, Sonos Speaker sound system ready to play bossa nova or any music you like with our premium Spotify linked account, or directly from your phone, wirelessly. We will try our best to have a gift a small welcome package to our guests when time allows us to do it and fresh drink on arrival.',
+       'Os hospedes tem acesso a lavanderia, cozinha para pequenos lanches.rede wi fi.televisão a cabo. Poderão compartilhar a sala de visitas.Nosso banheiro e muito limpo todo branco.',
+       'A praia de Copacabana está distante a poucos passos de nosso edifício. Durante o Reveillon a cobertura do edifício permanerá aberta durante a queima de fogos.para um numero limitado de hóspedes',
+       'You can access the entire private apartment in this ad.'],
+      dtype=object), 'interaction': array(['I will be available throughout your stay should you need me.',
+       'Only at check in, we like to leave our guests free and independent but they can count on us anytime.',
+       nan,
+       'We are available whenever the guest needs help or even  to take a coffe or a Caipirinha.  we give all kinds of information about the city.',
+       'I can easily support my guests with important suggestions about how to enjoy Rio de Janeiro',
+       'Our apartments can be fully serviced if guests request it. Full breakfast, free laundry, and recommended local concierge service.',
+       'Sou muito extrovertida gosto de uma boa conversa, mas respeito a intimidade e liberdade de cada um.Provavelmente sempre estarei.',
+       'Once you book I will share my (Hidden by Airbnb) contact information and will be available anytime to assist.',
+       'Our apartments can be fully serviced if guests request it. Full breakfast , cleaning, laundry, and recommended local concierge service for a small extra fee.',
+       'He have a staff to help our guests with all the information they may need, besides a partnership with guides, yofa teachers, surf and kite surf schools, personal driver and coolcierge service (providing Rio de Janeiro best tips and advices).'],
+      dtype=object), 'house_rules': array(['Please leave the apartment in a clean fashion (just like you found it).  No loud noise after 10pm. If you are a smoker, please smoke outside on the balcony and not in the apartment itself. Please treat the apartment just like it would be your own. Air condition and lights should be turned off when you are out and about.  Por favor, mantenha o apartamento limpo da mesma maneira que você o encontrou. Os vizinhos precisam ser respeitados, então sem barulhos excessivos após as 22hrs. Se você é um fumante, por favor, fume na varanda e não dentro do apartamento. Em geral, será apreciado se você tratar o apartamento e suas comodidades como se elas fossem as suas. Ar condicionado e as luzes devem ser desligadas quando você não estiver no apartamento.',
+       "Smoking outside only. Family building so please keep quiet after 10pm. No parties please. Check out at 10am. Late check out possible. Rules apply. Voltage is 110V.  It's a good idea to bring an adapter plug depending on where you come from. Not because of voltage but electrical plugs are often different in each country. Just a thought... Most appliances today are dual voltage.",
+       'So far, I haven\'t had any problems with guests, and I\'d like to keep it that way. There are just a few rules: No partys in the Apt! Try to keep it quiet after 10pm. Also, If you booked the place please don\'t bring other people in or let other people sleep in the apt without telling me. During summer, people usually leave the A/C on all day. That\'s ok, but please remember to turn it off everytime you leave the apt, otherwise, it might not work properly. Some guests seem to have taken the bath towels to the beach. Please, don\'t do that. The towels are white, and they get really badly stained if you take them to the beach. Use your beach towels or buy a "canga" at the beach. They\'re really cheap and a lot less messier. If you\'re not in a hurry, please remember to put away the trash and clean the dishes. It will be appreciated. Basically, that\'s it. Have a nice stay!',
+       "Dear Guest, Welcome! We hope you enjoy our apartment and Rio as much as you can. During your stay in our apartment, there are a some house rules that we want to share with you in order keep the house in the same way you found for the next guests, and our good relationship within the neighborhood: - Smoking, and parties are not allowed. - No illegal drugs allowed - NO EXCEPTIONS. - Noise is not allowed after 10 pm to 8 am. Please be aware that the building is residential/family oriented. During this time radios and stereos may be played at a level not to be heard outside of the apartment. - The guest is responsible for taking care of the apartment during his stay and must return the apartment in the same condition it was found, as well as all utensils and furniture of the place. Damage caused by the behavior of a Tenant, or a Tenant’s guest, will be repaired at the Tenant’s expense. - Please don't take towels to the beach (we don't provide beach towels) - Keys and access to apartment: W",
+       'Pede-se carteira de identidade, CPF e comprovante de residência em caso de morador do Brasil. Não é permitido festas, animais e nem fumantes. Caso, você seja fumante, terá que descer e fumar fora do edifício. Não é permitido nenhuma atividade ilícita. Temos o Check-in e o Check-out flexível desde que não tenha outro hóspede chegando ou saindo no mesmo dia que você.  Procuramos atender a todos os nossos hóspedes, mas caso isso aconteça o check-out é às 10:00 horas e o check-in às 14:00 horas. Guardamos as malas até a hora do check-in, caso necessário, enquanto os hóspedes dão uma relaxada na praia ou fazem algum passeio para não perder tempo.  Para o check-out podemos também guardar sua bagem até a hora de irem para o aeroporto.',
+       nan,
+       'CHECK-IN / CHECK-OUT INFORMATION o\tThe flexible check-in and check-out policy applies only when booking calendar allows it (no guests checking in or out the same day). o\tCheck In is 1:00 PM (for the room) but we (homeowners) are happy to welcome guest in the apartment as soon as you arrive in Rio upon calendar availabilities, we are very flexible. o\tCheck Out is Noon. but we (homeowners) are happy to have guest stay in the apartment if departure is later on the day (the room will be cleaned by the maid at noon), if our calendar allows it. o\tAs reservation can occur last minute and change calendar availabilities homeowners cannot guarantee late checkout (after 12) or early check-in (before 1PM) until 24h before the check-out time limit. SMOKING / PETS / GUESTS o\tNo smoking inside the apartment. (smokers are welcome in the outdoors only or by main corridor window) Smoking inside the apartment will result in loss of deposit. o\tPets are not allowed. o\tWe encourage all renters to purchase t',
+       'Com gentileza, educação respeito mas sentindo-se recebidos com mesmo carinho e respeito.',
+       'We only accept single guys in specific situations. Single Guys Groups please consult BEFORE booking. Rapazes ( muchachos ) sós não são aceitos, há exceções para Bussinessmen. Grupos de rapazes : Consulte antes do fechamento Grupos solo muchachos: Consultar antes de reservar. Animais serão permitidos dsde que de pequeno porte , a custo adicional. POR FAVOR CONSULTE ANTES DO PAGAMENTO. Small pets allowed at an extra-cost. Please consult before paying',
+       '+ Actual Electric My representative with read the meter when you check in and out. If you turn off the air conditioner when you go out the bill will be very low. You need to pay the electric bill in cash at checkout.'],
+      dtype=object), 'thumbnail_url': array([nan]), 'medium_url': array([nan]), 'picture_url': array(['https://a0.muscache.com/im/pictures/65320518/30698f38_original.jpg?aki_policy=large',
+       'https://a0.muscache.com/im/pictures/3003965/68ebb634_original.jpg?aki_policy=large',
+       'https://a0.muscache.com/im/pictures/83114449/2457fe47_original.jpg?aki_policy=large',
+       'https://a0.muscache.com/im/pictures/20009355/38b6a10a_original.jpg?aki_policy=large',
+       'https://a0.muscache.com/im/pictures/6992951/b8702fe4_original.jpg?aki_policy=large',
+       'https://a0.muscache.com/im/pictures/5979525/4259ddc1_original.jpg?aki_policy=large',
+       'https://a0.muscache.com/im/pictures/9dfbf26b-3277-4952-a046-9aa8ab5bf1d9.jpg?aki_policy=large',
+       'https://a0.muscache.com/im/pictures/dab394ab-c16d-41b0-9bd1-7364560c3671.jpg?aki_policy=large',
+       'https://a0.muscache.com/im/pictures/ab455843-5273-4333-b970-b8984884981d.jpg?aki_policy=large',
+       'https://a0.muscache.com/im/pictures/9a4f46f5-cfeb-42ae-bc3b-8c7d65817821.jpg?aki_policy=large'],
+      dtype=object), 'xl_picture_url': array([nan]), 'host_id': array([ 68997, 102840, 135635, 153232, 153691, 154043,  70933, 221941,
+       222884, 224192]), 'host_url': array(['https://www.airbnb.com/users/show/68997',
+       'https://www.airbnb.com/users/show/102840',
+       'https://www.airbnb.com/users/show/135635',
+       'https://www.airbnb.com/users/show/153232',
+       'https://www.airbnb.com/users/show/153691',
+       'https://www.airbnb.com/users/show/154043',
+       'https://www.airbnb.com/users/show/70933',
+       'https://www.airbnb.com/users/show/221941',
+       'https://www.airbnb.com/users/show/222884',
+       'https://www.airbnb.com/users/show/224192'], dtype=object), 'host_name': array(['Matthias', 'Viviane', 'Renata', 'Patricia',
+       'Patricia Miranda & Paulo', 'Seba', 'Alex', 'Vana', 'Marcio',
+       'David'], dtype=object), 'host_since': array(['2010-01-08', '2010-04-03', '2010-05-31', '2010-06-27',
+       '2010-06-28', '2010-01-16', '2010-09-02', '2010-09-03',
+       '2010-09-05', '2010-09-13'], dtype=object), 'host_location': array(['Rio de Janeiro, State of Rio de Janeiro, Brazil',
+       'Rio de Janeiro, Rio de Janeiro, Brazil',
+       'San Carlos de Bariloche, Rio Negro, Argentina',
+       'Sao Paulo, São Paulo, Brazil', 'Mesa, Arizona, United States',
+       'Brasil ', 'Brasil', 'Newport Beach, California, United States',
+       'Florianópolis, State of Santa Catarina, Brazil',
+       'Rio, Rio de Janeiro, Brazil'], dtype=object), 'host_about': array(['I  am a  journalist/writer. Lived for 15 years in NYC. I  am now based in Rio,  writing novels. Available on AMAZ0N: "And Always Donuts for Lunch" and "Wild Years in West Berlin."',
+       "Hi guys, We're a lovely team of 3 people:\r\n\r\nViviane is a photographer for Lonely Planet. And also a photographer for Airbnb and an Airbnb host. And a free lance photographer for other wonderful clients. She loves life.\r\n\r\nEduardo - you may occasionally bump into him for your check ins/out - is a M.I.T. (Musicians Institute of Technology) graduate from Los Angeles and plays the best guitar you'll ever hear. Just ask him! Fluent in English, a true carioca full of stories to share.\r\n\r\nWe  work together in providing the best accommodation to people. You could meet just Viviane. Or exchange messages with her. Or Katia.  Or you could book and meet Katia. Or book with Viviane and meet Eduardo for your check in. Or all of us depending on who's around. \r\n\r\nWe're great at what we do because we care and we like the type of people Airbnb brings to us. And with almost 500 positive reviews (wow!), we kind of know by now that guests like us too. \r\n\r\nJust like you, we're also independent travelers always looking for the new next thing.\r\n\r\nVoila!\r\n\r\nWe can't live without: love, travel, cameras, movies, music, a good laugh and cool people. Did we say dark chocolate?\r\n\r\nFirm believers of positivity as a prime attitude towards life!\r\n",
+       'I was born and raised in Rio de (Website hidden by Airbnb) a real "carioca" I love going to the beach and practicing outdoor activities.\r\nI`m a big fan of travelling and experiencing new cultures. It`s really nice to have friends (and of course, make new ones) from all around the world!\r\n\r\n   ',
+       'I am Brazilian and Carioca graphic designer, but above all a person who loves life and nature. Known as a creative and curious person, I enjoy a variety of activities: from photography, cooking and outdoor sports; to reading, discovering new music and rhythms, travelling and meeting people.\r\nWith so much travelling around I ended up learning a bit of what we want when visiting a great city as Rio, the city I LOVE!\r\nAs a hostess I am an informal one, and as a guest I want to feel at home.\r\nI invite you to enjoy to the most your stay at my place and city.\r\nWelcome!\r\n\r\n---------------------------------------------\r\n\r\nSou carioca, designer gráfica, e acima de tudo uma pessoa que tem curiosidade e amor pela vida. Isto significa que gosto de uma variedade de atividades e assuntos. Amo fotografar, brincar de chef, ler, esportes ao ar livre, descobrir musicas e ritmos novos, amo viajar e conhecer gente. De tanto viajar por aí acho que aprendi um pouquinho do que a gente gosta de encontrar quando está visitando uma cidade como o Rio, uma cidade que amo!\r\nSou uma anfitriã informal e gosto de me sentir em casa quando sou hospede.\r\nAssim, a ideia é que vocês desfrutem ao máximo da estadia no meu ap e na minha cidade.\r\n\r\nBem-vindos!',
+       'Hello,   We are Patricia Miranda and Paulo.\r\nWe are a couple who love to meet new people, new cultures, we both are  very easy going persons, we  love to travel, music, dancing, to walk along the beach and chat with friends in a bar in somewhere in  Rio.  We are retired after working for several years in tourism and an international airline company. Our biggest passion is playing with our  4 american  granddaughters .  We are gay friendly and everybody is welcome! We look forward to meeting you and sharing advice and recommendation about our wonderful city.\r\n\r\nWe were guest in Buenos Aires, João Pessoa, PB, Brooklin NY, and Manhattan.\r\n\r\n\r\n!',
+       'Hello my name is Sebastien, and i live in Rio.\r\nWe provide a neighbourhood tour to check with all important spots.\r\nWe´ll take you to most enjoyable place, from alternative sightseeing, partying.\r\n\r\nYou´ll miss it when you´´ ll leave!',
+       "Hi!\r\n\r\nWe are the lucky owners of these beautiful properties and penthouses in Ipanema and a luxury Mansion in Gavea.\r\nWe had the chance to host 300+ guests on Airbnb!\r\n\r\nWe  love to travel and try to do so as much as possible and we're excited to be a part of the airbnb community!\r\n\r\nPlease feel free to contact us should any questions arise. \r\n\r\nWe are very open to your inquiries and will do our very best to make your stay in Rio fun, easy and comfortable! \r\n\r\nBest wishes and safe travels! \r\n",
+       nan,
+       'Renting since 2002 - Great guests , nice locations, great value for money.\nNever had any inconveniences. All good luck and professionalism.\nHappy to help .Happy to inform\n\nAlugando apartamentos desde 2002 - \nRio de Janeiro - Copacabana e Ipanema \nCabo Frio - Peró\n\nSorte e profissionalismo\n\nDestinos favoritos são: Búzios e Rio de Janeiro\nEstilo musical preferido: Jazz n Blues\nArtista Preferido: Keanu Reeves\nArtista preferida: Meryl Streep\nIdioma preferido: Italiano\n\n',
+       'I love spending time with my family, watching films, and exploring new places.\r\n\r\n'],
+      dtype=object), 'host_response_time': array(['within an hour', 'within a day', 'within a few hours',
+       'a few days or more', nan], dtype=object), 'host_response_rate': array(['100%', '91%', '50%', '95%', '80%', '0%', '69%', '90%', '92%', nan],
+      dtype=object), 'host_acceptance_rate': array([nan]), 'host_is_superhost': array(['t', 'f', nan], dtype=object), 'host_thumbnail_url': array(['https://a0.muscache.com/im/pictures/user/67b13cea-8c11-49c0-a08d-7f42c330676e.jpg?aki_policy=profile_small',
+       'https://a0.muscache.com/im/pictures/user/9e204f80-1667-448b-b5a3-4dec677060f4.jpg?aki_policy=profile_small',
+       'https://a0.muscache.com/im/users/135635/profile_pic/1275317914/original.jpg?aki_policy=profile_small',
+       'https://a0.muscache.com/im/users/153232/profile_pic/1317563156/original.jpg?aki_policy=profile_small',
+       'https://a0.muscache.com/im/users/153691/profile_pic/1277774787/original.jpg?aki_policy=profile_small',
+       'https://a0.muscache.com/im/users/154043/profile_pic/1441058613/original.jpg?aki_policy=profile_small',
+       'https://a0.muscache.com/im/pictures/user/914743f5-68db-4853-ab07-60e50d4eb311.jpg?aki_policy=profile_small',
+       'https://a0.muscache.com/im/users/221941/profile_pic/1343844926/original.jpg?aki_policy=profile_small',
+       'https://a0.muscache.com/im/users/222884/profile_pic/1283553621/original.jpg?aki_policy=profile_small',
+       'https://a0.muscache.com/im/users/224192/profile_pic/1358100631/original.jpg?aki_policy=profile_small'],
+      dtype=object), 'host_picture_url': array(['https://a0.muscache.com/im/pictures/user/67b13cea-8c11-49c0-a08d-7f42c330676e.jpg?aki_policy=profile_x_medium',
+       'https://a0.muscache.com/im/pictures/user/9e204f80-1667-448b-b5a3-4dec677060f4.jpg?aki_policy=profile_x_medium',
+       'https://a0.muscache.com/im/users/135635/profile_pic/1275317914/original.jpg?aki_policy=profile_x_medium',
+       'https://a0.muscache.com/im/users/153232/profile_pic/1317563156/original.jpg?aki_policy=profile_x_medium',
+       'https://a0.muscache.com/im/users/153691/profile_pic/1277774787/original.jpg?aki_policy=profile_x_medium',
+       'https://a0.muscache.com/im/users/154043/profile_pic/1441058613/original.jpg?aki_policy=profile_x_medium',
+       'https://a0.muscache.com/im/pictures/user/914743f5-68db-4853-ab07-60e50d4eb311.jpg?aki_policy=profile_x_medium',
+       'https://a0.muscache.com/im/users/221941/profile_pic/1343844926/original.jpg?aki_policy=profile_x_medium',
+       'https://a0.muscache.com/im/users/222884/profile_pic/1283553621/original.jpg?aki_policy=profile_x_medium',
+       'https://a0.muscache.com/im/users/224192/profile_pic/1358100631/original.jpg?aki_policy=profile_x_medium'],
+      dtype=object), 'host_neighbourhood': array(['Copacabana', 'Ipanema', 'Joá', 'Flamengo', 'Leblon', nan,
+       'Santa Teresa', 'Lapa', 'Gávea', 'Barra da Tijuca'], dtype=object), 'host_listings_count': array([ 2.,  3.,  1.,  7.,  6., 48.,  4.,  5.,  8., 12.]), 'host_total_listings_count': array([ 2.,  3.,  1.,  7.,  6., 48.,  4.,  5.,  8., 12.]), 'host_verifications': array(["['email', 'phone', 'reviews', 'jumio', 'offline_government_id', 'selfie', 'government_id']",
+       "['email', 'phone', 'facebook', 'reviews', 'jumio', 'offline_government_id', 'government_id']",
+       "['email', 'phone', 'manual_online', 'facebook', 'reviews', 'manual_offline']",
+       "['email', 'phone', 'facebook', 'reviews', 'manual_offline', 'jumio', 'government_id']",
+       "['email', 'phone', 'reviews', 'jumio', 'government_id']",
+       "['email', 'phone', 'facebook', 'reviews', 'jumio', 'offline_government_id', 'selfie', 'government_id', 'identity_manual']",
+       "['email', 'phone', 'reviews', 'manual_offline', 'jumio', 'offline_government_id', 'government_id', 'work_email']",
+       "['phone', 'facebook', 'reviews', 'offline_government_id', 'selfie', 'government_id', 'identity_manual']",
+       "['email', 'phone', 'reviews', 'offline_government_id', 'kba', 'selfie', 'government_id', 'identity_manual']",
+       "['email', 'phone', 'facebook', 'reviews', 'work_email']"],
+      dtype=object), 'host_has_profile_pic': array(['t', 'f', nan], dtype=object), 'host_identity_verified': array(['t', 'f', nan], dtype=object), 'street': array(['Rio de Janeiro, Rio de Janeiro, Brazil',
+       'Rio de Janeiro, RJ, Brazil', 'Rio, Rio de Janeiro, Brazil',
+       'IPANEMA, Rio de Janeiro, Brazil',
+       'Copacabana, Rio de Janeiro, Brazil', 'Rio de Janeiro, Brazil',
+       'Rio de janeiro , Rio de Janeiro, Brazil',
+       'Barra da Tijuca, Rio de Janeiro, Brazil',
+       'Glória, Rio de Janeiro-RJ, Brazil',
+       'Itanhangá, Rio de Janeiro, Brazil'], dtype=object), 'neighbourhood': array(['Copacabana', 'Ipanema', 'Barra da Tijuca', 'Flamengo', 'Leblon',
+       nan, 'Santa Teresa', 'Lapa', 'Gávea', 'Laranjeiras'], dtype=object), 'neighbourhood_cleansed': array(['Copacabana', 'Ipanema', 'Barra da Tijuca', 'Flamengo', 'Leblon',
+       'Itanhangá', 'Santa Teresa', 'Centro', 'Gávea', 'Campo Grande'],
+      dtype=object), 'neighbourhood_group_cleansed': array([nan]), 'city': array(['Rio de Janeiro', 'Rio', 'IPANEMA', 'Copacabana',
+       'Rio de janeiro ', 'Barra da Tijuca', 'Glória', 'Itanhangá',
+       'Rio De Janeiro', 'Ipanema'], dtype=object), 'state': array(['Rio de Janeiro', 'RJ', nan, 'Rio de Janeiro-RJ',
+       'State of Rio de Janeiro', 'Rj', 'Rio De Janeiro',
+       'rio de janeiro', 'Recreio dos bandeirantes', 'Copacabana'],
+      dtype=object), 'zipcode': array(['22020-050', '22060-020', '22410-003', '22081-020', '21031-300',
+       '22031-112', '21072-540', '22081-025', '22021', '22071-020'],
+      dtype=object), 'market': array(['Rio De Janeiro', 'Buzios', 'Other (International)',
+       'Rio de Janeiro', 'Brasilia', 'Rome', 'Perth', 'Sao Paulo',
+       'Manchester', 'Angra dos Reis'], dtype=object), 'smart_location': array(['Rio de Janeiro, Brazil', 'Rio, Brazil', 'IPANEMA, Brazil',
+       'Copacabana, Brazil', 'Rio de janeiro , Brazil',
+       'Barra da Tijuca, Brazil', 'Glória, Brazil', 'Itanhangá, Brazil',
+       'Rio De Janeiro, Brazil', 'Ipanema, Brazil'], dtype=object), 'country_code': array(['BR', 'DM'], dtype=object), 'country': array(['Brazil', 'Dominica'], dtype=object), 'latitude': array([-22.96592, -22.97712, -22.98302, -22.98816, -22.98127, -22.96681,
+       -22.98633, -22.98359, -22.96467, -22.97934]), 'longitude': array([-43.17896, -43.19045, -43.21427, -43.19359, -43.19046, -43.18657,
+       -43.20256, -43.19382, -43.17442, -43.19113]), 'is_location_exact': array(['t', 'f'], dtype=object), 'property_type': array(['Condominium', 'Apartment', 'Loft', 'Serviced apartment', 'House',
+       'Bed and breakfast', 'Townhouse', 'Cottage', 'Guest suite',
+       'Guesthouse'], dtype=object), 'room_type': array(['Entire home/apt', 'Private room', 'Shared room', 'Hotel room'],
+      dtype=object), 'accommodates': array([ 5,  2,  3, 13,  1, 10,  6, 12,  4, 16]), 'bathrooms': array([1. , 1.5, 7. , 3.5, 3. , 2. , nan, 4. , 5. , 4.5]), 'bedrooms': array([ 2.,  1.,  6.,  4.,  3.,  0.,  7.,  5., nan,  9.]), 'beds': array([ 2.,  1.,  6.,  4.,  3.,  7.,  5.,  0.,  8., 10.]), 'bed_type': array(['Real Bed', 'Pull-out Sofa', 'Futon', 'Airbed', 'Couch'],
+      dtype=object), 'amenities': array(['{TV,"Cable TV",Internet,Wifi,"Air conditioning",Kitchen,"Paid parking off premises","Smoking allowed",Doorman,Elevator,"Hot tub","Family/kid friendly","Suitable for events",Essentials,"24-hour check-in",Hangers,"Hair dryer",Iron,"Laptop friendly workspace","Self check-in","Building staff","Private entrance","Hot water","Bed linens",Microwave,"Coffee maker",Refrigerator,"Dishes and silverware","Cooking basics",Oven,Stove,"Patio or balcony","Luggage dropoff allowed"}',
+       '{TV,"Cable TV",Internet,Wifi,"Air conditioning",Kitchen,Doorman,Elevator,"Buzzer/wireless intercom","Family/kid friendly",Hangers,"Hair dryer",Iron,"Laptop friendly workspace"}',
+       '{TV,"Cable TV",Internet,Wifi,"Air conditioning",Kitchen,Doorman,Elevator,"Buzzer/wireless intercom",Essentials,Shampoo,Hangers,"Hair dryer",Iron,"Laptop friendly workspace","translation missing: en.hosting_amenity_49","translation missing: en.hosting_amenity_50","Self check-in","Building staff","Hot water",Microwave,"Coffee maker",Refrigerator,"Dishes and silverware","Cooking basics"}',
+       '{TV,"Cable TV",Internet,Wifi,"Air conditioning","Wheelchair accessible",Kitchen,Doorman,Elevator,"Free street parking","Buzzer/wireless intercom","Family/kid friendly",Washer,"Smoke detector","Carbon monoxide detector",Essentials,Shampoo,Hangers,"Hair dryer",Iron,"Self check-in",Lockbox,"Hot water","Bed linens",Microwave,Refrigerator,"Dishes and silverware","Cooking basics",Oven,Stove,"Luggage dropoff allowed","Long term stays allowed","Cleaning before checkout"}',
+       '{TV,"Cable TV",Wifi,"Air conditioning",Kitchen,"Paid parking off premises",Elevator,"Family/kid friendly","Smoke detector","Carbon monoxide detector","Fire extinguisher",Essentials,Hangers,"Hair dryer",Iron,"Laptop friendly workspace","translation missing: en.hosting_amenity_50","Room-darkening shades","Hot water","Bed linens","Extra pillows and blankets","Pocket wifi",Microwave,"Coffee maker",Refrigerator,"Dishes and silverware","Cooking basics",Stove,"Luggage dropoff allowed","Wide entrance for guests","Flat path to guest entrance","Well-lit path to entrance","No stairs or steps to enter","Extra space around bed","Accessible-height bed","No stairs or steps to enter","Bathtub with bath chair","Accessible-height toilet","Wide entryway","Host greets you",Beachfront}',
+       '{Wifi,Kitchen,"Free parking on premises",Elevator,Washer,Essentials,Hangers,Iron,"Self check-in","Building staff","Hot water","Bed linens","Coffee maker",Refrigerator,"Dishes and silverware",Oven,Stove,"Patio or balcony"}',
+       '{TV,"Cable TV",Internet,Wifi,"Air conditioning",Kitchen,Doorman,"Buzzer/wireless intercom","Family/kid friendly",Washer,Dryer,"Smoke detector","Carbon monoxide detector","Fire extinguisher",Essentials,Shampoo,"24-hour check-in",Hangers,"Hair dryer",Iron,"Laptop friendly workspace","Self check-in","Building staff","Hot water","Body soap","Bath towel","Toilet paper","Bed linens","Extra pillows and blankets",Microwave,"Coffee maker",Refrigerator,Stove,"Patio or balcony","Luggage dropoff allowed","Long term stays allowed",Kitchenette,"Full kitchen","Paid parking on premises","Bedroom comforts","Bathroom essentials"}',
+       '{TV,"Cable TV",Wifi,"Air conditioning",Breakfast,Elevator,"Free street parking",Heating,Washer,"First aid kit","Fire extinguisher",Essentials,Shampoo,"Lock on bedroom door",Hangers,"Hair dryer",Iron,"Laptop friendly workspace","Self check-in","Building staff","Hot water","Bed linens","Extra pillows and blankets",Microwave,"Coffee maker",Refrigerator,"Dishes and silverware","Cooking basics",Oven,Stove,"Luggage dropoff allowed","Long term stays allowed","Wide hallways","Wide entrance for guests","Flat path to guest entrance","Well-lit path to entrance","No stairs or steps to enter","Wide entrance","Extra space around bed","Accessible-height bed","No stairs or steps to enter","Accessible-height toilet","Wide clearance to shower, toilet","Wide entryway"}',
+       '{TV,"Cable TV",Wifi,"Air conditioning",Kitchen,"Free parking on premises","Smoking allowed","Pets allowed",Doorman,Elevator,"Family/kid friendly",Washer,Essentials,Hangers,"Hair dryer",Iron,"Hot water","Bed linens","Long term stays allowed","Host greets you",Beachfront}',
+       '{TV,"Cable TV",Internet,Wifi,"Air conditioning",Kitchen,Doorman,Elevator,"Free street parking","Buzzer/wireless intercom","Family/kid friendly",Essentials,Shampoo,"24-hour check-in",Hangers,"Hair dryer",Iron,"Laptop friendly workspace","Self check-in","Building staff","Hot water","Bed linens","Extra pillows and blankets","Ethernet connection",Microwave,"Coffee maker",Refrigerator,"Dishes and silverware","Cooking basics",Stove,"Luggage dropoff allowed","Long term stays allowed"}'],
+      dtype=object), 'square_feet': array([  nan,    0.,  861., 1938., 3122.,  194.,  646.,  377.,  452.,
+         20.]), 'price': array(['$332.00', '$160.00', '$273.00', '$378.00', '$130.00', '$151.00',
+       '$3,581.00', '$80.00', '$848.00', '$189.00'], dtype=object), 'weekly_price': array([nan, '$1,500.00', '$600.00', '$772.00', '$500.00', '$1,050.00',
+       '$2,897.00', '$1,302.00', '$1,400.00', '$945.00'], dtype=object), 'monthly_price': array([nan, '$9,656.00', '$2,000.00', '$2,733.00', '$41,839.00',
+       '$69,731.00', '$1,800.00', '$3,900.00', '$4,198.00', '$10,454.00'],
+      dtype=object), 'security_deposit': array(['$0.00', '$1,000.00', '$1,050.00', '$400.00', nan, '$3,254.00',
+       '$600.00', '$420.00', '$2,324.00', '$651.00'], dtype=object), 'cleaning_fee': array(['$378.00', '$250.00', '$84.00', '$172.00', '$140.00', '$150.00',
+       '$372.00', '$0.00', '$199.00', '$210.00'], dtype=object), 'guests_included': array([ 2,  1,  7,  8,  4,  5,  3,  6,  9, 11]), 'extra_people': array(['$63.00', '$45.00', '$42.00', '$80.00', '$150.00', '$93.00',
+       '$0.00', '$69.00', '$21.00', '$139.00'], dtype=object), 'minimum_nights': array([ 4,  7,  2,  3,  1,  5, 10, 60, 21,  6]), 'maximum_nights': array([  30,   60, 1125,   89,   28,  750,   90,  730,  365,  420]), 'minimum_minimum_nights': array([ 4,  7,  2,  3,  1,  5, 10, 60, 21,  6]), 'maximum_minimum_nights': array([ 4,  7,  5,  2,  3,  1,  6, 10, 60, 21]), 'minimum_maximum_nights': array([  30,   60, 1125,   89,   28,  750,   90,  730,  365,  420]), 'maximum_maximum_nights': array([  30,   60, 1125,   89,   28,  750,   90,  730,  365,  420]), 'minimum_nights_avg_ntm': array([4. , 7. , 2.1, 2. , 3. , 2.6, 1. , 5. , 1.9, 6.9]), 'maximum_nights_avg_ntm': array([  30.,   60., 1125.,   89.,   28.,  750.,   90.,  730.,  365.,
+        420.]), 'calendar_updated': array(['a week ago', '5 weeks ago', 'today', '7 weeks ago', '5 days ago',
+       '10 months ago', '2 months ago', '1 week ago', '4 months ago',
+       '4 weeks ago'], dtype=object), 'has_availability': array(['t'], dtype=object), 'availability_30': array([23, 16,  2,  5,  4, 29, 14, 12, 17, 30]), 'availability_60': array([31, 22,  5,  6, 59,  2, 42, 20, 30, 18]), 'availability_90': array([35,  9, 17, 12, 89, 43,  2, 72, 34, 40]), 'availability_365': array([303, 119,  88,  85, 128,  89, 311,   2, 194, 296]), 'calendar_last_scraped': array(['2019-11-22', '2019-11-23'], dtype=object), 'number_of_reviews': array([243, 235, 271, 169, 316,   1,  64,  42,   3,  78]), 'number_of_reviews_ltm': array([27, 17, 42, 35, 40,  0, 23, 21, 13,  9]), 'first_review': array(['2010-07-15', '2010-06-07', '2010-07-11', '2013-10-22',
+       '2010-10-03', '2012-06-25', '2011-03-02', '2017-11-03',
+       '2015-08-01', '2012-11-24'], dtype=object), 'last_review': array(['2019-11-11', '2019-10-08', '2019-11-21', '2019-11-13',
+       '2019-11-16', '2012-06-25', '2019-11-17', '2019-08-08',
+       '2018-10-04', '2019-11-03'], dtype=object), 'review_scores_rating': array([93., 94., 96., 98., nan, 92., 80., 91., 95., 88.]), 'review_scores_accuracy': array([ 9., 10., nan,  8.,  7.,  6.,  4.,  2.,  5.,  3.]), 'review_scores_cleanliness': array([10.,  9., nan,  8.,  7.,  6.,  2.,  5.,  4.,  3.]), 'review_scores_checkin': array([10.,  9., nan,  8.,  6.,  2.,  7.,  5.,  4.,  3.]), 'review_scores_communication': array([10., nan,  9.,  8.,  6.,  7.,  5.,  4.,  2.,  3.]), 'review_scores_location': array([10., nan,  9.,  8.,  7.,  6.,  4.,  2.,  5.,  3.]), 'review_scores_value': array([ 9., 10., nan,  6.,  8.,  7.,  5.,  2.,  4.]), 'requires_license': array(['f'], dtype=object), 'license': array([nan, '+1512-6670366', '05.557.336/0001-70'], dtype=object), 'jurisdiction_names': array([nan]), 'instant_bookable': array(['t', 'f'], dtype=object), 'is_business_travel_ready': array(['f'], dtype=object), 'cancellation_policy': array(['strict_14_with_grace_period', 'moderate', 'flexible',
+       'super_strict_30', 'super_strict_60', 'strict'], dtype=object), 'require_guest_profile_picture': array(['f', 't'], dtype=object), 'require_guest_phone_verification': array(['f', 't'], dtype=object), 'calculated_host_listings_count': array([ 1,  3,  5, 46,  4,  2,  6,  7,  9, 10]), 'calculated_host_listings_count_entire_homes': array([ 1,  3,  0, 46,  2,  6,  5,  7,  4, 10]), 'calculated_host_listings_count_private_rooms': array([0, 1, 2, 3, 6, 7, 4, 9, 5, 8]), 'calculated_host_listings_count_shared_rooms': array([ 0,  1,  6,  3,  5,  2,  4,  8,  7, 14]), 'reviews_per_month': array([2.13, 2.04, 2.38, 2.28, 2.84, 0.01, 0.6 , 1.68, 0.06, 0.92])}
+INFO:root:=====================================================================
+INFO:root:Attributes with only one label:
+{'scrape_id': array([20191122092441]), 'experiences_offered': array(['none'], dtype=object), 'thumbnail_url': array([nan]), 'medium_url': array([nan]), 'xl_picture_url': array([nan]), 'host_acceptance_rate': array([nan]), 'neighbourhood_group_cleansed': array([nan]), 'has_availability': array(['t'], dtype=object), 'requires_license': array(['f'], dtype=object), 'jurisdiction_names': array([nan]), 'is_business_travel_ready': array(['f'], dtype=object)}
+INFO:root:=====================================================================
+INFO:root:=====================================================================
+INFO:root:Applying Preprocessing step
+INFO:root:=====================================================================
+INFO:root:Data that will be transformed into float:
+['price', 'security_deposit', 'cleaning_fee', 'extra_people', 'host_response_rate']
+INFO:root:=====================================================================
+INFO:root:Numerical data that will be transformed into categories 
+        [No Data, Low, Medium, High, Excellent]
+        based on their own quantiles: 
+['host_response_rate', 'review_scores_rating', 'review_scores_accuracy', 'review_scores_cleanliness', 'review_scores_checkin', 'review_scores_communication', 'review_scores_location', 'review_scores_value', 'reviews_per_month']
+INFO:root:=====================================================================
+INFO:root:Textual data that will be transformed into an integer
+          by counting its words:
+['amenities', 'name', 'summary', 'space', 'description', 'access', 'neighborhood_overview', 'interaction', 'house_rules']
+INFO:root:=====================================================================
+INFO:root:Plotting data
+INFO:root:=====================================================================
+INFO:root:Removing outliers
+INFO:root:Numerical data which their outliers will be removed 
+        (computed by z-score): 
+['price', 'accommodates', 'bathrooms', 'bedrooms', 'beds', 'calculated_host_listings_count', 'cleaning_fee', 'extra_people', 'guests_included', 'minimum_nights', 'security_deposit']
+INFO:root:=====================================================================
+INFO:root:Transforming target variable 'price' into log
+INFO:root:=====================================================================
+INFO:root:Plotting data
+INFO:root:=====================================================================
+INFO:root:Data exploration after preprocessing
+INFO:root:=====================================================================
+INFO:root:This dataset contains 30579
+        samples with 41 attributes.
+
+INFO:root:=====================================================================
+INFO:root:These attributes are:
+ name                                int64
+summary                             int64
+space                               int64
+description                         int64
+neighborhood_overview               int64
+access                              int64
+interaction                         int64
+house_rules                         int64
+host_response_time                 object
+host_response_rate                 object
+host_is_superhost                  object
+host_identity_verified             object
+neighbourhood                      object
+property_type                      object
+room_type                          object
+accommodates                        int64
+bathrooms                         float64
+bedrooms                          float64
+beds                              float64
+bed_type                           object
+amenities                           int64
+price                             float64
+security_deposit                  float64
+cleaning_fee                      float64
+guests_included                     int64
+extra_people                      float64
+minimum_nights                      int64
+maximum_nights                      int64
+number_of_reviews                   int64
+review_scores_rating               object
+review_scores_accuracy             object
+review_scores_cleanliness          object
+review_scores_checkin              object
+review_scores_communication        object
+review_scores_location             object
+review_scores_value                object
+instant_bookable                   object
+cancellation_policy                object
+calculated_host_listings_count      int64
+reviews_per_month                  object
+logPrice                          float64
+dtype: object
+INFO:root:=====================================================================
+INFO:root:Per attribute description:
+{'name': count    30579.000000
+mean         5.416462
+std          1.942005
+min          1.000000
+25%          4.000000
+50%          5.000000
+75%          7.000000
+max         47.000000
+Name: name, dtype: float64, 'summary': count    30579.000000
+mean        43.924131
+std         23.299565
+min          1.000000
+25%         29.000000
+50%         41.000000
+75%         64.000000
+max        173.000000
+Name: summary, dtype: float64, 'space': count    30579.000000
+mean        34.783348
+std         46.236608
+min          1.000000
+25%          2.000000
+50%         14.000000
+75%         48.000000
+max        201.000000
+Name: space, dtype: float64, 'description': count    30579.000000
+mean       101.668007
+std         56.247090
+min          1.000000
+25%         47.000000
+50%        109.000000
+75%        156.000000
+max        199.000000
+Name: description, dtype: float64, 'neighborhood_overview': count    30579.000000
+mean        26.261879
+std         36.634634
+min          1.000000
+25%          2.000000
+50%         10.000000
+75%         37.000000
+max        189.000000
+Name: neighborhood_overview, dtype: float64, 'access': count    30579.000000
+mean        12.105726
+std         20.791893
+min          1.000000
+25%          2.000000
+50%          2.000000
+75%         14.000000
+max        182.000000
+Name: access, dtype: float64, 'interaction': count    30579.000000
+mean        11.821315
+std         17.663340
+min          1.000000
+25%          2.000000
+50%          2.000000
+75%         16.000000
+max        202.000000
+Name: interaction, dtype: float64, 'house_rules': count    30579.000000
+mean        22.852415
+std         39.527001
+min          1.000000
+25%          2.000000
+50%          3.000000
+75%         23.000000
+max        193.000000
+Name: house_rules, dtype: float64, 'host_response_time': count       30579
+unique          5
+top       No data
+freq        11007
+Name: host_response_time, dtype: object, 'host_response_rate': count         30579
+unique            4
+top       Excellent
+freq          11023
+Name: host_response_rate, dtype: object, 'host_is_superhost': count     30579
+unique        3
+top           f
+freq      26864
+Name: host_is_superhost, dtype: object, 'host_identity_verified': count     30579
+unique        3
+top           f
+freq      22156
+Name: host_identity_verified, dtype: object, 'neighbourhood': count          30579
+unique            99
+top       copacabana
+freq            7647
+Name: neighbourhood, dtype: object, 'property_type': count         30579
+unique           34
+top       apartment
+freq          23737
+Name: property_type, dtype: object, 'room_type': count               30579
+unique                  4
+top       entire home/apt
+freq                21176
+Name: room_type, dtype: object, 'accommodates': count    30579.000000
+mean         3.844501
+std          1.944649
+min          1.000000
+25%          2.000000
+50%          4.000000
+75%          5.000000
+max         12.000000
+Name: accommodates, dtype: float64, 'bathrooms': count    30579.000000
+mean         1.548301
+std          0.773738
+min          0.000000
+25%          1.000000
+50%          1.000000
+75%          2.000000
+max          6.000000
+Name: bathrooms, dtype: float64, 'bedrooms': count    30579.000000
+mean         1.506197
+std          0.859012
+min          0.000000
+25%          1.000000
+50%          1.000000
+75%          2.000000
+max          4.000000
+Name: bedrooms, dtype: float64, 'beds': count    30579.000000
+mean         2.309101
+std          1.447857
+min          0.000000
+25%          1.000000
+50%          2.000000
+75%          3.000000
+max          8.000000
+Name: beds, dtype: float64, 'bed_type': count        30579
+unique           5
+top       real bed
+freq         30139
+Name: bed_type, dtype: object, 'amenities': count    30579.000000
+mean        18.728703
+std         10.284124
+min          1.000000
+25%         12.000000
+50%         16.000000
+75%         24.000000
+max         79.000000
+Name: amenities, dtype: float64, 'price': count    30579.000000
+mean       467.771085
+std        584.150498
+min         17.000000
+25%        151.000000
+50%        256.000000
+75%        524.500000
+max       5579.000000
+Name: price, dtype: float64, 'security_deposit': count    30579.000000
+mean       392.300795
+std        853.719671
+min          0.000000
+25%          0.000000
+50%          0.000000
+75%        500.000000
+max       6500.000000
+Name: security_deposit, dtype: float64, 'cleaning_fee': count    30579.000000
+mean        91.739429
+std         96.147498
+min          0.000000
+25%          0.000000
+50%         80.000000
+75%        150.000000
+max        600.000000
+Name: cleaning_fee, dtype: float64, 'guests_included': count    30579.000000
+mean         1.567906
+std          1.159436
+min          1.000000
+25%          1.000000
+50%          1.000000
+75%          2.000000
+max          6.000000
+Name: guests_included, dtype: float64, 'extra_people': count    30579.000000
+mean        31.447039
+std         53.685420
+min          0.000000
+25%          0.000000
+50%          0.000000
+75%         50.000000
+max        340.000000
+Name: extra_people, dtype: float64, 'minimum_nights': count    30579.000000
+mean         3.593872
+std          4.473683
+min          1.000000
+25%          1.000000
+50%          2.000000
+75%          4.000000
+max         60.000000
+Name: minimum_nights, dtype: float64, 'maximum_nights': count    3.057900e+04
+mean     9.788973e+02
+std      5.747012e+04
+min      1.000000e+00
+25%      3.000000e+01
+50%      1.125000e+03
+75%      1.125000e+03
+max      1.000000e+07
+Name: maximum_nights, dtype: float64, 'number_of_reviews': count    30579.000000
+mean         9.846594
+std         25.581257
+min          0.000000
+25%          0.000000
+50%          1.000000
+75%          6.000000
+max        372.000000
+Name: number_of_reviews, dtype: float64, 'review_scores_rating': count       30579
+unique          5
+top       No data
+freq        13495
+Name: review_scores_rating, dtype: object, 'review_scores_accuracy': count         30579
+unique            3
+top       Excellent
+freq          13590
+Name: review_scores_accuracy, dtype: object, 'review_scores_cleanliness': count       30579
+unique          4
+top       No data
+freq        13505
+Name: review_scores_cleanliness, dtype: object, 'review_scores_checkin': count         30579
+unique            3
+top       Excellent
+freq          15162
+Name: review_scores_checkin, dtype: object, 'review_scores_communication': count         30579
+unique            3
+top       Excellent
+freq          14855
+Name: review_scores_communication, dtype: object, 'review_scores_location': count         30579
+unique            3
+top       Excellent
+freq          14319
+Name: review_scores_location, dtype: object, 'review_scores_value': count       30579
+unique          4
+top       No data
+freq        13507
+Name: review_scores_value, dtype: object, 'instant_bookable': count     30579
+unique        2
+top           f
+freq      18258
+Name: instant_bookable, dtype: object, 'cancellation_policy': count        30579
+unique           6
+top       flexible
+freq         13053
+Name: cancellation_policy, dtype: object, 'calculated_host_listings_count': count    30579.00000
+mean         3.67409
+std          8.02023
+min          1.00000
+25%          1.00000
+50%          1.00000
+75%          2.00000
+max         64.00000
+Name: calculated_host_listings_count, dtype: float64, 'reviews_per_month': count       30579
+unique          5
+top       No data
+freq        12709
+Name: reviews_per_month, dtype: object, 'logPrice': count    30579.000000
+mean         5.672501
+std          0.934538
+min          2.833213
+25%          5.017280
+50%          5.545177
+75%          6.262445
+max          8.626765
+Name: logPrice, dtype: float64}
+INFO:root:=====================================================================
+INFO:root:Attributes with null data:
+ name                              0
+summary                           0
+space                             0
+description                       0
+neighborhood_overview             0
+access                            0
+interaction                       0
+house_rules                       0
+host_response_time                0
+host_response_rate                0
+host_is_superhost                 0
+host_identity_verified            0
+neighbourhood                     0
+property_type                     0
+room_type                         0
+accommodates                      0
+bathrooms                         0
+bedrooms                          0
+beds                              0
+bed_type                          0
+amenities                         0
+price                             0
+security_deposit                  0
+cleaning_fee                      0
+guests_included                   0
+extra_people                      0
+minimum_nights                    0
+maximum_nights                    0
+number_of_reviews                 0
+review_scores_rating              0
+review_scores_accuracy            0
+review_scores_cleanliness         0
+review_scores_checkin             0
+review_scores_communication       0
+review_scores_location            0
+review_scores_value               0
+instant_bookable                  0
+cancellation_policy               0
+calculated_host_listings_count    0
+reviews_per_month                 0
+logPrice                          0
+dtype: int64
+INFO:root:=====================================================================
+INFO:root:Attributes which more than 66% of data is null:
+
+                    {}
+INFO:root:=====================================================================
+INFO:root:Textual attributes with empty data (value=' '):
+{}
+INFO:root:=====================================================================
+INFO:root:Numerical attributes with zeros:
+{'bathrooms': 130, 'bedrooms': 1893, 'beds': 414, 'security_deposit': 20693, 'cleaning_fee': 11806, 'extra_people': 18758, 'number_of_reviews': 12709}
+INFO:root:=====================================================================
+INFO:root:Sample of each attribute:
+{'name': array([ 5,  6,  2,  4,  7,  9,  3,  8,  1, 10]), 'summary': array([46, 39, 40, 41, 26, 28, 63, 79, 78,  2]), 'space': array([ 92, 172, 183, 155, 166, 167,  68, 150, 158, 173]), 'description': array([153, 169, 183, 174, 165, 164, 141, 156, 157, 176]), 'neighborhood_overview': array([133,  46,  52,  47,  28,  18,  16,   2,  58, 161]), 'access': array([17, 19, 38,  2, 26, 14, 10, 15, 32, 51]), 'interaction': array([11, 20,  2, 26, 16, 19, 24, 23, 27, 39]), 'house_rules': array([131,  64, 168, 178, 122,   2,  12,  43, 164,  69]), 'host_response_time': array(['within an hour', 'within a day', 'within a few hours',
+       'a few days or more', 'No data'], dtype=object), 'host_response_rate': array(['Excellent', 'Medium', 'Low', 'No data'], dtype=object), 'host_is_superhost': array(['t', 'f', 'No data'], dtype=object), 'host_identity_verified': array(['t', 'f', 'No data'], dtype=object), 'neighbourhood': array(['copacabana', 'ipanema', 'flamengo', 'leblon', 'No data', 'lapa',
+       'gávea', 'santa teresa', 'barra da tijuca', 'laranjeiras'],
+      dtype=object), 'property_type': array(['condominium', 'apartment', 'loft', 'serviced apartment', 'house',
+       'townhouse', 'guest suite', 'bed and breakfast', 'guesthouse',
+       'hotel'], dtype=object), 'room_type': array(['entire home/apt', 'private room', 'shared room', 'hotel room'],
+      dtype=object), 'accommodates': array([ 5,  2,  3,  1,  6,  4, 12,  8,  9, 10]), 'bathrooms': array([1. , 1.5, 3. , 2. , 0. , 4. , 2.5, 3.5, 6. , 0.5]), 'bedrooms': array([2., 1., 3., 0., 4.]), 'beds': array([2., 1., 3., 4., 5., 0., 8., 6., 7.]), 'bed_type': array(['real bed', 'pull-out sofa', 'futon', 'airbed', 'couch'],
+      dtype=object), 'amenities': array([33, 14, 25, 41, 18, 45, 32, 56, 46, 36]), 'price': array([332., 160., 273., 378., 130., 151.,  80., 189., 928., 134.]), 'security_deposit': array([   0., 1000., 1050.,  400.,  420., 2324.,  651.,  630., 1679.,
+        840.]), 'cleaning_fee': array([378., 250.,  84., 172., 140., 150.,   0., 210., 232., 135.]), 'guests_included': array([2, 1, 4, 5, 3, 6]), 'extra_people': array([ 63.,  45.,  42.,  80., 150.,   0.,  21., 139.,  75., 130.]), 'minimum_nights': array([ 4,  7,  2,  3,  5,  1, 10, 60, 21,  6]), 'maximum_nights': array([  30,   60, 1125,   89,   28,   90,  365,  420,  360,    6]), 'number_of_reviews': array([243, 235, 271, 169, 316,   1,  42,  78,  71, 168]), 'review_scores_rating': array(['Medium', 'High', 'No data', 'Low', 'Excellent'], dtype=object), 'review_scores_accuracy': array(['Low', 'Excellent', 'No data'], dtype=object), 'review_scores_cleanliness': array(['Excellent', 'Medium', 'No data', 'Low'], dtype=object), 'review_scores_checkin': array(['Excellent', 'Low', 'No data'], dtype=object), 'review_scores_communication': array(['Excellent', 'No data', 'Low'], dtype=object), 'review_scores_location': array(['Excellent', 'No data', 'Low'], dtype=object), 'review_scores_value': array(['Medium', 'Excellent', 'No data', 'Low'], dtype=object), 'instant_bookable': array(['t', 'f'], dtype=object), 'cancellation_policy': array(['strict_14_with_grace_period', 'moderate', 'flexible',
+       'super_strict_30', 'super_strict_60', 'strict'], dtype=object), 'calculated_host_listings_count': array([ 1,  3, 46,  5,  2,  6,  4,  7,  9, 10]), 'reviews_per_month': array(['Excellent', 'Low', 'High', 'Medium', 'No data'], dtype=object), 'logPrice': array([5.80513497, 5.07517382, 5.6094718 , 5.9348942 , 4.86753445,
+       5.01727984, 4.38202663, 5.24174702, 6.83303173, 4.8978398 ])}
+INFO:root:=====================================================================
+INFO:root:Attributes with only one label:
+{}
+INFO:root:=====================================================================
+INFO:root:=====================================================================
+INFO:root:Running Ridge Regression
+INFO:root:Best alpha: 6.0
+INFO:root:RMSE on training data: 0.6189303465687723
+INFO:root:RMSE on validation data: 0.6146928022361714
+INFO:root:The Ridge model picked 213 features
+                     and eliminated 3 features
+INFO:root:=====================================================================
+INFO:root:Running Lasso Regression
+INFO:root:Best alpha: 0.0001
+INFO:root:RMSE on training data: 0.6189127921076177
+INFO:root:RMSE on validation data: 0.6140930129023869
+INFO:root:The Lasso model picked 126 features
+                     and eliminated 90 features
+INFO:root:=====================================================================
+INFO:root:Running ElasticNet Regression
+INFO:root:Best alpha: 0.0003
+INFO:root:Best l1_ratio: 0.1
+INFO:root:RMSE on training data: 0.6188705491276876
+INFO:root:RMSE on validation data: 0.6144034915906774
+INFO:root:The ElasticNet model picked 171 features
+                     and eliminated 45 features
+INFO:root:=====================================================================
+INFO:root:Running SVR
+INFO:root:Best SVR params:
+{'gamma': 0.01, 'C': 10}
+INFO:root:RMSE on training data: 0.5698221619050271
+INFO:root:RMSE on validation data: 0.5885689721234424
+INFO:root:=====================================================================
+INFO:root:Running Gradient Boosting
+INFO:root:Best GradientBoosting params:
+{'n_estimators': 1000, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_depth': 5, 'learning_rate': 0.05}
+INFO:root:RMSE on training data: 0.5465946168017162
+INFO:root:RMSE on validation data: 0.5601179307840729
+INFO:root:=====================================================================

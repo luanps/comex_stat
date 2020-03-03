@@ -21,7 +21,7 @@ import logging
 
 pd.set_option('display.max_rows', 1000)
 
-logging.basicConfig(filename='airbnb.log',level=logging.INFO)
+logging.basicConfig(filename='log.txt',level=logging.INFO)
 stderrLogger=logging.StreamHandler()
 stderrLogger.setFormatter(logging.Formatter(logging.BASIC_FORMAT))
 logging.getLogger().addHandler(stderrLogger)
