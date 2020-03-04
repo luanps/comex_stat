@@ -11,8 +11,14 @@ no Rio de Janeiro analisando dados do [AirBnB](http://insideairbnb.com/get-the-d
 pip3 install -r requirements.txt
 ```
 
-## Como executar
+## Download e extração da base de dados utilizada 
+```
+wget  http://data.insideairbnb.com/brazil/rj/rio-de-janeiro/2020-01-21/data/listings.csv.gz 
+gzip -d listings.csv.gz
+mv listings.csv data/
+```
 
+## Como executar
 ```
 python3 main.py
 ```
@@ -37,22 +43,22 @@ Após esse contato inicial com a base de dados, foram utilizadas as seguintes
 rotinas de pré-processamento:
 
 * Tratamento textual de variáveis categóricas para 
-[transformá-las em numéricas](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1089-L1090)
+[transformá-las em numéricas](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1089-L1090)  
 (ex.: `'$500,00'` para `float(500.00)`)
 
 * Agrupamento de variáveis numéricas para 
-[transformá-las em categóricas](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1092-L1095)
+[transformá-las em categóricas](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1092-L1095)  
 (ex.: `'$1.500,00'` para `500.00`)
 
 * Contagem de palavras existentes em variáveis de texto para 
-[transformá-las em variáveis numéricas](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1097-L1099)
+[transformá-las em variáveis numéricas](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1097-L1099)  
 (ex.: `'lindo APTO em Copacabana'` para `4`).
 
 Para cada variável numérica, foram gerados seus respectivos gráficos de
 [histograma e boxplot](https://github.com/luanps/airbnb/tree/master/plots/before_outlier_removal),
 possibilitando identificar visualmente casos aonde existem
 distribuição assimétrica dos dados e outliers.
-A variável *price*, por exemplo, apresenta uma 
+A variável `price`, por exemplo, apresenta uma 
 [assimetria à direita](https://github.com/luanps/airbnb/blob/master/plots/before_outlier_removal/hist_boxplot_price.png),
 ou seja, tem uma concentração de valores baixos, mas sua média é influenciada
 em função da cauda longa com valores mais altos.
@@ -72,7 +78,7 @@ do modelo de regressão a ser aplicado.
 
 Os gráficos de histograma e boxplot foram então
 [gerados novamente](https://github.com/luanps/airbnb/tree/master/plots/after_outlier_removal),
-possibilitando identificar as distribuições atualizadas após a o processo
+possibilitando identificar as distribuições atualizadas após o processo
 de remoção de outliers, bem como todas as rotinas de exploração de dados, 
 as quais foram
 [re-computadas](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1114-L1489)
