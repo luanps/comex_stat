@@ -75,11 +75,11 @@ def preproc_routines():
 
     logging.info("="*69)
     logging.info("Reading data from file")
-    filepath = 'data/listings_full.csv'
+    filepath = 'data/listings.csv'
     data = load_dataset(filepath)
     logging.info("="*69)
 
-    unnecessary_columns = 'unnecessary_attributes.csv'
+    unnecessary_columns = 'data/unnecessary_attributes.csv'
     unnecessary_columns = load_dataset(unnecessary_columns)
     unnecessary_columns = unnecessary_columns['attributes'].values.tolist()
 
