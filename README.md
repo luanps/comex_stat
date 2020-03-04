@@ -22,16 +22,16 @@ python3 main.py
 Inicialmente foi realizado uma análise exploratória no conjunto de dados, 
 verificando as propriedades de cada variável existente, tais como seu o
 [tipo](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L7-L118),
-[descrição](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L120),
+[descrição](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L120-L725),
 quantidade de dados nulos (
-[1](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L727),
-[2](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L840),
-[3](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L843)
+[1](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L727-L834),
+[2](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L840-L841),
+[3](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L843-L844)
 ),
-[exemplo](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L846)
+[exemplo](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L846-L1081)
 de itens existentes em cada variável,
 bem como a identificação de variáveis que possuem 
-[apenas um label](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1083)
+[apenas um label](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1083-L1084)
 
 
 
