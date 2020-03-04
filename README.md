@@ -21,7 +21,7 @@ python3 main.py
 
 Inicialmente foi realizado uma análise exploratória no conjunto de dados, 
 verificando as propriedades de cada variável existente, tais como seu o
-[tipo](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L7),
+[tipo](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L7-L118),
 [descrição](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L120),
 quantidade de dados nulos (
 [1](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L727),
