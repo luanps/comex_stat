@@ -26,7 +26,9 @@ python3 main.py
 #### Como foi a definição da sua estratégia de modelagem?
 
 Inicialmente foi realizado uma análise exploratória no conjunto de dados, 
-verificando as propriedades de cada variável existente, tais como seu o
+removendo aquelas que julguei não serem necessárias para a condução deste estudo.
+Em seguida, foram verificadas as propriedades de cada variável restante,
+tais como seu o
 [tipo](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L7-L118),
 [descrição](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L120-L725),
 quantidade de dados nulos (
@@ -81,12 +83,49 @@ Os gráficos de histograma e boxplot foram então
 possibilitando identificar as distribuições atualizadas após o processo
 de remoção de outliers, bem como todas as rotinas de exploração de dados, 
 as quais foram
-[re-computadas](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1114-L1489)
+[recomputadas](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1114-L1489)
 para análise.
 
 
 #### Como foi definida a função de custo utilizada?
+Foi empregada a métrica de ajuste o RMSE *(Root Mean Square Error)*, que 
+consiste em aferir a diferença entre o valor estimado por dado modelo de 
+regressão e o valor real. 
+Por elevar o erro ao quadrado, esta é uma métrica sensível à outliers, o que
+pode ser um indicadivo para iterar a análise e filtragem dos dados.
+
+Outro fator que favoreceu o uso desta métrica é que,
+por se tratar de uma avaliação universal, permite comparar o 
+resultado de diferentes modelos empregados.
+
 #### Qual foi o critério utilizado na seleção do modelo final?
+Uma vez separado o conjunto de dados em treino (70%) e validação (30%),
+o modelo final foi aquele que alcançou o menor erro RMSE no conjunto de 
+validação, que neste caso foi o com o método  *Gradient Boosting*.
+
 #### Qual foi o critério utilizado para validação do modelo?
+Foram empregados no total cinco métodos distintos de regressão, 
+sendo três abordagens lineares 
+[Ridge](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1492-L1497),
+[Lasso](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1499-L1504),
+[ElasticNet](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1506-L1512)
+),
+a regressão não-linear
+[SVR](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1514-L1518)
+e o modelo
+[Gradient Boosting](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1521-L1524).
+
+Para todos os casos, foram testados diferentes hiperparâmetros, além da
+avaliação cruzada, garantindo o melhor ajuste possível para o conjunto de dados
+existente.
+
 #### Por que escolheu utilizar este método?
+Visto que a variável dependente `price` é contínua, esta tarefa teve a
+necessidade de utilização de uma abordagem de regressão. 
+Para tanto, foi decidido utilizar modelos mais simples e de baixa complexidade,
+tanto em sua implementação como na otimização de hiperparâmetros, 
+possibilitando agregar resultados consistentes em pouco tempo.
+
 #### Quais evidências você possui de que seu modelo é suficientemente bom?
+O modelo de regressão escolhido apresentou ser mais robusto frente aos demais
+no benchmark desenvolvido neste estudo, sendo suficiente para dada tarefa.
