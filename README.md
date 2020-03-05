@@ -16,6 +16,7 @@ pip3 install -r requirements.txt
 wget  http://data.insideairbnb.com/brazil/rj/rio-de-janeiro/2020-01-21/data/listings.csv.gz 
 gzip -d listings.csv.gz
 mv listings.csv data/
+mkdir models
 ```
 
 ## Como executar
@@ -107,9 +108,9 @@ validação, que neste caso foi o com o método  *Gradient Boosting*.
 Foram empregados no total cinco métodos distintos de regressão, 
 sendo três abordagens lineares 
 [Ridge](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1492-L1497),
-[Lasso](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1499-L1504),
+[Lasso](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1499-L1504) e
 [ElasticNet](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1506-L1512)
-),
+,
 a regressão não-linear
 [SVR](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1514-L1518)
 e o modelo
