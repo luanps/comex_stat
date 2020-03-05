@@ -24,6 +24,8 @@ mkdir models
 python3 main.py
 ```
 
+## Definições de modelagem
+
 #### Como foi a definição da sua estratégia de modelagem?
 
 Inicialmente foi realizado uma análise exploratória no conjunto de dados, 
@@ -102,7 +104,7 @@ resultado de diferentes modelos empregados.
 #### Qual foi o critério utilizado na seleção do modelo final?
 Uma vez separado o conjunto de dados em treino (70%) e validação (30%),
 o modelo final foi aquele que alcançou o menor erro RMSE no conjunto de 
-validação, que neste caso foi o com o método  *Gradient Boosting*.
+validação, que neste caso foi utilizando o método  *Gradient Boosting*.
 
 #### Qual foi o critério utilizado para validação do modelo?
 Foram empregados no total cinco métodos distintos de regressão, 
@@ -114,16 +116,16 @@ sendo três abordagens lineares
 a regressão não-linear
 [SVR](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1514-L1518)
 e o modelo
-[Gradient Boosting](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1521-L1524).
+[Gradient Boosting](https://github.com/luanps/airbnb/blob/a15943ce4c7eaba434b775322d7ae1a801222a8a/log.txt#L1520-L1524).
 
-Para todos os casos, foram testados diferentes hiperparâmetros, além da
-avaliação cruzada, garantindo o melhor ajuste possível para o conjunto de dados
-existente.
+Para todos os casos foram testados diferentes combinações de hiperparâmetros,
+além da avaliação cruzada, buscando o melhor ajuste possível para o
+conjunto de dados existente.
 
 #### Por que escolheu utilizar este método?
 Visto que a variável dependente `price` é contínua, esta tarefa teve a
 necessidade de utilização de uma abordagem de regressão. 
-Para tanto, foi decidido utilizar modelos mais simples e de baixa complexidade,
+Neste sentido, foi decidido utilizar modelos mais simples e de baixa complexidade,
 tanto em sua implementação como na otimização de hiperparâmetros, 
 possibilitando agregar resultados consistentes em pouco tempo.
 
