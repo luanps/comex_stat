@@ -1,7 +1,8 @@
-# Análise de preço de estadia no AirBnB-Rio de Janeiro
+# Análise da base de dados do Comércio exterior brasileiro
 
-Este repositório tem como finalidade estimar o valor de estadia 
-no Rio de Janeiro analisando dados do [AirBnB](http://insideairbnb.com/get-the-data.html)
+Este repositório tem como finalidade analisar os dados públicos de importação e 
+exportação do Brasil fornecidos pelo
+[Ministério da Economia](http://www.mdic.gov.br/index.php/comercio-exterior/estatisticas-de-comercio-exterior/base-de-dados-do-comercio-exterior-brasileiro-arquivos-para-download)
 
 
 ## Instalação
@@ -13,9 +14,11 @@ pip3 install -r requirements.txt
 
 ## Download e extração da base de dados utilizada 
 ```
-wget  http://data.insideairbnb.com/brazil/rj/rio-de-janeiro/2020-01-21/data/listings.csv.gz 
-gzip -d listings.csv.gz
-mv listings.csv data/
+wget http://www.mdic.gov.br/balanca/bd/comexstat-bd/ncm/EXP_COMPLETA.zip
+wget http://www.mdic.gov.br/balanca/bd/comexstat-bd/ncm/IMP_COMPLETA.zip
+unzip EXP_COMPLETA.zip
+unzip IMP_COMPLETA.zip
+mv EXP_COMPLETA.csv IMP_COMPLETA.csv ata/
 mkdir models
 ```
 
