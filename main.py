@@ -8,16 +8,17 @@ from sklearn.linear_model import ElasticNetCV
 from sklearn.linear_model import LassoCV
 from sklearn.linear_model import RidgeCV
 from sklearn.svm import SVR'''
+import logging
 import numpy as np
 import pandas as pd
 import pdb
+
 from src.utils import load_dataset
 from src.utils import load_serialized
 from src.utils import save_serialized
 from src.exploratory import ExploratoryAnalysis
 from src.preproc import Preproc
 from src.model import Model
-import logging
 
 pd.set_option('display.max_rows', 1000)
 
@@ -30,74 +31,62 @@ def data_exploration(data):
     exploratory = ExploratoryAnalysis(data)
     
     data_length = exploratory.data_length()
-    logging.info("="*69)
+    draw_line = "="*79
     logging.info(f"""This dataset contains {data_length[0]}
-        samples with {data_length[1]} attributes.\n""")
-    logging.info("="*69)
+        samples with {data_length[1]} attributes.\n{draw_line}""")
 
     attributes = exploratory.list_attributes()
-    logging.info(f"""These attributes are:\n {attributes}""")
-    logging.info("="*69)
+    logging.info(f"""These attributes are:\n {attributes}\n{draw_line}""")
     
     description = exploratory.data_description()
-    logging.info(f"""Per attribute description:\n{description}""")
-    logging.info("="*69)
+    logging.info(f"""Per attribute description:\n{description}\n{draw_line}""")
 
     null_data = exploratory.check_null()
-    logging.info(f"""Attributes with null data:\n {null_data}""")
-    logging.info("="*69)
+    logging.info(f"""Attributes with null data:\n {null_data}\n{draw_line}""")
 
     majority_null = exploratory.majority_nulls(0.66)
-    logging.info(f"""Attributes which more than 66% of data is null:\n
-                    {majority_null}""")
-    logging.info("="*69)
+    logging.info(f"""Attributes which more than 66% of data is null:\n{majority_null}\n{draw_line}""")
 
     empty_spaces = exploratory.check_empty_spaces()
-    logging.info(f"""Textual attributes with empty data (value=' '):\n{empty_spaces}""")
-    logging.info("="*69)
+    logging.info(f"""Textual attributes with empty data (value=' '):\n{empty_spaces}\n{draw_line}""")
     
     zeros = exploratory.check_zeros()
-    logging.info(f"""Numerical attributes with zeros:\n{zeros}""")
-    logging.info("="*69)
+    logging.info(f"""Numerical attributes with zeros:\n{zeros}\n{draw_line}""")
 
     unique_values = exploratory.check_unique_values(10)
-    logging.info(f"""Sample of each attribute:\n{unique_values}""")
-    logging.info("="*69)
+    logging.info(f"""Sample of each attribute:\n{unique_values} \n{draw_line}""")
 
     singlelabel = exploratory.check_singlelabel()
-    logging.info(f"""Attributes with only one label:\n{singlelabel}""")
-    logging.info("="*69)
+    logging.info(f"""Attributes with only one label:\n{singlelabel}\n{draw_line}""")
    
     return majority_null, singlelabel
 
 
 def preproc_routines(filepath):
 
-    logging.info("="*69)
-    logging.info("Reading data from file")
+    draw_line = "="*79
+    logging.info(f"Reading data from file\n{draw_line}")
     data = load_dataset(filepath)
-    logging.info("="*69)
 
-    years = ['2017', '2018', '2019']
+    years = [2017, 2018, 2019]
     year_attribute = 'CO_ANO'
+    logging.info(f"Filtering data to keep only {year_attribute}:{years}\n{draw_line}")
     data = Preproc.filter_data(data, year_attribute, years)
 
     '''unnecessary_columns = 'data/unnecessary_attributes.csv'
     unnecessary_columns = load_dataset(unnecessary_columns)
     unnecessary_columns = unnecessary_columns['attributes'].values.tolist()'''
 
-    logging.info("Data exploration")
     majority_null, singlelabel = data_exploration(data)
-    logging.info("="*69)
 
-    '''logging.info("Applying Preprocessing step")
+    '''logging.info("Applying Preprocessing step\n{draw_line}")
     empty_columns = [key for key, value in {**majority_null,
                                               **singlelabel}.items()]
     logging.info("="*69)
 
-    columns_to_drop = unnecessary_columns + empty_columns
+    columns_to_drop = unnecessary_columns + empty_columns'''
 
-    #country = 'Brazil'
+    '''country = 'Brazil'
     obj_to_float = ['price', 'security_deposit', 'cleaning_fee',
     'extra_people', 'host_response_rate']
     logging.info(f"""Data that will be transformed into float:\n{obj_to_float}""")
@@ -116,18 +105,22 @@ def preproc_routines(filepath):
     'neighborhood_overview', 'interaction', 'house_rules']
     logging.info(f"""Textual data that will be transformed into an integer
           by counting its words:\n{text_to_counter}""")
-    logging.info("="*69)
+    logging.info("="*69)'''
 
-    preproc = Preproc(data, columns_to_drop, country , obj_to_float,
-        num_to_categories, text_to_counter)
-    preproc.apply_general_preproc()
+    logging.info("Data exploration\n{draw_line}")
+
+    preproc = Preproc(data, '', '' , '', '', '')
+
+    top_n = 3
+    grouped_by_year = preproc.get_top_products_by_year(top_n)
+    pdb.set_trace()
 
     logging.info("Plotting data")
     prefix = 'before_outlier_removal'
-    ExploratoryAnalysis.plot_data(preproc.data, prefix)
+    #ExploratoryAnalysis.plot_data(preproc.data, prefix)
     logging.info("="*69)
 
-    logging.info("Removing outliers")
+    '''logging.info("Removing outliers")
     outlier_threshold = 3
     outliers_to_analize = ['price', 'accommodates', 'bathrooms', 'bedrooms',
     'beds', 'calculated_host_listings_count', 'cleaning_fee', 'extra_people',

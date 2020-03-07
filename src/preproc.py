@@ -111,8 +111,8 @@ class Preproc:
 
 
     def apply_general_preproc(self):
-        self.drop_another_countries()
-        self.drop_columns()
+        #self.drop_another_countries()
+        #self.drop_columns()
 
         categorical_data = self.data.select_dtypes(include=['object'])
         for attribute, item in categorical_data.iteritems():
@@ -120,7 +120,7 @@ class Preproc:
             treated_data = cleaned_data.fillna('No data')
             self.data[attribute] = treated_data
 
-        for attribute in self.obj_to_float:
+        '''for attribute in self.obj_to_float:
             data = self.data[attribute].copy()
             self.data[attribute] = self.map_str_to_float(data)
 
@@ -138,7 +138,16 @@ class Preproc:
         numerical_data = self.data.select_dtypes(exclude=['object'])
         for attribute, item in numerical_data.iteritems():
             treated_data = item.fillna(0)
-            self.data[attribute] = treated_data
+            self.data[attribute] = treated_data'''
+
+
+    def get_top_products_by_year(self,n):
+        grouped = self.data.groupby(['CO_ANO', 'SG_UF_NCM', 'CO_NCM'])['CO_NCM']\
+                      .count().reset_index(name='count')\
+                      .sort_values(['CO_ANO', 'SG_UF_NCM', 'count'],ascending = False)
+        top_grouped = grouped.groupby(['CO_ANO', 'SG_UF_NCM'])\
+                             .apply(lambda x: x.head(n))
+        return top_grouped
 
 
     @staticmethod
