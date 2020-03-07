@@ -6,11 +6,11 @@ import pdb
 
 class Preproc:
 
-    def __init__(self, data, columns_to_drop, country, obj_to_float,
+    def __init__(self, data, columns_to_drop, years, obj_to_float,
         num_to_categories, text_to_counter):
         self.data = data.copy()
         self.columns_to_drop = columns_to_drop
-        self.country = country
+        self.years = years
         self.obj_to_float = obj_to_float
         self.num_to_categories = num_to_categories
         self.text_to_counter = text_to_counter
@@ -34,7 +34,7 @@ class Preproc:
 
 
     def drop_another_countries(self):
-        self.data = self.data[self.data['country'] == self.country]
+        self.data = self.data[self.data['years'].isin(self.years)]
 
 
     def drop_zero_prices(self):
@@ -139,3 +139,12 @@ class Preproc:
         for attribute, item in numerical_data.iteritems():
             treated_data = item.fillna(0)
             self.data[attribute] = treated_data
+
+
+    @staticmethod
+    def filter_data(data_list, attribute, values_list):
+        filtered_data = list()
+        for chunk in data_list:
+            filtered_data.append(chunk[chunk[attribute].isin(values_list)])
+        filtered_data = pd.concat(filtered_data)
+        return filtered_data

@@ -5,7 +5,7 @@ import pickle
 
 def load_dataset(filepath):
     try:
-        data = pd.read_csv(filepath)
+        data = pd.read_csv(filepath, sep = ';', chunksize=500000)
         return data
     except Exception as e:
         err_msg = f"""Something went wrong while loading {filepath}

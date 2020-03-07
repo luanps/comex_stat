@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from sklearn.ensemble import GradientBoostingRegressor
+'''from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import make_scorer
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.linear_model import ElasticNetCV
 from sklearn.linear_model import LassoCV
 from sklearn.linear_model import RidgeCV
-from sklearn.svm import SVR
+from sklearn.svm import SVR'''
 import numpy as np
 import pandas as pd
 import pdb
@@ -71,30 +71,33 @@ def data_exploration(data):
     return majority_null, singlelabel
 
 
-def preproc_routines():
+def preproc_routines(filepath):
 
     logging.info("="*69)
     logging.info("Reading data from file")
-    filepath = 'data/listings.csv'
     data = load_dataset(filepath)
     logging.info("="*69)
 
-    unnecessary_columns = 'data/unnecessary_attributes.csv'
+    years = ['2017', '2018', '2019']
+    year_attribute = 'CO_ANO'
+    data = Preproc.filter_data(data, year_attribute, years)
+
+    '''unnecessary_columns = 'data/unnecessary_attributes.csv'
     unnecessary_columns = load_dataset(unnecessary_columns)
-    unnecessary_columns = unnecessary_columns['attributes'].values.tolist()
+    unnecessary_columns = unnecessary_columns['attributes'].values.tolist()'''
 
     logging.info("Data exploration")
     majority_null, singlelabel = data_exploration(data)
     logging.info("="*69)
 
-    logging.info("Applying Preprocessing step")
+    '''logging.info("Applying Preprocessing step")
     empty_columns = [key for key, value in {**majority_null,
                                               **singlelabel}.items()]
     logging.info("="*69)
 
     columns_to_drop = unnecessary_columns + empty_columns
 
-    country = 'Brazil'
+    #country = 'Brazil'
     obj_to_float = ['price', 'security_deposit', 'cleaning_fee',
     'extra_people', 'host_response_rate']
     logging.info(f"""Data that will be transformed into float:\n{obj_to_float}""")
@@ -147,7 +150,7 @@ def preproc_routines():
     data_exploration(preproc.data)
     logging.info("="*69)
 
-    return preproc.data
+    return preproc.data'''
 
 
 def update_alphas(generic_model, model_name, model_configs, alpha, l1_ratio): 
@@ -282,13 +285,15 @@ def run_linear_model(generic_model, model_name,  model_configs):
 
 if __name__ == '__main__':
 
-    preproc_filepath = 'data/preprocessed'
+    preproc_filepath = 'data/exp_preprocessed'
     '''try:
         data = load_serialized(preproc_filepath)
         logging.info(f'Preprocessed file preproc_filepath loaded')
     except:'''
     logging.info(f'Running data preprocessment routines')
-    data = preproc_routines()
+    data_filepath = 'data/EXP_COMPLETA.csv'
+    preproc_routines(data_filepath)
+    '''data = preproc_routines()
     save_serialized(preproc_filepath, data)
 
     general_configs = {
@@ -314,7 +319,7 @@ if __name__ == '__main__':
         'gamma' : [0.001, 0.01, 0.1, 1]
     }
 
-    '''ensemble_param_grid = {
+    ensemble_param_grid = {
         'n_estimators' : [100],
         'learning_rate' : [0.01],
         'max_depth': [1],
@@ -325,7 +330,7 @@ if __name__ == '__main__':
     nonlinear_param_grid = {
         'C' : [1],
         'gamma' : [1]
-    }'''
+    }
 
     logging.info("Running Ridge Regression")
     model = RidgeCV
@@ -357,4 +362,4 @@ if __name__ == '__main__':
     model = GradientBoostingRegressor
     model_name = 'GradientBoosting'
     run_ensemble_model(model, model_name, general_configs, ensemble_param_grid)
-    logging.info("="*69)
+    logging.info("="*69)'''
