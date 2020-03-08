@@ -150,6 +150,16 @@ class Preproc:
         return top_grouped
 
 
+    def get_top_products_by_month(self, year, n):
+        data = self.data[self.data['CO_ANO']==year]
+        grouped = data.groupby(['CO_MES', 'SG_UF_NCM', 'CO_NCM'])['CO_NCM']\
+                      .count().reset_index(name='count')\
+                      .sort_values(['CO_MES', 'SG_UF_NCM', 'count'],ascending = False)
+        top_grouped = grouped.groupby(['CO_MES', 'SG_UF_NCM'])\
+                             .apply(lambda x: x.head(n))
+        return top_grouped
+
+        
     @staticmethod
     def filter_data(data_list, attribute, values_list):
         filtered_data = list()

@@ -107,12 +107,14 @@ def preproc_routines(filepath):
           by counting its words:\n{text_to_counter}""")
     logging.info("="*69)'''
 
-    logging.info("Data exploration\n{draw_line}")
+    logging.info(f"Data exploration\n{draw_line}")
 
     preproc = Preproc(data, '', '' , '', '', '')
 
     top_n = 3
-    grouped_by_year = preproc.get_top_products_by_year(top_n)
+    year = 2019
+    #grouped_by_year = preproc.get_top_products_by_year(top_n)
+    grouped_by_month = preproc.get_top_products_by_month(year, top_n)
     pdb.set_trace()
 
     logging.info("Plotting data")
