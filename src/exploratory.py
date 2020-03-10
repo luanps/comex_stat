@@ -105,26 +105,24 @@ class ExploratoryAnalysis:
 
 
     @staticmethod
-    def plot_bar(data):
-        categorical_data = data.select_dtypes(exclude=['int64'])
-        categorical_data['Churn'] = categorical_data['Churn'].replace({0: 'No Churn', 1: 'Churn'})
-
-        for attribute, item in categorical_data.iteritems():
-            len_unique_values = len(item.unique())
-            if attribute == 'price':# or len_unique_values >5:
-                continue
+    def plot_bar(data,n, prefix):
+        for state in data['SG_UF_NCM'].unique():
 
             plt.figure(figsize=(10, 8))
-            plt.title(f"{attribute} plot")
-            tmp_data = categorical_data.groupby(attribute)['Churn'].value_counts()/len(categorical_data)
-            tmp_data = tmp_data.to_frame().rename({'Churn': 'percentage'}, axis=1).reset_index()
-            ax = sns.barplot(x=attribute, y= 'percentage', hue = 'Churn', data= tmp_data)
+            plt.title(f"{state} - top {n} {prefix} ")
+            tmp_data = data[data['SG_UF_NCM']==state].reset_index(drop=True)
+            ax = sns.barplot(x='CO_ANO', y= 'count', hue = 'CO_NCM', data=tmp_data)
 
             for p in ax.patches:
-                ax.annotate(format(p.get_height(), '.3f'), (p.get_x() + p.get_width() / 2., p.get_height()),
-                ha = 'center', va = 'center', xytext = (0, 5), textcoords = 'offset points')
+                if not np.isnan(p.get_height()):
+                    ax.annotate(int(p.get_height()),
+                               (p.get_x() + p.get_width() / 2., p.get_height()),
+                               ha = 'center',
+                               va = 'center',
+                               xytext = (0, 5),
+                               textcoords = 'offset points')
 
-            plt.savefig(f"plots/barplot_{attribute}.png")
+            plt.savefig(f"plots/{prefix}/barplot_{state}.png")
             plt.close()
 
 
@@ -140,8 +138,8 @@ class ExploratoryAnalysis:
 
 
     @staticmethod
-    def plot_data(data, prefix):
+    def plot_data(data, n, prefix):
         #ExploratoryAnalysis.plot_pie(data)
-        ExploratoryAnalysis.plot_correlation_matrix(data, prefix)
-        ExploratoryAnalysis.plot_hist_boxplot(data, prefix)
-        #ExploratoryAnalysis.plot_bar(data)
+        #ExploratoryAnalysis.plot_correlation_matrix(data, prefix)
+        #ExploratoryAnalysis.plot_hist_boxplot(data, prefix)
+        ExploratoryAnalysis.plot_bar(data,n, prefix)

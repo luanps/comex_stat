@@ -113,13 +113,13 @@ def preproc_routines(filepath):
 
     top_n = 3
     year = 2019
-    #grouped_by_year = preproc.get_top_products_by_year(top_n)
-    grouped_by_month = preproc.get_top_products_by_month(year, top_n)
-    pdb.set_trace()
+    grouped_by_year = preproc.get_top_products_by_year(top_n)
+    #grouped_by_month = preproc.get_top_products_by_month(year, top_n)
 
     logging.info("Plotting data")
-    prefix = 'before_outlier_removal'
-    #ExploratoryAnalysis.plot_data(preproc.data, prefix)
+    #prefix = 'before_outlier_removal'
+    prefix = 'exportations'
+    ExploratoryAnalysis.plot_data(grouped_by_year, top_n, prefix)
     logging.info("="*69)
 
     '''logging.info("Removing outliers")

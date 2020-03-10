@@ -145,7 +145,7 @@ class Preproc:
         grouped = self.data.groupby(['CO_ANO', 'SG_UF_NCM', 'CO_NCM'])['CO_NCM']\
                       .count().reset_index(name='count')\
                       .sort_values(['CO_ANO', 'SG_UF_NCM', 'count'],ascending = False)
-        top_grouped = grouped.groupby(['CO_ANO', 'SG_UF_NCM'])\
+        top_grouped = grouped.groupby(['SG_UF_NCM', 'CO_ANO'])\
                              .apply(lambda x: x.head(n))
         return top_grouped
 
