@@ -54,7 +54,7 @@ def data_exploration(data):
     logging.info(f"""Numerical attributes with zeros:\n{zeros}\n{draw_line}""")
 
     unique_values = exploratory.check_unique_values(10)
-    logging.info(f"""Sample of each attribute:\n{unique_values} \n{draw_line}""")
+    logging.info(f"""Sample of each attribute:\n{unique_values}\n{draw_line}""")
 
     singlelabel = exploratory.check_singlelabel()
     logging.info(f"""Attributes with only one label:\n{singlelabel}\n{draw_line}""")
@@ -67,60 +67,43 @@ def preproc_routines(filepath):
     draw_line = "="*79
     logging.info(f"Reading data from file\n{draw_line}")
     data = load_dataset(filepath)
+    #uf_filepath = 'data/UF.csv'
+    #uf_data = load_dataset(uf_filepath)
+    #ncm_filepath = 'data/UF.csv'
+    #ncm_data = load_dataset(uf_filepath)
+    #country_filepath = 'data/UF.csv'
+    #country_data = load_dataset(uf_filepath)
 
-    years = [2017, 2018, 2019]
+    uf_drop_list = ['EX', 'CB', 'MN', 'RE', 'ED', 'ND', 'ZN']
+    years_to_keep = [2017, 2018, 2019]
+
     year_attribute = 'CO_ANO'
-    logging.info(f"Filtering data to keep only {year_attribute}:{years}\n{draw_line}")
-    data = Preproc.filter_data(data, year_attribute, years)
+    logging.info(f"Filtering data to keep only {year_attribute}:{years_to_keep}\n{draw_line}")
+    data = Preproc.filter_values(data, year_attribute, years_to_keep)
 
-    '''unnecessary_columns = 'data/unnecessary_attributes.csv'
-    unnecessary_columns = load_dataset(unnecessary_columns)
-    unnecessary_columns = unnecessary_columns['attributes'].values.tolist()'''
-
-    majority_null, singlelabel = data_exploration(data)
-
-    '''logging.info("Applying Preprocessing step\n{draw_line}")
-    empty_columns = [key for key, value in {**majority_null,
-                                              **singlelabel}.items()]
-    logging.info("="*69)
-
-    columns_to_drop = unnecessary_columns + empty_columns'''
-
-    '''country = 'Brazil'
-    obj_to_float = ['price', 'security_deposit', 'cleaning_fee',
-    'extra_people', 'host_response_rate']
-    logging.info(f"""Data that will be transformed into float:\n{obj_to_float}""")
-    logging.info("="*69)
-
-    num_to_categories = ['host_response_rate', 'review_scores_rating', 
-        'review_scores_accuracy', 'review_scores_cleanliness',
-        'review_scores_checkin', 'review_scores_communication',
-        'review_scores_location', 'review_scores_value', 'reviews_per_month']
-    logging.info(f"""Numerical data that will be transformed into categories 
-        [No Data, Low, Medium, High, Excellent]
-        based on their own quantiles: \n{num_to_categories}""")
-    logging.info("="*69)
-
-    text_to_counter = ['amenities', 'name', 'summary', 'space', 'description', 'access', 
-    'neighborhood_overview', 'interaction', 'house_rules']
-    logging.info(f"""Textual data that will be transformed into an integer
-          by counting its words:\n{text_to_counter}""")
-    logging.info("="*69)'''
-
-    logging.info(f"Data exploration\n{draw_line}")
-
-    preproc = Preproc(data, '', '' , '', '', '')
-
+    preproc = Preproc(data, '', uf_drop_list , '', '', '')
+    preproc.apply_general_preproc()
     top_n = 3
     year = 2019
+    prefix = 'exportations'
+
     grouped_by_year = preproc.get_top_products_by_year(top_n)
-    #grouped_by_month = preproc.get_top_products_by_month(year, top_n)
+    logging.info(f"""Top {top_n} {prefix} by UF each year
+        \n{grouped_by_year.to_markdown()}\n{draw_line}""")
+
+    grouped_by_month = preproc.get_top_products_by_month(year, top_n)
+    logging.info(f"""Top {top_n} {prefix} by UF each {year}'s month
+        \n{grouped_by_month.to_markdown()}\n{draw_line}""")
 
     logging.info("Plotting data")
-    #prefix = 'before_outlier_removal'
-    prefix = 'exportations'
-    ExploratoryAnalysis.plot_data(grouped_by_year, top_n, prefix)
+    ExploratoryAnalysis.plot_data(grouped_by_year, grouped_by_month, top_n, prefix)
     logging.info("="*69)
+
+    logging.info(f"Data exploration\n{draw_line}")
+    majority_null, singlelabel = data_exploration(data)
+
+
+
 
     '''logging.info("Removing outliers")
     outlier_threshold = 3
