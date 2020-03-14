@@ -3,10 +3,15 @@
 import pandas as pd
 import pickle
 
-def load_dataset(filepath):
+def load_dataset(filepath, chunk = False):
     try:
-        data = pd.read_csv(filepath, sep = ';', chunksize=500000)
+        if chunk:
+            data = pd.read_csv(filepath, sep = ';', encoding='latin', 
+                               chunksize=500000)
+        else:
+            data = pd.read_csv(filepath, sep = ';', encoding='latin')
         return data
+
     except Exception as e:
         err_msg = f"""Something went wrong while loading {filepath}
                    {str(e)}"""
