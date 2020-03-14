@@ -145,20 +145,27 @@ class ExploratoryAnalysis:
 
 
     @staticmethod
-    def plot_pie(data):
-            labels = ['Churn', 'No Churn']
-            sizes = data['Churn'].value_counts(sort = True)
-            plt.figure(figsize=(6, 4))
-            plt.title('Churn distribution')
-            plt.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=270)
-            plt.savefig("plots/piechart_churn.png")
-            plt.close()
+    def plot_pie_per_region(data, year, prefix):
+            for region in data['NO_REGIAO'].unique():
+                tmp_data = data[data['NO_REGIAO']==region]
+                sizes = tmp_data['value']
+                labels = tmp_data['NO_UF']
+                summ = np.sum(sizes)
+                labels = ['%s, %1.1f %%' % (l, s) for l, s in zip(labels,
+                    sizes/summ*100)] 
+
+                plt.figure(figsize=(10, 8))
+                plt.pie(sizes, labels=labels)
+                plt.title(f"{prefix} values per UF from {region} in {year}")
+                plt.savefig(f"plots/piechart_values_{region}_{year}.png")
+                plt.close()
 
 
     @staticmethod
-    def plot_data(data_by_year, data_by_month, n, prefix):
-        #ExploratoryAnalysis.plot_pie(data)
+    def plot_data(data_by_year, data_by_month, data_by_uf_values, n, year, prefix):
         #ExploratoryAnalysis.plot_correlation_matrix(data, prefix)
         #ExploratoryAnalysis.plot_hist_boxplot(data, prefix)
-        ExploratoryAnalysis.plot_bar(data_by_year ,'CO_ANO', n, prefix)
-        ExploratoryAnalysis.plot_bar(data_by_month ,'CO_MES', n, prefix)
+        #ExploratoryAnalysis.plot_bar(data_by_year ,'CO_ANO', n, prefix)
+        #ExploratoryAnalysis.plot_bar(data_by_month ,'CO_MES', n, prefix)
+        ExploratoryAnalysis.plot_pie_per_region(data_by_uf_values, year, prefix)
+        #ExploratoryAnalysis.plot_pie(data_by_uf_values, year, prefix)
