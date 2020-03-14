@@ -4,6 +4,7 @@ import pandas as pd
 import seaborn as sns
 import numpy as np
 import pdb
+import random
 
 class ExploratoryAnalysis:
 
@@ -103,26 +104,43 @@ class ExploratoryAnalysis:
             plt.close()
 
 
-
     @staticmethod
-    def plot_bar(data,n, prefix):
-        for state in data['SG_UF_NCM'].unique():
+    def plot_bar(data, data_type, n, prefix):
+        for uf in data['SG_UF_NCM'].unique():
+            tmp_data = data[data['SG_UF_NCM']==uf]
 
-            plt.figure(figsize=(10, 8))
-            plt.title(f"{state} - top {n} {prefix} ")
-            tmp_data = data[data['SG_UF_NCM']==state].reset_index(drop=True)
-            ax = sns.barplot(x='CO_ANO', y= 'count', hue = 'CO_NCM', data=tmp_data)
+            fig, ax = plt.subplots()
+            plt.title(f"{uf} - top {n} {prefix} ")
+            ncm_code, ncm_index = np.unique(tmp_data["CO_NCM"], return_inverse=1)
 
-            for p in ax.patches:
-                if not np.isnan(p.get_height()):
-                    ax.annotate(int(p.get_height()),
-                               (p.get_x() + p.get_width() / 2., p.get_height()),
-                               ha = 'center',
-                               va = 'center',
-                               xytext = (0, 5),
-                               textcoords = 'offset points')
+            bright_palette = sns.color_palette('bright')
+            pastel_palette = sns.color_palette('pastel')
+            palette = bright_palette + pastel_palette
+            colors = [palette[i] for i in ncm_index]
 
-            plt.savefig(f"plots/{prefix}/barplot_{state}.png")
+            bar_position = list()
+            legend_position = list()
+            pos = -1
+            for i in np.arange(0, len(tmp_data)):
+                if i%n:
+                    pos = pos + 0.4
+                else:
+                    pos = pos + 0.8
+                    legend_position.append(pos)
+                bar_position.append(pos)
+
+            ax.bar(bar_position, tmp_data["count"], width=0.4, align="edge",
+                   ec="k", color=colors)
+
+            handles=[plt.Rectangle((0,0),1,1, color=palette[i], ec="k") 
+                     for i in range(len(ncm_code))]
+
+            ax.legend(handles=handles, labels=list(ncm_code), 
+                      prop = {'size':10}, loc= 'center left')
+            ax.set_xticks(legend_position)
+            ax.set_xticklabels(tmp_data[data_type].unique())
+            
+            plt.savefig(f"plots/barplot_{data_type}_{uf}.png")
             plt.close()
 
 
@@ -138,8 +156,9 @@ class ExploratoryAnalysis:
 
 
     @staticmethod
-    def plot_data(data, n, prefix):
+    def plot_data(data_by_year, data_by_month, n, prefix):
         #ExploratoryAnalysis.plot_pie(data)
         #ExploratoryAnalysis.plot_correlation_matrix(data, prefix)
         #ExploratoryAnalysis.plot_hist_boxplot(data, prefix)
-        ExploratoryAnalysis.plot_bar(data,n, prefix)
+        ExploratoryAnalysis.plot_bar(data_by_year ,'CO_ANO', n, prefix)
+        ExploratoryAnalysis.plot_bar(data_by_month ,'CO_MES', n, prefix)
