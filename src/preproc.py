@@ -6,11 +6,11 @@ import pdb
 
 class Preproc:
 
-    def __init__(self, data, columns_to_drop, years, obj_to_float,
+    def __init__(self, data, columns_to_drop, uf_drop_list, obj_to_float,
         num_to_categories, text_to_counter):
         self.data = data.copy()
         self.columns_to_drop = columns_to_drop
-        self.years = years
+        self.uf_drop_list = uf_drop_list
         self.obj_to_float = obj_to_float
         self.num_to_categories = num_to_categories
         self.text_to_counter = text_to_counter
@@ -33,8 +33,8 @@ class Preproc:
         return formatted_data.astype(float)
 
 
-    def drop_another_countries(self):
-        self.data = self.data[self.data['years'].isin(self.years)]
+    def drop_non_uf(self):
+        self.data = self.data[~self.data['SG_UF_NCM'].isin(self.uf_drop_list)]
 
 
     def drop_zero_prices(self):
@@ -111,8 +111,9 @@ class Preproc:
 
 
     def apply_general_preproc(self):
-        #self.drop_another_countries()
+        self.drop_non_uf()
         #self.drop_columns()
+        # TODO: merge data
 
         categorical_data = self.data.select_dtypes(include=['object'])
         for attribute, item in categorical_data.iteritems():
@@ -145,9 +146,9 @@ class Preproc:
         grouped = self.data.groupby(['CO_ANO', 'SG_UF_NCM', 'CO_NCM'])['CO_NCM']\
                       .count().reset_index(name='count')\
                       .sort_values(['CO_ANO', 'SG_UF_NCM', 'count'],ascending = False)
-        top_grouped = grouped.groupby(['SG_UF_NCM', 'CO_ANO'])\
-                             .apply(lambda x: x.head(n))
-        return top_grouped
+        top_grouped = grouped.groupby(['SG_UF_NCM', 'CO_ANO']).apply(lambda x: x.head(n))
+        
+        return top_grouped.reset_index(drop=True)
 
 
     def get_top_products_by_month(self, year, n):
@@ -155,15 +156,15 @@ class Preproc:
         grouped = data.groupby(['CO_MES', 'SG_UF_NCM', 'CO_NCM'])['CO_NCM']\
                       .count().reset_index(name='count')\
                       .sort_values(['CO_MES', 'SG_UF_NCM', 'count'],ascending = False)
-        top_grouped = grouped.groupby(['CO_MES', 'SG_UF_NCM'])\
-                             .apply(lambda x: x.head(n))
-        return top_grouped
+        top_grouped = grouped.groupby(['SG_UF_NCM', 'CO_MES']).apply(lambda x: x.head(n))
+
+        return top_grouped.reset_index(drop=True)
 
         
     @staticmethod
-    def filter_data(data_list, attribute, values_list):
-        filtered_data = list()
+    def filter_values(data_list, attribute, values_list):
+        filtered_values = list()
         for chunk in data_list:
-            filtered_data.append(chunk[chunk[attribute].isin(values_list)])
-        filtered_data = pd.concat(filtered_data)
-        return filtered_data
+            filtered_values.append(chunk[chunk[attribute].isin(values_list)])
+        filtered_values = pd.concat(filtered_values)
+        return filtered_values
