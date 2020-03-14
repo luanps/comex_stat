@@ -115,17 +115,28 @@ class Preproc:
                           left_on='SG_UF_NCM', right_on='SG_UF')
 
 
-    def apply_general_preproc(self, uf_data):
+    def merge_ncm_data(self, ncm_data):
+        self.data = pd.merge(self.data, ncm_data, how='left', on='CO_NCM')
+
+    
+    def cut_title(self, cut_point):
+        self.data.loc[:,'NO_NCM_POR'] = self.data['NO_NCM_POR'].apply(lambda x: x[:cut_point])
+
+
+    def apply_general_preproc(self, uf_data, ncm_data, cut_point):
         self.drop_non_uf()
         #self.drop_columns()
         # TODO: merge data
-        self.merge_uf_data()
+        self.merge_uf_data(uf_data)
+        self.merge_ncm_data(ncm_data)
+        self.cut_title(cut_point)
 
-        categorical_data = self.data.select_dtypes(include=['object'])
+        '''categorical_data = self.data.select_dtypes(include=['object'])
         for attribute, item in categorical_data.iteritems():
             cleaned_data = self.clean_signs(item)
             treated_data = cleaned_data.fillna('No data')
             self.data[attribute] = treated_data
+        pdb.set_trace()'''
 
         '''for attribute in self.obj_to_float:
             data = self.data[attribute].copy()
@@ -149,29 +160,29 @@ class Preproc:
 
 
     def get_top_products_by_year(self,n):
-        grouped = self.data.groupby(['CO_ANO', 'SG_UF_NCM', 'CO_NCM'])['CO_NCM']\
+        grouped = self.data.groupby(['CO_ANO', 'NO_UF', 'NO_NCM_POR'])['NO_NCM_POR']\
                       .count().reset_index(name='count')\
-                      .sort_values(['CO_ANO', 'SG_UF_NCM', 'count'],ascending = False)
-        top_grouped = grouped.groupby(['SG_UF_NCM', 'CO_ANO']).apply(lambda x: x.head(n))
+                      .sort_values(['CO_ANO', 'NO_UF', 'count'],ascending = False)
+        top_grouped = grouped.groupby(['NO_UF', 'CO_ANO']).apply(lambda x: x.head(n))
         
         return top_grouped.reset_index(drop=True)
 
 
     def get_top_products_by_month(self, year, n):
         data = self.data[self.data['CO_ANO']==year]
-        grouped = data.groupby(['CO_MES', 'SG_UF_NCM', 'CO_NCM'])['CO_NCM']\
+        grouped = data.groupby(['CO_MES', 'NO_UF', 'NO_NCM_POR'])['NO_NCM_POR']\
                       .count().reset_index(name='count')\
-                      .sort_values(['CO_MES', 'SG_UF_NCM', 'count'],ascending = False)
-        top_grouped = grouped.groupby(['SG_UF_NCM', 'CO_MES']).apply(lambda x: x.head(n))
+                      .sort_values(['CO_MES', 'NO_UF', 'count'],ascending = False)
+        top_grouped = grouped.groupby(['NO_UF', 'CO_MES']).apply(lambda x: x.head(n))
 
         return top_grouped.reset_index(drop=True)
 
 
     def get_summed_values_by_uf(self, year):
         data = self.data[self.data['CO_ANO']==year]
-        grouped = data.groupby(['SG_UF_NCM'])['VL_FOB']\
+        grouped = data.groupby(['NO_REGIAO','NO_UF'])['VL_FOB']\
                       .count().reset_index(name='value')\
-                      .sort_values(['value'],ascending = False)
+                      .sort_values(['NO_REGIAO','value'],ascending = False)
 
         summ = grouped['value'].sum()
         grouped['proportion'] = grouped['value']/summ*100
