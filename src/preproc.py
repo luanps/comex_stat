@@ -110,10 +110,16 @@ class Preproc:
         self.data['logPrice'] = np.log(self.data['price'])
 
 
-    def apply_general_preproc(self):
+    def merge_uf_data(self, uf_data):
+        self.data = pd.merge(self.data, uf_data, how='left', 
+                          left_on='SG_UF_NCM', right_on='SG_UF')
+
+
+    def apply_general_preproc(self, uf_data):
         self.drop_non_uf()
         #self.drop_columns()
         # TODO: merge data
+        self.merge_uf_data()
 
         categorical_data = self.data.select_dtypes(include=['object'])
         for attribute, item in categorical_data.iteritems():
@@ -159,6 +165,17 @@ class Preproc:
         top_grouped = grouped.groupby(['SG_UF_NCM', 'CO_MES']).apply(lambda x: x.head(n))
 
         return top_grouped.reset_index(drop=True)
+
+
+    def get_summed_values_by_uf(self, year):
+        data = self.data[self.data['CO_ANO']==year]
+        grouped = data.groupby(['SG_UF_NCM'])['VL_FOB']\
+                      .count().reset_index(name='value')\
+                      .sort_values(['value'],ascending = False)
+
+        summ = grouped['value'].sum()
+        grouped['proportion'] = grouped['value']/summ*100
+        return grouped
 
         
     @staticmethod
