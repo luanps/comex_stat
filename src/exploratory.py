@@ -71,6 +71,7 @@ class ExploratoryAnalysis:
             unique_values.update({attribute: top_unique})
         return unique_values
 
+
     def check_singlelabel(self):
         singlelabel = dict()
         unique_values = self.check_unique_values(2)
@@ -78,32 +79,6 @@ class ExploratoryAnalysis:
             if len(value) <=1:
                 singlelabel.update({key: value})
         return singlelabel
-
-
-    @staticmethod
-    def plot_correlation_matrix(data, prefix):
-        plt.figure(figsize=(14, 14))
-        plt.title(f"""Correlation matrix""")
-        corr = data.apply(lambda x: pd.factorize(x)[0]).corr()
-        axis = sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns,
-                         linewidths=.2, cmap="YlGnBu")
-
-        plt.savefig(f"plots/{prefix}/correlation_matrix.png",
-                    bbox_inches='tight')
-
-
-    @staticmethod
-    def plot_hist_boxplot(data, prefix):
-        continuous_data = data.select_dtypes(exclude=['object'])
-        for attribute, item in continuous_data.iteritems():
-            
-            fig, ax =plt.subplots(1,2, figsize=(12,4))
-            sns.distplot(data[attribute], color= 'blue', ax=ax[0])
-            sns.boxplot(data[attribute], color= 'blue', ax=ax[1])
-
-            plt.savefig(f"plots/{prefix}/hist_boxplot_{attribute}.png",
-                        bbox_inches='tight')
-            plt.close()
 
 
     @staticmethod
@@ -185,9 +160,7 @@ class ExploratoryAnalysis:
 
     @staticmethod
     def plot_data(data_by_year, data_by_month, data_by_uf_values, n, year, prefix):
-        #ExploratoryAnalysis.plot_correlation_matrix(data, prefix)
-        #ExploratoryAnalysis.plot_hist_boxplot(data, prefix)
         ExploratoryAnalysis.plot_bar(data_by_year ,'CO_ANO', n, prefix)
         ExploratoryAnalysis.plot_bar(data_by_month ,'CO_MES', n, prefix)
-        #ExploratoryAnalysis.plot_pie_per_region(data_by_uf_values, year, prefix)
-        #ExploratoryAnalysis.plot_pie(data_by_uf_values, year, prefix)
+        ExploratoryAnalysis.plot_pie_per_region(data_by_uf_values, year, prefix)
+        ExploratoryAnalysis.plot_pie(data_by_uf_values, year, prefix)
