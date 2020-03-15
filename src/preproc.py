@@ -118,18 +118,20 @@ class Preproc:
     def merge_ncm_data(self, ncm_data):
         self.data = pd.merge(self.data, ncm_data, how='left', on='CO_NCM')
 
+    def merge_country_data(self, country_data):
+        self.data = pd.merge(self.data, country_data, how='left', on='CO_PAIS')
     
     def cut_title(self, cut_point):
         self.data.loc[:,'NO_NCM_POR'] = self.data['NO_NCM_POR'].apply(lambda x: x[:cut_point])
 
 
-    def apply_general_preproc(self, uf_data, ncm_data, cut_point):
+    def apply_general_preproc(self, uf_data, ncm_data, country_data, cut_point):
         self.drop_non_uf()
-        #self.drop_columns()
-        # TODO: merge data
         self.merge_uf_data(uf_data)
         self.merge_ncm_data(ncm_data)
+        self.merge_country_data(country_data)
         self.cut_title(cut_point)
+        self.drop_columns()
 
         '''categorical_data = self.data.select_dtypes(include=['object'])
         for attribute, item in categorical_data.iteritems():

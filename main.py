@@ -71,8 +71,8 @@ def preproc_routines(filepath):
     uf_data = load_dataset(uf_filepath, chunk = False)
     ncm_filepath = 'data/NCM.csv'
     ncm_data = load_dataset(ncm_filepath, chunk = False)
-    #country_filepath = 'data/PAIS.csv'
-    #country_data = load_dataset(country_filepath)
+    country_filepath = 'data/PAIS.csv'
+    country_data = load_dataset(country_filepath, chunk = False)
 
     uf_drop_list = ['EX', 'CB', 'MN', 'RE', 'ED', 'ND', 'ZN']
     years_to_keep = [2017, 2018, 2019]
@@ -82,8 +82,13 @@ def preproc_routines(filepath):
     logging.info(f"Filtering data to keep only {year_attribute}:{years_to_keep}\n{draw_line}")
     data = Preproc.filter_values(data, year_attribute, years_to_keep)
 
-    preproc = Preproc(data, '', uf_drop_list , '', '', '')
-    preproc.apply_general_preproc(uf_data, ncm_data, cut_point)
+    columns_to_drop = ['CO_UF', 'SG_UF', 'CO_NCM', 'CO_UNID_y', 'CO_PAIS', 
+                       'SG_UF_NCM', 'NO_NCM_ESP', 'NO_NCM_ING','CO_PAIS_ISON3',
+                       'CO_PAIS_ISOA3','NO_PAIS_ING','NO_PAIS_ESP']
+
+
+    preproc = Preproc(data, columns_to_drop, uf_drop_list , '', '', '')
+    preproc.apply_general_preproc(uf_data, ncm_data, country_data, cut_point)
     top_n = 3
     year = 2019
     prefix = 'exportations'
@@ -100,7 +105,6 @@ def preproc_routines(filepath):
     logging.info(f"""{prefix} values per UF in {year}
         \n{grouped_values_by_uf.to_markdown()}\n{draw_line}""")
 
-    pdb.set_trace()
     logging.info(f"Plotting data \n{draw_line}")
     ExploratoryAnalysis.plot_data(grouped_by_year, grouped_by_month,
                                   grouped_values_by_uf, top_n, year, prefix)
