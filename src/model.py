@@ -90,12 +90,13 @@ class Model:
 
     @staticmethod
     def encode_data(X):
-        categorical_data = X.select_dtypes(include=['object'])
-        categorical_labels = categorical_data.keys().tolist()
+        #categorical_data = X.select_dtypes(include=['object'])
+        X = X.astype('str')
+        categorical_labels = X.keys().tolist()
 
         onehot_X = OneHotEncoder()
-        onehot_X.fit(categorical_data)
-        onehot_encoded = onehot_X.transform(categorical_data).toarray()
+        onehot_X.fit(X)
+        onehot_encoded = onehot_X.transform(X).toarray()
         onehot_labels = onehot_X.get_feature_names(categorical_labels)
 
         onehot_df = pd.DataFrame(onehot_encoded, columns = onehot_labels)
@@ -104,7 +105,7 @@ class Model:
 
     @staticmethod
     def encode_split_data(data):
-        X = data[['CO_MES', 'NO_PAIS']]
+        X = data[['CO_MES', 'NO_PAIS', 'CO_NCM']]
         X = Model.encode_data(X)
         y = data[['log_vlfob']]
 
