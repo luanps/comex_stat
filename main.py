@@ -29,9 +29,9 @@ logging.getLogger().addHandler(stderrLogger)
 
 def data_exploration(data):
     exploratory = ExploratoryAnalysis(data)
+    draw_line = "="*79
     
     data_length = exploratory.data_length()
-    draw_line = "="*79
     logging.info(f"""This dataset contains {data_length[0]}
         samples with {data_length[1]} attributes.\n{draw_line}""")
 
@@ -58,87 +58,71 @@ def data_exploration(data):
 
     singlelabel = exploratory.check_singlelabel()
     logging.info(f"""Attributes with only one label:\n{singlelabel}\n{draw_line}""")
-   
-    return majority_null, singlelabel
 
 
-def preproc_routines(filepath):
+def preproc_routines(p, prefix):
 
     draw_line = "="*79
     logging.info(f"Reading data from file\n{draw_line}")
-    data = load_dataset(filepath, chunk = True)
+    data = load_dataset(p['data_filepath'], chunk = True)
     uf_filepath = 'data/UF.csv'
-    uf_data = load_dataset(uf_filepath, chunk = False)
+    uf_data = load_dataset(p['uf_filepath'], chunk = False)
     ncm_filepath = 'data/NCM.csv'
-    ncm_data = load_dataset(ncm_filepath, chunk = False)
+    ncm_data = load_dataset(p['ncm_filepath'], chunk = False)
     country_filepath = 'data/PAIS.csv'
-    country_data = load_dataset(country_filepath, chunk = False)
+    country_data = load_dataset(p['country_filepath'], chunk = False)
 
-    uf_drop_list = ['EX', 'CB', 'MN', 'RE', 'ED', 'ND', 'ZN']
-    years_to_keep = [2017, 2018, 2019]
-    cut_point = 80
+    logging.info(f"""Filtering data to keep only 
+                 {p['year_attribute']}:{p['years_to_keep']}\n{draw_line}""")
+    data = Preproc.filter_values(data, p['year_attribute'], p['years_to_keep'])
 
-    year_attribute = 'CO_ANO'
-    logging.info(f"Filtering data to keep only {year_attribute}:{years_to_keep}\n{draw_line}")
-    data = Preproc.filter_values(data, year_attribute, years_to_keep)
+    preproc = Preproc(data, p['columns_to_drop'], p['uf_drop_list'])
+    preproc.apply_general_preproc(uf_data, ncm_data, country_data,
+                                  p['textual_cut_point'])
 
-    columns_to_drop = ['CO_UF', 'SG_UF', 'CO_NCM', 'CO_UNID_y', 'CO_PAIS', 
-                       'SG_UF_NCM', 'NO_NCM_ESP', 'NO_NCM_ING','CO_PAIS_ISON3',
-                       'CO_PAIS_ISOA3','NO_PAIS_ING','NO_PAIS_ESP']
-
-
-    preproc = Preproc(data, columns_to_drop, uf_drop_list , '', '', '')
-    preproc.apply_general_preproc(uf_data, ncm_data, country_data, cut_point)
-    top_n = 3
-    year = 2019
-    prefix = 'exportations'
-
-    grouped_by_year = preproc.get_top_products_by_year(top_n)
-    logging.info(f"""Top {top_n} {prefix} by UF each year
+    grouped_by_year = preproc.get_top_products_by_year(p['top_n'])
+    logging.info(f"""Top {p['top_n']} {prefix} by UF each year
         \n{grouped_by_year.to_markdown()}\n{draw_line}""")
 
-    grouped_by_month = preproc.get_top_products_by_month(year, top_n)
-    logging.info(f"""Top {top_n} {prefix} by UF each {year}'s month
-        \n{grouped_by_month.to_markdown()}\n{draw_line}""")
+    grouped_by_month = preproc.get_top_products_by_month(p['year'], p['top_n'])
+    logging.info(f"""Top {p['top_n']} {prefix} by UF each {p['year']}'s month
+                  \n{grouped_by_month.to_markdown()}\n{draw_line}""")
 
-    grouped_values_by_uf = preproc.get_summed_values_by_uf(year)
-    logging.info(f"""{prefix} values per UF in {year}
-        \n{grouped_values_by_uf.to_markdown()}\n{draw_line}""")
+    grouped_values_by_uf = preproc.get_summed_values_by_uf(p['year'])
+    logging.info(f"""{prefix} values per UF in {p['year']}\n
+                {grouped_values_by_uf.to_markdown()}\n{draw_line}""")
+
+    grouped_uf = preproc.get_top_products_by_month_one_uf(p['keep_uf'], p['top_n'])
+    logging.info(f"""{prefix} {p['keep_uf']} top {p['top_n']} values per month\n
+                 {grouped_uf.to_markdown()}\n{draw_line}""")
 
     logging.info(f"Plotting data \n{draw_line}")
     ExploratoryAnalysis.plot_data(grouped_by_year, grouped_by_month,
-                                  grouped_values_by_uf, top_n, year, prefix)
-
-    #logging.info(f"Data exploration\n{draw_line}")
-    #majority_null, singlelabel = data_exploration(data)
+                                  grouped_values_by_uf, p['top_n'], p['year'], prefix)
 
 
+    logging.info(f"""Keep only top {p['top_n']} data per month from UF {p['keep_uf']}
+                  to predict their values\n{draw_line}""")
+    preproc.keep_top_data_to_predict(grouped_uf, p['keep_uf'])
 
-
-    '''logging.info("Removing outliers")
-    outlier_threshold = 3
-    outliers_to_analize = ['price', 'accommodates', 'bathrooms', 'bedrooms',
-    'beds', 'calculated_host_listings_count', 'cleaning_fee', 'extra_people',
-    'guests_included', 'minimum_nights', 'security_deposit'] 
-    logging.info(f"""Numerical data which their outliers will be removed 
-        (computed by z-score): \n{outliers_to_analize}""")
-    preproc.drop_outliers(outliers_to_analize, outlier_threshold)
-    logging.info("="*69)
-
-    logging.info("Transforming target variable 'price' into log")
-    preproc.log_price()
-    logging.info("="*69)
-
-    logging.info("Plotting data")
-    prefix = 'after_outlier_removal'
-    ExploratoryAnalysis.plot_data(preproc.data, prefix)
-    logging.info("="*69)
-
-    logging.info("Data exploration after preprocessing")
+    logging.info(f"Data exploration\n{draw_line}")
     data_exploration(preproc.data)
-    logging.info("="*69)
 
-    return preproc.data'''
+
+    logging.info(f"Remove empty 'VL_FOB' from data\n{draw_line}")
+    preproc.drop_zero_vlfob()
+
+    logging.info(f"Transforming target variable 'VL_FOB' into log\n{draw_line}")
+    preproc.target_log()
+
+    '''logging.info("Plotting data")
+    prefix = 'after_outlier_removal'
+    ExploratoryAnalysis.plot_data(preproc.data, prefix)'''
+
+    logging.info("Data exploration after preprocessing steps\n{draw_line}")
+    data_exploration(preproc.data)
+
+    return preproc.data
 
 
 def update_alphas(generic_model, model_name, model_configs, alpha, l1_ratio): 
@@ -272,19 +256,42 @@ def run_linear_model(generic_model, model_name,  model_configs):
 
 
 if __name__ == '__main__':
+    
+    preproc_params = {
+        'data_filepath' : 'data/EXP_COMPLETA.csv',
+        'uf_filepath' : 'data/UF.csv',
+        'ncm_filepath' : 'data/NCM.csv',
+        'country_filepath' : 'data/PAIS.csv',
 
+        'uf_drop_list' : ['EX', 'CB', 'MN', 'RE', 'ED', 'ND', 'ZN'],
+        'years_to_keep' : [2017, 2018, 2019],
+        'year_attribute' : 'CO_ANO',
+        'year' : 2019,
+        'textual_cut_point' : 80,
+
+        'columns_to_drop' : ['CO_UF', 'SG_UF', 'CO_UNID_x', 'CO_VIA', 
+                            'CO_UNID_y', 'CO_URF', 'QT_ESTAT', 'KG_LIQUIDO',
+                            'CO_SH6', 'CO_PPE', 'CO_PPI', 'CO_FAT_AGREG',
+                            'CO_CUCI_ITEM','CO_CGCE_N3', 'CO_SIIT',
+                            'CO_ISIC4', 'CO_EXP_SUBSET' , 'NO_NCM_ESP',
+                            'NO_NCM_ING', 'CO_PAIS', 'CO_PAIS_ISON3',
+                            'CO_PAIS_ISOA3','NO_PAIS_ING','NO_PAIS_ESP'], 
+        'top_n' : 3,
+        'keep_uf' : 'SC'
+    }
+
+    prefix = 'exportations'
     preproc_filepath = 'data/exp_preprocessed'
     '''try:
         data = load_serialized(preproc_filepath)
         logging.info(f'Preprocessed file preproc_filepath loaded')
     except:'''
     logging.info(f'Running data preprocessment routines')
-    data_filepath = 'data/EXP_COMPLETA.csv'
-    preproc_routines(data_filepath)
-    '''data = preproc_routines()
+
+    data = preproc_routines(preproc_params, prefix)
     save_serialized(preproc_filepath, data)
 
-    general_configs = {
+    '''general_configs = {
         'splitted_data' : Model.encode_split_data(data),
         'cross_val' : 5,
         'max_iter' : 50000,
