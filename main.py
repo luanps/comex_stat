@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-'''from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import make_scorer
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.linear_model import ElasticNetCV
 from sklearn.linear_model import LassoCV
 from sklearn.linear_model import RidgeCV
-from sklearn.svm import SVR'''
+from sklearn.svm import SVR
 import logging
 import numpy as np
 import pandas as pd
@@ -115,17 +115,14 @@ def preproc_routines(p, prefix):
     logging.info(f"Transforming target variable 'VL_FOB' into log\n{draw_line}")
     preproc.target_log()
 
-    '''logging.info("Plotting data")
-    prefix = 'after_outlier_removal'
-    ExploratoryAnalysis.plot_data(preproc.data, prefix)'''
-
     logging.info("Data exploration after preprocessing steps\n{draw_line}")
     data_exploration(preproc.data)
 
     return preproc.data
 
 
-def update_alphas(generic_model, model_name, model_configs, alpha, l1_ratio): 
+def update_alphas(generic_model, model_name, model_configs, alpha, l1_ratio, prefix):
+
     refined_alphas = model_configs['update_alphas'] * alpha
     refined_l1_ratios = model_configs['update_alphas'] * l1_ratio
 
@@ -145,13 +142,14 @@ def update_alphas(generic_model, model_name, model_configs, alpha, l1_ratio):
                               cv = model_configs['cross_val'],
                               max_iter = model_configs['max_iter'])
 
-    model = Model(model, model_name, cross_val = model_configs['cross_val'])
+    model = Model(model, model_name, prefix, 
+                  cross_val = model_configs['cross_val'])
     return model
 
 
 
 def run_ensemble_model(generic_model, model_name,  model_configs,
-                       ensemble_param_grid):
+                       ensemble_param_grid, prefix):
 
     X_train, X_test, y_train, y_test = model_configs['splitted_data']
     y_train = y_train.to_numpy().ravel()
@@ -162,14 +160,18 @@ def run_ensemble_model(generic_model, model_name,  model_configs,
                                ensemble_param_grid, random_state=1, n_iter=100,
                                cv=model_configs['cross_val'], verbose=0,
                                scoring = scorer)
-    model = Model(model, model_name, cross_val = model_configs['cross_val'])
+
+    model = Model(model, model_name, prefix,
+                  cross_val = model_configs['cross_val'])
 
     model.fit(X_train, y_train)
     best_model = model.model.best_estimator_
     best_params = model.model.best_params_ 
     logging.info(f'Best {model_name} params:\n{best_params}')
 
-    model = Model(best_model, model_name, cross_val = model_configs['cross_val'])
+    model = Model(best_model, model_name, prefix,
+                  cross_val = model_configs['cross_val'])
+
     rmse_train = model.fit_cross_val(X_train, y_train)
     rmse_test = model.predict_cross_val(X_test, y_test)
     logging.info(f'RMSE on training data: {rmse_train}')
@@ -177,12 +179,12 @@ def run_ensemble_model(generic_model, model_name,  model_configs,
 
     model.plot_feature_importances(X_test)
 
-    filepath = f'models/{model_name}' 
+    filepath = f'models/{prefix}_{model_name}' 
     save_serialized(filepath, model)
 
 
 def run_nonlinear_model(generic_model, model_name,  model_configs,
-                        nonlinear_param_grid):
+                        nonlinear_param_grid, prefix):
 
     X_train, X_test, y_train, y_test = model_configs['splitted_data']
     y_train = y_train.to_numpy().ravel()
@@ -193,24 +195,27 @@ def run_nonlinear_model(generic_model, model_name,  model_configs,
                                nonlinear_param_grid, random_state=1, n_iter=100,
                                cv=model_configs['cross_val'], verbose=0,
                                scoring = scorer)
-    model = Model(model, model_name, cross_val = model_configs['cross_val'])
+    model = Model(model, model_name, prefix,
+                  cross_val = model_configs['cross_val'])
 
     model.fit(X_train, y_train)
     best_model = model.model.best_estimator_
     best_params = model.model.best_params_ 
     logging.info(f'Best {model_name} params:\n{best_params}')
 
-    model = Model(best_model, model_name, cross_val = model_configs['cross_val'])
+    model = Model(best_model, model_name, prefix,
+                  cross_val = model_configs['cross_val'])
+
     rmse_train = model.fit_cross_val(X_train, y_train)
     rmse_test = model.predict_cross_val(X_test, y_test)
     logging.info(f'RMSE on training data: {rmse_train}')
     logging.info(f'RMSE on validation data: {rmse_test}')
 
-    filepath = f'models/{model_name}' 
+    filepath = f'models/{prefix}_{model_name}' 
     save_serialized(filepath, model)
 
     
-def run_linear_model(generic_model, model_name,  model_configs):
+def run_linear_model(generic_model, model_name,  model_configs, prefix):
 
     X_train, X_test, y_train, y_test = model_configs['splitted_data']
     y_train = y_train.to_numpy().ravel()
@@ -231,7 +236,9 @@ def run_linear_model(generic_model, model_name,  model_configs):
                               cv = model_configs['cross_val'],
                               max_iter = model_configs['max_iter'])
 
-    model = Model(model, model_name, cross_val = model_configs['cross_val'])
+    model = Model(model, model_name, prefix,
+                  cross_val = model_configs['cross_val'])
+
     alpha, l1_ratio = model.fit_linear_model(X_train, y_train)
     logging.info(f'Best alpha: {alpha}')
     if model_name == 'ElasticNet':
@@ -239,7 +246,7 @@ def run_linear_model(generic_model, model_name,  model_configs):
 
 
     updated_model = update_alphas(generic_model, model_name, model_configs, 
-                                  alpha, l1_ratio)
+                                  alpha, l1_ratio, prefix)
     alpha, l1_ratio = updated_model.fit_linear_model(X_train, y_train)
 
     rmse_train = updated_model.fit_cross_val(X_train, y_train)
@@ -251,110 +258,114 @@ def run_linear_model(generic_model, model_name,  model_configs):
     logging.info(f"""The {model_name} model picked {keep_coefs} features
                      and eliminated {discarted_coefs} features""")
 
-    filepath = f'models/{model_name}' 
+    filepath = f'models/{prefix}_{model_name}' 
     save_serialized(filepath, model)
 
 
 if __name__ == '__main__':
     
-    preproc_params = {
-        'data_filepath' : 'data/EXP_COMPLETA.csv',
-        'uf_filepath' : 'data/UF.csv',
-        'ncm_filepath' : 'data/NCM.csv',
-        'country_filepath' : 'data/PAIS.csv',
+    prefixes = ['exportations', 'importations']
+    file_prefix = ['EXP', 'IMP']
+    for dt_file, prefix in zip(file_prefix, prefixes):
+        preproc_params = {
+            'data_filepath' : f'data/{dt_file}_COMPLETA.csv',
+            'uf_filepath' : 'data/UF.csv',
+            'ncm_filepath' : 'data/NCM.csv',
+            'country_filepath' : 'data/PAIS.csv',
 
-        'uf_drop_list' : ['EX', 'CB', 'MN', 'RE', 'ED', 'ND', 'ZN'],
-        'years_to_keep' : [2017, 2018, 2019],
-        'year_attribute' : 'CO_ANO',
-        'year' : 2019,
-        'textual_cut_point' : 80,
+            'uf_drop_list' : ['EX', 'CB', 'MN', 'RE', 'ED', 'ND', 'ZN'],
+            'years_to_keep' : [2017, 2018, 2019],
+            'year_attribute' : 'CO_ANO',
+            'year' : 2019,
+            'textual_cut_point' : 80,
+            'top_n' : 3,
+            'keep_uf' : 'SC',
+            'columns_to_drop' : ['CO_UF', 'SG_UF', 'CO_UNID_x', 'CO_VIA', 
+                                'CO_UNID_y', 'CO_URF', 'QT_ESTAT', 'KG_LIQUIDO',
+                                'CO_SH6', 'CO_PPE', 'CO_PPI', 'CO_FAT_AGREG',
+                                'CO_CUCI_ITEM','CO_CGCE_N3', 'CO_SIIT',
+                                'CO_ISIC4', 'CO_EXP_SUBSET' , 'NO_NCM_ESP',
+                                'NO_NCM_ING', 'CO_PAIS', 'CO_PAIS_ISON3',
+                                'CO_PAIS_ISOA3','NO_PAIS_ING','NO_PAIS_ESP']
+        }
 
-        'columns_to_drop' : ['CO_UF', 'SG_UF', 'CO_UNID_x', 'CO_VIA', 
-                            'CO_UNID_y', 'CO_URF', 'QT_ESTAT', 'KG_LIQUIDO',
-                            'CO_SH6', 'CO_PPE', 'CO_PPI', 'CO_FAT_AGREG',
-                            'CO_CUCI_ITEM','CO_CGCE_N3', 'CO_SIIT',
-                            'CO_ISIC4', 'CO_EXP_SUBSET' , 'NO_NCM_ESP',
-                            'NO_NCM_ING', 'CO_PAIS', 'CO_PAIS_ISON3',
-                            'CO_PAIS_ISOA3','NO_PAIS_ING','NO_PAIS_ESP'], 
-        'top_n' : 3,
-        'keep_uf' : 'SC'
-    }
+        preproc_filepath = f'data/{prefix}_preprocessed'
+        try:
+            data = load_serialized(preproc_filepath)
+            logging.info(f'Preprocessed file {preproc_filepath} loaded')
+        except:
+            logging.info(f"""Running data preprocessment routines on 
+                         {prefix} dataset""")
+            data = preproc_routines(preproc_params, prefix)
+            save_serialized(preproc_filepath, data)
 
-    prefix = 'exportations'
-    preproc_filepath = 'data/exp_preprocessed'
-    '''try:
-        data = load_serialized(preproc_filepath)
-        logging.info(f'Preprocessed file preproc_filepath loaded')
-    except:'''
-    logging.info(f'Running data preprocessment routines')
+        draw_line = "="*79
 
-    data = preproc_routines(preproc_params, prefix)
-    save_serialized(preproc_filepath, data)
+        general_configs = {
+            'splitted_data' : Model.encode_split_data(data),
+            'cross_val' : 2,#5,
+            'max_iter' : 100,#50000,
+            'initial_alphas' : np.array([0.01, 0.03, 0.06, 0.1, 0.3, 0.6, 1, 3,
+                                         6, 10, 30, 60]),
+            'update_alphas' : np.array([.6, .65, .7, .75, .8, .85, .9, .95, 
+                                        1.05, 1.1, 1.15, 1.25, 1.3, 1.35, 1.4])
+        }
 
-    '''general_configs = {
-        'splitted_data' : Model.encode_split_data(data),
-        'cross_val' : 5,
-        'max_iter' : 50000,
-        'initial_alphas' : np.array([0.01, 0.03, 0.06, 0.1, 0.3, 0.6, 1, 3, 6,
-                                     10, 30, 60]),
-        'update_alphas' : np.array([.6, .65, .7, .75, .8, .85, .9, .95, 1.05, 
-                                    1.1, 1.15, 1.25, 1.3, 1.35, 1.4])
-    }
+        nonlinear_param_grid = {
+            'C' : [0.001, 0.01, 0.1, 1, 10],
+            'gamma' : [0.001, 0.01, 0.1, 1]
+        }
 
-    ensemble_param_grid = {
-        'n_estimators' : [100, 500, 1000],
-        'learning_rate' : [0.01, 0.02, 0.05],
-        'max_depth': [1, 2, 5],
-        'min_samples_leaf' : [1, 5, 10],
-        'min_samples_split' : [2, 5, 10]
-    }
+        ensemble_param_grid = {
+            'n_estimators' : [100, 500, 1000],
+            'learning_rate' : [0.01, 0.02, 0.05],
+            'max_depth': [1, 2, 5],
+            'min_samples_leaf' : [1, 5, 10],
+            'min_samples_split' : [2, 5, 10]
+        }
 
-    nonlinear_param_grid = {
-        'C' : [0.001, 0.01, 0.1, 1, 10],
-        'gamma' : [0.001, 0.01, 0.1, 1]
-    }
+        '''nonlinear_param_grid = {
+            'C' : [1],
+            'gamma' : [1]
+        }
 
-    ensemble_param_grid = {
-        'n_estimators' : [100],
-        'learning_rate' : [0.01],
-        'max_depth': [1],
-        'min_samples_leaf' : [1],
-        'min_samples_split' : [2]
-    }
-
-    nonlinear_param_grid = {
-        'C' : [1],
-        'gamma' : [1]
-    }
-
-    logging.info("Running Ridge Regression")
-    model = RidgeCV
-    model_name = 'Ridge'
-    run_linear_model(model, model_name, general_configs)
-    logging.info("="*69)
+        ensemble_param_grid = {
+            'n_estimators' : [30],
+            'learning_rate' : [0.01],
+            'max_depth': [1],
+            'min_samples_leaf' : [1],
+            'min_samples_split' : [2]
+        }'''
 
 
-    logging.info("Running Lasso Regression")
-    model = LassoCV
-    model_name = 'Lasso'
-    run_linear_model(model, model_name, general_configs)
-    logging.info("="*69)
+        logging.info("Running Ridge Regression")
+        model = RidgeCV
+        model_name = 'Ridge'
+        run_linear_model(model, model_name, general_configs, prefix)
+        logging.info(f"\n{draw_line}")
 
-    logging.info("Running ElasticNet Regression")
-    model = ElasticNetCV
-    model_name = 'ElasticNet'
-    run_linear_model(model, model_name, general_configs)
-    logging.info("="*69)
+        logging.info("Running Lasso Regression")
+        model = LassoCV
+        model_name = 'Lasso'
+        run_linear_model(model, model_name, general_configs, prefix)
+        logging.info(f"\n{draw_line}")
 
-    logging.info("Running SVR")
-    model = SVR
-    model_name = 'SVR'
-    run_nonlinear_model(model, model_name, general_configs,
-                        nonlinear_param_grid)
-    logging.info("="*69)
+        logging.info("Running ElasticNet Regression")
+        model = ElasticNetCV
+        model_name = 'ElasticNet'
+        run_linear_model(model, model_name, general_configs, prefix)
+        logging.info(f"\n{draw_line}")
 
-    logging.info("Running Gradient Boosting")
-    model = GradientBoostingRegressor
-    model_name = 'GradientBoosting'
-    run_ensemble_model(model, model_name, general_configs, ensemble_param_grid)
-    logging.info("="*69)'''
+        logging.info("Running SVR")
+        model = SVR
+        model_name = 'SVR'
+        run_nonlinear_model(model, model_name, general_configs,
+                            nonlinear_param_grid, prefix)
+        logging.info(f"\n{draw_line}")
+
+        logging.info("Running Gradient Boosting")
+        model = GradientBoostingRegressor
+        model_name = 'GradientBoosting'
+        run_ensemble_model(model, model_name, general_configs,
+                           ensemble_param_grid, prefix)
+        logging.info(f"\n{draw_line}")
