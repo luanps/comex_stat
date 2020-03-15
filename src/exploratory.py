@@ -91,7 +91,8 @@ class ExploratoryAnalysis:
 
             bright_palette = sns.color_palette('bright')
             pastel_palette = sns.color_palette('pastel')
-            palette = bright_palette + pastel_palette
+            dark_palette = sns.color_palette('dark')
+            palette = bright_palette + pastel_palette + dark_palette
             colors = [palette[i] for i in ncm_index]
 
             bar_position = list()
