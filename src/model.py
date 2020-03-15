@@ -90,33 +90,22 @@ class Model:
 
     @staticmethod
     def encode_data(X):
-        numerical_data = X.select_dtypes(exclude=['object'])
-        numerical_labels = numerical_data.keys().tolist()
-
         categorical_data = X.select_dtypes(include=['object'])
         categorical_labels = categorical_data.keys().tolist()
-
-        standard_X = StandardScaler()
-        standard_X.fit(numerical_data)
-        standard_encoded = standard_X.transform(numerical_data)
 
         onehot_X = OneHotEncoder()
         onehot_X.fit(categorical_data)
         onehot_encoded = onehot_X.transform(categorical_data).toarray()
         onehot_labels = onehot_X.get_feature_names(categorical_labels)
 
-        standard_df = pd.DataFrame(standard_encoded, columns = numerical_labels)
         onehot_df = pd.DataFrame(onehot_encoded, columns = onehot_labels)
-        X = pd.concat([standard_df, onehot_df],axis=1)
-
-        return X
+        return onehot_df
 
 
     @staticmethod
     def encode_split_data(data):
-        X = data.drop(['logPrice', 'price'], axis=1)
+        X = data[['CO_MES', 'NO_PAIS']]
         X = Model.encode_data(X)
-        y = data[['logPrice']]
+        y = data[['log_vlfob']]
 
         return train_test_split(X, y, test_size = 0.3, random_state = 42)
-
