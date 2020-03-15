@@ -7,7 +7,7 @@ import pdb
 class Preproc:
 
     def __init__(self, data, columns_to_drop, uf_drop_list, obj_to_float,
-        num_to_categories, text_to_counter):
+                num_to_categories, text_to_counter):
         self.data = data.copy()
         self.columns_to_drop = columns_to_drop
         self.uf_drop_list = uf_drop_list
@@ -37,8 +37,8 @@ class Preproc:
         self.data = self.data[~self.data['SG_UF_NCM'].isin(self.uf_drop_list)]
 
 
-    def drop_zero_prices(self):
-        self.data = self.data[self.data['price'] != 0]
+    def drop_zero_vlfob(self):
+        self.data = self.data[self.data['VL_FOB'] != 0]
        
 
     def compute_zscore(self, data_item):
@@ -106,8 +106,12 @@ class Preproc:
         return data_item
 
 
-    def log_price(self):
-        self.data['logPrice'] = np.log(self.data['price'])
+    def keep_one_uf(self, uf):
+        self.data = self.data[self.data['SG_UF_NCM'] == uf]
+
+
+    def target_log(self):
+        self.data['log_vlfob'] = np.log(self.data['VL_FOB'])
 
 
     def merge_uf_data(self, uf_data):
@@ -184,7 +188,7 @@ class Preproc:
         data = self.data[self.data['CO_ANO']==year]
         grouped = data.groupby(['NO_REGIAO','NO_UF'])['VL_FOB']\
                       .count().reset_index(name='value')\
-                      .sort_values(['NO_REGIAO','value'],ascending = False)
+                      .sort_values(['value'],ascending = False)
 
         summ = grouped['value'].sum()
         grouped['proportion'] = grouped['value']/summ*100
