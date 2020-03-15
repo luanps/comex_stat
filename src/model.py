@@ -15,9 +15,10 @@ import pdb
 
 class Model:
 
-    def __init__(self, model, model_name, cross_val):
+    def __init__(self, model, model_name, prefix, cross_val):
         self.model = model
         self.model_name = model_name
+        self.prefix = prefix
         self.cross_val = cross_val
         self.scorer = make_scorer(mean_squared_error, greater_is_better = False) 
 
@@ -65,7 +66,7 @@ class Model:
         importances.plot(kind = 'barh')
 
         plt.title(f'{self.model_name} feature importances')
-        plt.savefig(f'plots/coefficients/{self.model_name}.png', 
+        plt.savefig(f'plots/coefficients/{self.prefix}_{self.model_name}.png', 
                     bbox_inches = "tight")
         plt.close()
 
@@ -81,7 +82,7 @@ class Model:
 
         imp_coefs.plot(kind = 'barh')
         plt.title(f'{self.model_name} coefficients')
-        plt.savefig(f'plots/coefficients/{self.model_name}.png', 
+        plt.savefig(f'plots/coefficients/{self.prefix}_{self.model_name}.png', 
                     bbox_inches = "tight")
         plt.close()
 
