@@ -229,13 +229,13 @@ para cada região geográfica do Brasil:
 ![pie_country](plots/exportations/piechart_values_per_region_2019.png)
 
 Os demais gráficos a seguir representam a contribuição de cada estado
-em relação à sua região:
+em relação à sua região, ordenados conforme 
 
-![pie_sul](plots/exportations/piechart_values_REGIAO%20SUL_2019.png)
-![pie_sudeste](plots/exportations/piechart_values_REGIAO%20SUDESTE_2019.png)
-![pie_centro_oeste](plots/exportations/piechart_values_REGIAO%20CENTRO%20OESTE_2019.png)
-![pie_norte](plots/exportations/piechart_values_REGIAO%20NORTE_2019.png)
-![pie_nordeste](plots/exportations/piechart_values_REGIAO%20NORDESTE_2019.png)
+![pie_sudeste](plots/exportations/piechart_values_REGIAO%20SUDESTE_2019.png){width=50%}
+![pie_sul](plots/exportations/piechart_values_REGIAO%20SUL_2019.png){width=50%}
+![pie_nordeste](plots/exportations/piechart_values_REGIAO%20NORDESTE_2019.png){width=50%}
+![pie_norte](plots/exportations/piechart_values_REGIAO%20NORTE_2019.png){width=50%}
+![pie_centro_oeste](plots/exportations/piechart_values_REGIAO%20CENTRO%20OESTE_2019.png){width=50%}
 
 
 #### e) Representatividade em valor de importação por estado no ano de 2019 em relação ao total importado pelo país no mesmo ano.
