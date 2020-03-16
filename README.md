@@ -177,6 +177,15 @@ Os gráficos dos demais estados e DF estão dispostos no diretório
 
 #### d) Representatividade em valor de exportação por estado no ano de 2019 em relação ao total exportado pelo país no mesmo ano.
 
+A tabela abaixo relata a proporção do valor obtido na exportação de produtos
+do ano de 2019 para cada UF em relação ao total exportado pelo país, em ordem
+decrescente.
+
+Percebe-se que, somete o estado de São Paulo foi responsável por 42.90%
+do valor total de exportações, atingindo mais do que o dobro do segundo
+estado (Rio Grande do Sul, com 13,18%).
+
+
 | NO_REGIAO           | NO_UF               |   value |   proportion |
 |:--------------------|:--------------------|--------:|-------------:|
 | REGIAO SUDESTE      | São Paulo           |  607762 |   42.9036    |
@@ -207,7 +216,26 @@ Os gráficos dos demais estados e DF estão dispostos no diretório
 | REGIAO NORTE        | Acre                |     764 |    0.0539328 |
 | REGIAO NORDESTE     | Piauí               |     602 |    0.0424968 |
 
+Na primeira coluna da tabela acime é possível identificar que os estados que 
+maias contribuíram estão localizados em duas regiões do país, sul e sudeste,
+ofuscando as demais regiões.
+Desta forma, é interessante também analisar a proporção de exportações por
+região do país, assim como a representatividade de cada estado em relação à
+sua região pertencente.
 
+O gráfico abaixo relata a proporção de valor de exportações no ano de 2019
+para cada região geográfica do Brasil:
+
+![pie_country](plots/exportations/piechart_values_per_region_2019.png)
+
+Os demais gráficos a seguir representam a contribuição de cada estado
+em relação à sua região:
+
+![pie_sul](plots/exportations/piechart_values_REGIAO%20SUL_2019.png)
+![pie_sudeste](plots/exportations/piechart_values_REGIAO%20SUDESTE_2019.png)
+![pie_centro_oeste](plots/exportations/piechart_values_REGIAO%20CENTRO%20OESTE_2019.png)
+![pie_norte](plots/exportations/piechart_values_REGIAO%20NORTE_2019.png)
+![pie_nordeste](plots/exportations/piechart_values_REGIAO%20NORDESTE_2019.png)
 
 
 #### e) Representatividade em valor de importação por estado no ano de 2019 em relação ao total importado pelo país no mesmo ano.
