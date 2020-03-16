@@ -217,7 +217,7 @@ estado (Rio Grande do Sul, com 13,18%).
 | REGIAO NORDESTE     | Piauí               |     602 |    0.0424968 |
 
 Na primeira coluna da tabela acime é possível identificar que os estados que 
-maias contribuíram estão localizados em duas regiões do país, sul e sudeste,
+mais contribuíram estão localizados em duas regiões do país, sul e sudeste,
 ofuscando as demais regiões.
 Desta forma, é interessante também analisar a proporção de exportações por
 região do país, assim como a representatividade de cada estado em relação à
@@ -228,14 +228,14 @@ para cada região geográfica do Brasil:
 
 ![pie_country](plots/exportations/piechart_values_per_region_2019.png)
 
-Os demais gráficos a seguir representam a contribuição de cada estado
-em relação à sua região, ordenados conforme 
+Abaixo estão dispostos os links para acesso aos gráficos que relatam a
+proporção de valor de exportação obtido por estado em relação à sua região.
 
-![pie_sudeste](plots/exportations/piechart_values_REGIAO%20SUDESTE_2019.png){width=50%}
-![pie_sul](plots/exportations/piechart_values_REGIAO%20SUL_2019.png){width=50%}
-![pie_nordeste](plots/exportations/piechart_values_REGIAO%20NORDESTE_2019.png){width=50%}
-![pie_norte](plots/exportations/piechart_values_REGIAO%20NORTE_2019.png){width=50%}
-![pie_centro_oeste](plots/exportations/piechart_values_REGIAO%20CENTRO%20OESTE_2019.png){width=50%}
+[Sudeste](plots/exportations/piechart_values_REGIAO%20SUDESTE_2019.png)
+[Sul](plots/exportations/piechart_values_REGIAO%20SUL_2019.png)
+[Nordeste](plots/exportations/piechart_values_REGIAO%20NORDESTE_2019.png)
+[Norte](plots/exportations/piechart_values_REGIAO%20NORTE_2019.png)
+[Centro Oeste](plots/exportations/piechart_values_REGIAO%20CENTRO%20OESTE_2019.png)
 
 
 #### e) Representatividade em valor de importação por estado no ano de 2019 em relação ao total importado pelo país no mesmo ano.
