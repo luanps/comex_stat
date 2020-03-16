@@ -303,8 +303,8 @@ if __name__ == '__main__':
 
         general_configs = {
             'splitted_data' : Model.encode_split_data(data),
-            'cross_val' : 2,#5,
-            'max_iter' : 100,#50000,
+            'cross_val' : 5,
+            'max_iter' : 50000,
             'initial_alphas' : np.array([0.01, 0.03, 0.06, 0.1, 0.3, 0.6, 1, 3,
                                          6, 10, 30, 60]),
             'update_alphas' : np.array([.6, .65, .7, .75, .8, .85, .9, .95, 
