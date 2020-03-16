@@ -33,7 +33,7 @@ python3 main.py
 O arquivo de
 [log](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt)
 salva a descrição das etapas executadas, 
-possibilitando acompanhar todas as etapas empregadas na análise, tais como o
+possibilitando acompanhar todos os passos da análise, tais como o
 [pré-processamento](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#1),
 [exploração de dados](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L1311)
 e
@@ -41,7 +41,7 @@ e
 dos modelos de regressão empregados.
 
 Além disso, são gerados os
-[gráficos](https://github.com/luanps/comex_stat/tree/51d377f11d2713f9cb1c5daed11010f2541ccfd0/plots),
+[gráficos](https://github.com/luanps/comex_stat/tree/51d377f11d2713f9cb1c5daed11010f2541ccfd0/plots)
 necessários para solucionar as perguntas abaixo.
 
 
@@ -50,7 +50,7 @@ necessários para solucionar as perguntas abaixo.
 
 #### a) Mostre qual os top 3 produtos mais exportados por estado nos anos de 2017, 2018 e 2019
 
-Os 3 produtos mais exportados (leia-se com maior quantidade de de itens
+Os 3 produtos mais exportados (leia-se com maior quantidade de itens
 exportados) estão dispostos em uma sequência de gráficos de barras, 
 aonde cada estado possui um gráfico para melhor visualização.
 
@@ -62,7 +62,7 @@ para os anos 2017, 2018 e 2019.
 ![sc_ano](plots/exportations/barplot_CO_ANO_Santa%20Catarina.png)
 
  Os gráficos dos demais estados e DF estão dispostos no diretório
- `plots/exportations/barplot/CO_ANO_*`, e podem também ser acessados abaixo:
+ `plots/exportations/barplot_CO_ANO_*`, e podem também ser acessados abaixo:
 
 
 [Acre](plots/exportations/barplot_CO_ANO_Acre.png)
@@ -108,7 +108,7 @@ para os anos 2017, 2018 e 2019.
 ![sc_ano](plots/importations/barplot_CO_ANO_Santa%20Catarina.png)
 
  Os gráficos dos demais estados e DF estão dispostos no diretório
- `plots/importations/barplot/CO_ANO_*`, e podem também ser acessados abaixo:
+ `plots/importations/barplot_CO_ANO_*`, e podem também ser acessados abaixo:
 
 [Acre](plots/importations/barplot_CO_ANO_Acre.png)
 [Alagoas](plots/importations/barplot_CO_ANO_Alagoas.png)
@@ -160,7 +160,7 @@ na lista de top 3 produtos,  como exemplo abaixo estado do Acre:
 ![ac_mes](plots/exportations/barplot_CO_MES_Acre.png)
 
 Os gráficos dos demais estados e DF estão dispostos no diretório
- `plots/exportations/barplot/CO_MES_*`, e podem também ser acessados abaixo:
+ `plots/exportations/barplot_CO_MES_*`, e podem também ser acessados abaixo:
 
 [Acre](plots/exportations/barplot_CO_MES_Acre.png)
 [Alagoas](plots/exportations/barplot_CO_MES_Alagoas.png)
@@ -197,8 +197,8 @@ A tabela abaixo relata a proporção do valor obtido na exportação de produtos
 do ano de 2019 para cada UF em relação ao total exportado pelo país, em ordem
 decrescente.
 
-Percebe-se que, somete o estado de São Paulo foi responsável por 42.90%
-do valor total de exportações, atingindo mais do que o dobro do segundo
+Percebe-se que somente o estado de São Paulo foi responsável por 42.90%
+do valor total de exportações, atingindo mais que três vezes mais do que segundo
 estado (Rio Grande do Sul, com 13,18%).
 
 
@@ -232,7 +232,7 @@ estado (Rio Grande do Sul, com 13,18%).
 | REGIAO NORTE        | Acre                |     764 |    0.0539328 |
 | REGIAO NORDESTE     | Piauí               |     602 |    0.0424968 |
 
-Na primeira coluna da tabela acime é possível identificar que os estados que 
+Na primeira coluna da tabela acima é possível identificar que os estados que 
 mais contribuíram estão localizados em duas regiões do país, sul e sudeste,
 ofuscando as demais regiões.
 Desta forma, é interessante também analisar a proporção de exportações por
@@ -319,7 +319,7 @@ foi empregada a métrica de ajuste o RMSE *(Root Mean Square Error)*, que
 consiste em aferir a diferença entre o valor estimado por dado modelo de 
 regressão e o valor real. 
 Por elevar o erro ao quadrado, esta é uma métrica sensível à outliers, o que
-pode ser um indicadivo para iterar a análise e filtragem dos dados.
+pode ser um indicativo para iterar a análise e filtragem dos dados.
 Outro fator que favoreceu o uso desta métrica é que,
 por se tratar de uma avaliação universal, permite comparar o 
 resultado de diferentes modelos empregados.
@@ -346,13 +346,13 @@ conjunto de dados existente.
 
 #### g) Faça a predição de valor de produtos (top 3) importados por mês para SC de cada país de origem
 
-Todas as etapas de predição na base de dadoes de exportação foram replicadas
+Todas as etapas de predição na base de dados de exportação foram replicadas
 para o cenário de importações, incluindo o uso dos modelos de regressão
 [Ridge](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L3154-L3159),
 [Lasso](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L3162-L3167),
 [ElasticNet](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L3170-L3176),
 a regressão não-linear
-[SVR](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L3186-L3191)
+[SVR](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L3179-L3184)
 e o modelo
-[Gradient Boosting](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L1590-L1594).
+[Gradient Boosting](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L3186-L3190).
 Nesta base, o modelo *Gradient Boosting* obteve menor erro RMSE.
