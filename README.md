@@ -91,7 +91,7 @@ O eixo vertical representa o quantitativo de produtos, enquanto
 no eixo horizontal estão agrupados os top 3 produtos mais importados
 para os anos 2017, 2018 e 2019.
 
-![sc_ano](plots/importations/barplot_CO_ANO_Santa\ Catarina.png)
+![sc_ano](plots/importations/barplot_CO_ANO_Santa%20Catarina.png)
 
  Os gráficos dos demais estados e DF estão dispostos no diretório
  `plots/importations/barplot/CO_ANO_*`, e podem também ser acessados abaixo:
@@ -102,25 +102,25 @@ para os anos 2017, 2018 e 2019.
 [Amazonas](plots/importations/barplot_CO_ANO_Amazonas.png)
 [Bahia](plots/importations/barplot_CO_ANO_Bahia.png)
 [Ceará](plots/importations/barplot_CO_ANO_Ceará.png)
-[Distrito Federal](plots/importations/barplot_CO_ANO_Distrito\ Federal.png)
-[Espírito Santo](plots/importations/barplot_CO_ANO_Espírito\ Santo.png)
+[Distrito Federal](plots/importations/barplot_CO_ANO_Distrito%20Federal.png)
+[Espírito Santo](plots/importations/barplot_CO_ANO_Espírito%20Santo.png)
 [Goiás](plots/importations/barplot_CO_ANO_Goiás.png)
 [Maranhão](plots/importations/barplot_CO_ANO_Maranhão.png)
-[Mato Grosso do Sul](plots/importations/barplot_CO_ANO_Mato\ Grosso\ do\ Sul.png)
-[Mato Grosso](plots/importations/barplot_CO_ANO_Mato\ Grosso.png)
-[Minas Gerais](plots/importations/barplot_CO_ANO_Minas\ Gerais.png)
+[Mato Grosso do Sul](plots/importations/barplot_CO_ANO_Mato%20Grosso%20do%20Sul.png)
+[Mato Grosso](plots/importations/barplot_CO_ANO_Mato%20Grosso.png)
+[Minas Gerais](plots/importations/barplot_CO_ANO_Minas%20Gerais.png)
 [Paraíba](plots/importations/barplot_CO_ANO_Paraíba.png)
 [Paraná](plots/importations/barplot_CO_ANO_Paraná.png)
 [Pará](plots/importations/barplot_CO_ANO_Pará.png)
 [Pernambuco](plots/importations/barplot_CO_ANO_Pernambuco.png)
 [Piauí](plots/importations/barplot_CO_ANO_Piauí.png)
-[Rio de Janeiro](plots/importations/barplot_CO_ANO_Rio\ de\ Janeiro.png)
-[Rio Grande do Norte](plots/importations/barplot_CO_ANO_Rio\ Grande\ do\ Norte.png)
-[Rio Grande do Sul](plots/importations/barplot_CO_ANO_Rio\ Grande\ do\ Sul.png)
+[Rio de Janeiro](plots/importations/barplot_CO_ANO_Rio%20de%20Janeiro.png)
+[Rio Grande do Norte](plots/importations/barplot_CO_ANO_Rio%20Grande%20do%20Norte.png)
+[Rio Grande do Sul](plots/importations/barplot_CO_ANO_Rio%20Grande%20do%20Sul.png)
 [Rondônia](plots/importations/barplot_CO_ANO_Rondônia.png)
 [Roraima](plots/importations/barplot_CO_ANO_Roraima.png)
-[Santa Catarina](plots/importations/barplot_CO_ANO_Santa\ Catarina.png)
-[São Paulo](plots/importations/barplot_CO_ANO_São\ Paulo.png)
+[Santa Catarina](plots/importations/barplot_CO_ANO_Santa%20Catarina.png)
+[São Paulo](plots/importations/barplot_CO_ANO_São%20Paulo.png)
 [Sergipe](plots/importations/barplot_CO_ANO_Sergipe.png)
 [Tocantins](plots/importations/barplot_CO_ANO_Tocantins.png)
 
