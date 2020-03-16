@@ -32,8 +32,7 @@ python3 main.py
 ## Perguntas:
 
 
-#### a) Mostre qual os top 3 produtos mais exportados por estado nos anos de 2017,
-2018 e 2019
+#### a) Mostre qual os top 3 produtos mais exportados por estado nos anos de 2017, 2018 e 2019
 
 Os 3 produtos mais exportados (leia-se com maior quantidade de de itens
 exportados) estão dispostos em uma sequência de gráficos de barras, 
@@ -79,8 +78,7 @@ para os anos 2017, 2018 e 2019.
 [Tocantins](plots/exportations/barplot_CO_ANO_Tocantins.png)
 
   
-#### b) Mostre qual os top 3 produtos mais importados por estado nos anos de 2017,
-2018 e 2019
+#### b) Mostre qual os top 3 produtos mais importados por estado nos anos de 2017, 2018 e 2019
 
 Os 3 produtos mais importados (leia-se com maior quantidade de de itens
 importados) estão dispostos em uma sequência de gráficos de barras, 
@@ -126,6 +124,56 @@ para os anos 2017, 2018 e 2019.
 
 
 #### c) Mostre qual os top 3 produtos exportados em cada mês de 2019 por estado
+
+
+Os 3 produtos mais exportados por mês (leia-se com maior quantidade de de itens
+exportados) estão dispostos em uma sequência de gráficos de barras, 
+aonde cada estado possui um gráfico para melhor visualização.
+
+Como exemplo, segue abaixo o gráfico do estado de Santa Catarina.
+O eixo vertical representa o quantitativo de produtos, enquanto
+no eixo horizontal estão agrupados os top 3 produtos mais exportados
+para cada mês do ano de 2019.
+
+![sc_mes](plots/exportations/barplot_CO_MES_Santa%20Catarina.png)
+
+É possível notar que, uma vez que esta análise é realizada mês a mês, os estados
+com menor quantitativo de exportações apresentam uma grande variabilidade
+na lista de top 3 produtos,  como exemplo abaixo estado do Acre:
+
+![ac_mes](plots/exportations/barplot_CO_MES_Acre.png)
+
+Os gráficos dos demais estados e DF estão dispostos no diretório
+ `plots/exportations/barplot/CO_MES_*`, e podem também ser acessados abaixo:
+
+[Acre](plots/exportations/barplot_CO_MES_Acre.png)
+[Alagoas](plots/exportations/barplot_CO_MES_Alagoas.png)
+[Amapá](plots/exportations/barplot_CO_MES_Amapá.png)
+[Amazonas](plots/exportations/barplot_CO_MES_Amazonas.png)
+[Bahia](plots/exportations/barplot_CO_MES_Bahia.png)
+[Ceará](plots/exportations/barplot_CO_MES_Ceará.png)
+[Distrito Federal](plots/exportations/barplot_CO_MES_Distrito%20Federal.png)
+[Espírito Santo](plots/exportations/barplot_CO_MES_Espírito%20Santo.png)
+[Goiás](plots/exportations/barplot_CO_MES_Goiás.png)
+[Maranhão](plots/exportations/barplot_CO_MES_Maranhão.png)
+[Mato Grosso do Sul](plots/exportations/barplot_CO_MES_Mato%20Grosso%20do%20Sul.png)
+[Mato Grosso](plots/exportations/barplot_CO_MES_Mato%20Grosso.png)
+[Minas Gerais](plots/exportations/barplot_CO_MES_Minas%20Gerais.png)
+[Paraíba](plots/exportations/barplot_CO_MES_Paraíba.png)
+[Paraná](plots/exportations/barplot_CO_MES_Paraná.png)
+[Pará](plots/exportations/barplot_CO_MES_Pará.png)
+[Pernambuco](plots/exportations/barplot_CO_MES_Pernambuco.png)
+[Piauí](plots/exportations/barplot_CO_MES_Piauí.png)
+[Rio de Janeiro](plots/exportations/barplot_CO_MES_Rio%20de%20Janeiro.png)
+[Rio Grande do Norte](plots/exportations/barplot_CO_MES_Rio%20Grande%20do%20Norte.png)
+[Rio Grande do Sul](plots/exportations/barplot_CO_MES_Rio%20Grande%20do%20Sul.png)
+[Rondônia](plots/exportations/barplot_CO_MES_Rondônia.png)
+[Roraima](plots/exportations/barplot_CO_MES_Roraima.png)
+[Santa Catarina](plots/exportations/barplot_CO_MES_Santa%20Catarina.png)
+[São Paulo](plots/exportations/barplot_CO_MES_São%20Paulo.png)
+[Sergipe](plots/exportations/barplot_CO_MES_Sergipe.png)
+[Tocantins](plots/exportations/barplot_CO_MES_Tocantins.png)
+
 
 #### d) Representatividade em valor de exportação por estado no ano de 2019 em
 relação ao total exportado pelo país no mesmo ano.
