@@ -18,7 +18,7 @@ wget http://www.mdic.gov.br/balanca/bd/comexstat-bd/ncm/EXP_COMPLETA.zip
 wget http://www.mdic.gov.br/balanca/bd/comexstat-bd/ncm/IMP_COMPLETA.zip
 unzip EXP_COMPLETA.zip
 unzip IMP_COMPLETA.zip
-mv EXP_COMPLETA.csv IMP_COMPLETA.csv ata/
+mv EXP_COMPLETA.csv IMP_COMPLETA.csv data/
 mkdir models
 ```
 
@@ -26,6 +26,117 @@ mkdir models
 ```
 python3 main.py
 ```
+
+
+
+
+## Perguntas:
+
+
+a) Mostre qual os top 3 produtos mais exportados por estado nos anos de 2017,
+2018 e 2019
+
+Os 3 produtos mais exportados (leia-se com maior quantidade de de itens
+exportados) estão dispostos em uma sequência de gráficos de barras, 
+aonde cada estado possui um gráfico para melhor visualização.
+
+Como exemplo, segue abaixo o gráfico do estado de Santa Catarina.
+O eixo vertical representa o quantitativo de produtos, enquanto
+no eixo horizontal estão agrupados os top 3 produtos mais exportados
+para os anos 2017, 2018 e 2019.
+
+![sc_ano](plots/exportations/barplot_CO_ANO_Santa Catarina.png)
+
+ Os gráficos dos demais estados e DF estão dispostos no diretório
+ `plots/exportations/barplot/CO_ANO_*`, e podem também ser acessados abaixo:
+
+
+[Acre](plots/exportations/barplot_CO_ANO_Acre.png)
+[Alagoas](plots/exportations/barplot_CO_ANO_Alagoas.png)
+[Amapá](plots/exportations/barplot_CO_ANO_Amapá.png)
+[Amazonas](plots/exportations/barplot_CO_ANO_Amazonas.png)
+[Bahia](plots/exportations/barplot_CO_ANO_Bahia.png)
+[Ceará](plots/exportations/barplot_CO_ANO_Ceará.png)
+[Distrito Federal](plots/exportations/barplot_CO_ANO_Distrito Federal.png)
+[Espírito Santo](plots/exportations/barplot_CO_ANO_Espírito Santo.png)
+[Goiás](plots/exportations/barplot_CO_ANO_Goiás.png)
+[Maranhão](plots/exportations/barplot_CO_ANO_Maranhão.png)
+[Mato Grosso do Sul](plots/exportations/barplot_CO_ANO_Mato Grosso do Sul.png)
+[Mato Grosso](plots/exportations/barplot_CO_ANO_Mato Grosso.png)
+[Minas Gerais](plots/exportations/barplot_CO_ANO_Minas Gerais.png)
+[Paraíba](plots/exportations/barplot_CO_ANO_Paraíba.png)
+[Paraná](plots/exportations/barplot_CO_ANO_Paraná.png)
+[Pará](plots/exportations/barplot_CO_ANO_Pará.png)
+[Pernambuco](plots/exportations/barplot_CO_ANO_Pernambuco.png)
+[Piauí](plots/exportations/barplot_CO_ANO_Piauí.png)
+[Rio de Janeiro](plots/exportations/barplot_CO_ANO_Rio de Janeiro.png)
+[Rio Grande do Norte](plots/exportations/barplot_CO_ANO_Rio Grande do Norte.png)
+[Rio Grande do Sul](plots/exportations/barplot_CO_ANO_Rio Grande do Sul.png)
+[Rondônia](plots/exportations/barplot_CO_ANO_Rondônia.png)
+[Roraima](plots/exportations/barplot_CO_ANO_Roraima.png)
+[Santa Catarina](plots/exportations/barplot_CO_ANO_Santa Catarina.png)
+[São Paulo](plots/exportations/barplot_CO_ANO_São Paulo.png)
+[Sergipe](plots/exportations/barplot_CO_ANO_Sergipe.png)
+[Tocantins](plots/exportations/barplot_CO_ANO_Tocantins.png)
+
+  
+b) Mostre qual os top 3 produtos mais importados por estado nos anos de 2017,
+2018 e 2019
+
+Os 3 produtos mais importados (leia-se com maior quantidade de de itens
+importados) estão dispostos em uma sequência de gráficos de barras, 
+seguindo a mesma lógica empregada na solução da pergunta anterior.
+
+Como exemplo, segue abaixo o gráfico do estado de Santa Catarina.
+O eixo vertical representa o quantitativo de produtos, enquanto
+no eixo horizontal estão agrupados os top 3 produtos mais importados
+para os anos 2017, 2018 e 2019.
+
+![sc_ano](plots/importations/barplot_CO_ANO_Santa Catarina.png)
+
+ Os gráficos dos demais estados e DF estão dispostos no diretório
+ `plots/importations/barplot/CO_ANO_*`, e podem também ser acessados abaixo:
+
+
+[Acre](plots/importations/barplot_CO_ANO_Acre.png)
+[Alagoas](plots/importations/barplot_CO_ANO_Alagoas.png)
+[Amapá](plots/importations/barplot_CO_ANO_Amapá.png)
+[Amazonas](plots/importations/barplot_CO_ANO_Amazonas.png)
+[Bahia](plots/importations/barplot_CO_ANO_Bahia.png)
+[Ceará](plots/importations/barplot_CO_ANO_Ceará.png)
+[Distrito Federal](plots/importations/barplot_CO_ANO_Distrito Federal.png)
+[Espírito Santo](plots/importations/barplot_CO_ANO_Espírito Santo.png)
+[Goiás](plots/importations/barplot_CO_ANO_Goiás.png)
+[Maranhão](plots/importations/barplot_CO_ANO_Maranhão.png)
+[Mato Grosso do Sul](plots/importations/barplot_CO_ANO_Mato Grosso do Sul.png)
+[Mato Grosso](plots/importations/barplot_CO_ANO_Mato Grosso.png)
+[Minas Gerais](plots/importations/barplot_CO_ANO_Minas Gerais.png)
+[Paraíba](plots/importations/barplot_CO_ANO_Paraíba.png)
+[Paraná](plots/importations/barplot_CO_ANO_Paraná.png)
+[Pará](plots/importations/barplot_CO_ANO_Pará.png)
+[Pernambuco](plots/importations/barplot_CO_ANO_Pernambuco.png)
+[Piauí](plots/importations/barplot_CO_ANO_Piauí.png)
+[Rio de Janeiro](plots/importations/barplot_CO_ANO_Rio de Janeiro.png)
+[Rio Grande do Norte](plots/importations/barplot_CO_ANO_Rio Grande do Norte.png)
+[Rio Grande do Sul](plots/importations/barplot_CO_ANO_Rio Grande do Sul.png)
+[Rondônia](plots/importations/barplot_CO_ANO_Rondônia.png)
+[Roraima](plots/importations/barplot_CO_ANO_Roraima.png)
+[Santa Catarina](plots/importations/barplot_CO_ANO_Santa Catarina.png)
+[São Paulo](plots/importations/barplot_CO_ANO_São Paulo.png)
+[Sergipe](plots/importations/barplot_CO_ANO_Sergipe.png)
+[Tocantins](plots/importations/barplot_CO_ANO_Tocantins.png)
+
+c) Mostre qual os top 3 produtos exportados em cada mês de 2019 por estado
+
+d) Representatividade em valor de exportação por estado no ano de 2019 em
+relação ao total exportado pelo país no mesmo ano.
+e) Representatividade em valor de importação por estado no ano de 2019 em
+relação ao total importado pelo país no mesmo ano.
+
+f) Faça a predição de valor de produtos (top 3) exportados por mês originados
+de SC para cada país de destino.
+g) Faça a predição de valor de produtos (top 3) importados por mês para SC de
+cada país de origem
 
 ## Definições de modelagem
 
@@ -135,3 +246,4 @@ possibilitando agregar resultados consistentes em pouco tempo.
 #### Quais evidências você possui de que seu modelo é suficientemente bom?
 O modelo de regressão escolhido apresentou ser mais robusto frente aos demais
 no benchmark desenvolvido neste estudo, sendo suficiente para dada tarefa.
+
