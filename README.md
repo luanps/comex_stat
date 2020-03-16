@@ -240,6 +240,57 @@ proporção de valor de exportação obtido por estado em relação à sua regi�
 
 #### e) Representatividade em valor de importação por estado no ano de 2019 em relação ao total importado pelo país no mesmo ano.
 
+A análise realizada nesta questão segue o mesmo princípio da anterior, 
+relatando inicialmente a proporção de valor obtido pela importação para cada UF
+em relação ao total importado pelo país no ano de 2019.
+
+
+
+| NO_REGIAO           | NO_UF               |   value | proportion |
+|:--------------------|:--------------------|--------:|-------------:|
+| REGIAO SUDESTE      | São Paulo           |  750854 | 39.4836     |
+| REGIAO SUL          | Santa Catarina      |  209641 | 11.024      |
+| REGIAO SUL          | Paraná              |  156659 | 8.23791    |
+| REGIAO SUDESTE      | Rio de Janeiro      |  145149 | 7.63266    |
+| REGIAO SUDESTE      | Minas Gerais        |  141212 | 7.42563    |
+| REGIAO SUL          | Rio Grande do Sul   |  119147 | 6.26534    |
+| REGIAO NORTE        | Amazonas            |   93579 | 4.92085    |
+| REGIAO NORDESTE     | Bahia               |   51008 | 2.68225    |
+| REGIAO SUDESTE      | Espírito Santo      |   43034 | 2.26294    |
+| REGIAO CENTRO OESTE | Goiás               |   40107 | 2.10903    |
+| REGIAO NORDESTE     | Pernambuco          |   26676 | 1.40276    |
+| REGIAO NORDESTE     | Ceará               |   24042 | 1.26425    |
+| REGIAO NORTE        | Rondônia            |   20372 | 1.07126    |
+| REGIAO NORDESTE     | Alagoas             |   18279 | 0.961201   |
+| REGIAO NORTE        | Pará                |   15721 | 0.826688   |
+| REGIAO CENTRO OESTE | Mato Grosso do Sul  |    9677 | 0.508865   |
+| REGIAO CENTRO OESTE | Distrito Federal    |    8476 | 0.44571    |
+| REGIAO NORDESTE     | Rio Grande do Norte |    5499 | 0.289165   |
+| REGIAO NORDESTE     | Paraíba             |    5418 | 0.284905   |
+| REGIAO CENTRO OESTE | Mato Grosso         |    4537 | 0.238578   |
+| REGIAO NORDESTE     | Sergipe             |    4137 | 0.217544   |
+| REGIAO NORDESTE     | Maranhão            |    2577 | 0.135511   |
+| REGIAO NORTE        | Tocantins           |    1997 | 0.105012   |
+| REGIAO NORDESTE     | Piauí               |    1760 | 0.0925496  |
+| REGIAO NORTE        | Amapá               |    1562 | 0.0821377  |
+| REGIAO NORTE        | Roraima             |     446 | 0.0234529  |
+| REGIAO NORTE        | Acre                |     118 | 0.00620503 |
+
+
+Em seguida é disposto a proporção de importação para cada região geográfica
+do país, seguido pelos links de acesso aos gráficos de proporção por estado 
+dentro de sua devida região.
+
+![pie_country](plots/importations/piechart_values_per_region_2019.png)
+
+[Sudeste](plots/importations/piechart_values_REGIAO%20SUDESTE_2019.png)
+[Sul](plots/importations/piechart_values_REGIAO%20SUL_2019.png)
+[Nordeste](plots/importations/piechart_values_REGIAO%20NORDESTE_2019.png)
+[Norte](plots/importations/piechart_values_REGIAO%20NORTE_2019.png)
+[Centro Oeste](plots/importations/piechart_values_REGIAO%20CENTRO%20OESTE_2019.png)
+
+
+
 #### f) Faça a predição de valor de produtos (top 3) exportados por mês originados de SC para cada país de destino.
 
 #### g) Faça a predição de valor de produtos (top 3) importados por mês para SC de cada país de origem
