@@ -28,6 +28,22 @@ python3 main.py
 ```
 
 
+## Saída
+
+O arquivo de
+[log](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt)
+salva a descrição das etapas executadas, 
+possibilitando acompanhar todas as etapas empregadas na análise, tais como o
+[pré-processamento](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#1),
+[exploração de dados](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L1311)
+e
+[treinamento e validação](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L1558-1595)
+dos modelos de regressão empregados.
+
+Além disso, são gerados os
+[gráficos](https://github.com/luanps/comex_stat/tree/51d377f11d2713f9cb1c5daed11010f2541ccfd0/plots),
+necessários para solucionar as perguntas abaixo.
+
 
 ## Perguntas:
 
@@ -304,7 +320,6 @@ consiste em aferir a diferença entre o valor estimado por dado modelo de
 regressão e o valor real. 
 Por elevar o erro ao quadrado, esta é uma métrica sensível à outliers, o que
 pode ser um indicadivo para iterar a análise e filtragem dos dados.
-
 Outro fator que favoreceu o uso desta métrica é que,
 por se tratar de uma avaliação universal, permite comparar o 
 resultado de diferentes modelos empregados.
@@ -314,19 +329,30 @@ sendo três abordagens lineares
 [Ridge](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L1558-L1563),
 [Lasso](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L1566-L1571),
 [ElasticNet](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L1574-L1580),
-,
 a regressão não-linear
 [SVR](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L1583-L1588)
 e o modelo
 [Gradient Boosting](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L1590-L1594).
 
 Uma vez separado o conjunto de dados em treino (70%) e validação (30%),
-o modelo final foi aquele que alcançou o menor erro RMSE no conjunto de 
-validação, que neste caso foi utilizando o método  *Gradient Boosting*.
+o modelo com melhor resultado é aquele que alcançou o menor erro RMSE no conjunto de 
+validação, que neste caso foi utilizando o método  *SVR*, embora que todos 
+tenham resultado em erros próximos entre si.
 
 Para todos os casos foram testados diferentes combinações de hiperparâmetros,
 além da avaliação cruzada, buscando o melhor ajuste possível para o
 conjunto de dados existente.
 
+
 #### g) Faça a predição de valor de produtos (top 3) importados por mês para SC de cada país de origem
 
+Todas as etapas de predição na base de dadoes de exportação foram replicadas
+para o cenário de importações, incluindo o uso dos modelos de regressão
+[Ridge](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L3154-L3159),
+[Lasso](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L3162-L3167),
+[ElasticNet](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L3170-L3176),
+a regressão não-linear
+[SVR](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L3186-L3191)
+e o modelo
+[Gradient Boosting](https://github.com/luanps/comex_stat/blob/51d377f11d2713f9cb1c5daed11010f2541ccfd0/log.txt#L1590-L1594).
+Nesta base, o modelo *Gradient Boosting* obteve menor erro RMSE.
