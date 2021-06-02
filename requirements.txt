@@ -46,4 +46,4 @@ sphinxcontrib-qthelp==1.0.3
 sphinxcontrib-serializinghtml==1.1.4
 tabulate==0.8.6
 typing==3.7.4.1
-urllib3==1.25.8
+urllib3==1.26.5
